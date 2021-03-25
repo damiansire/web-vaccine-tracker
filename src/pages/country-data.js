@@ -11,9 +11,9 @@ import CheckBoxIcon from "@material-ui/icons/CheckBox";
 
 const CountryData = () => {
   const [loadCountryData, setLoadCountryData] = useState(false);
-  const [state, setState] = useState({});
+  const [state, setGraphState] = useState({});
   const [graphType, setGraphType] = useState("line");
-  const [selectedCountries, setSelectedCountries] = useState("Argentina");
+  const [selectedCountries, setSelectedCountries] = useState(["Argentina"]);
 
   const allCountries = [
     { countryId: "Uruguay" },
@@ -26,37 +26,86 @@ const CountryData = () => {
   const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
   const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
-  const getCountryData = (countryId) => {
-    fetch(getVaccineApiEndpointForCountry(countryId))
-      .then((response) => response.json())
-      .then((data) => {
-        let countryDate = data["vaccine"].map((datapoint) => datapoint["date"]);
-        let vaccineCountry = data["vaccine"].map(
-          (datapoint) => datapoint["total_vaccines"]
+  //Create a cache
+  const countriesDataCached = {};
+
+  const saveCountryDataInCached = (countryId, countryVaccinesData) => {
+    countriesDataCached[countryId] = {
+      total_vaccines: countryVaccinesData,
+      countryId: countryId,
+    };
+  };
+
+  const getSelectedCountriesDataForGraph = async () => {
+    //Get not cached element
+    let notCachedCountries = selectedCountries.filter(
+      (country) => !countriesDataCached.hasOwnProperty(country)
+    );
+    if (notCachedCountries.length > 0) {
+      //Get countries data not cached and cached it
+      let contriesData = await Promise.all(
+        notCachedCountries.map(async (country) => {
+          let countryResponse = await fetch(
+            getVaccineApiEndpointForCountry(country)
+          );
+          return countryResponse.json();
+        })
+      );
+
+      contriesData.forEach((countryData) => {
+        saveCountryDataInCached(
+          countryData["countryId"],
+          countryData["vaccine"]
         );
-        let newData = {
-          options: {
-            chart: {
-              id: "basic-bar",
-            },
-            xaxis: {
-              categories: countryDate,
-            },
-          },
-          series: [
-            {
-              name: countryId,
-              data: vaccineCountry,
-            },
-          ],
-        };
-        setState(newData);
-        setLoadCountryData(true);
       });
+    }
+    return selectedCountries.map((countryName) => {
+      return {
+        name: countriesDataCached[countryName]["countryId"],
+        data: countriesDataCached[countryName]["total_vaccines"],
+      };
+    });
+  };
+
+  const getGraphObj = (dates, countriesDataArray) => {
+    //Dates es un array de fechas en formato string
+    //CountriesDataArray es de la forma [ { name: countryId, data: vaccineCountry } ]
+    return {
+      options: {
+        chart: {
+          id: "basic-bar",
+        },
+        xaxis: {
+          categories: dates,
+        },
+      },
+      series: countriesDataArray,
+    };
+  };
+
+  const setSelectedCountriesData = async () => {
+    let selectedCountryData = await getSelectedCountriesDataForGraph();
+    //TODO: Controlar caso en el que no hay paises seleccionados
+    if (selectedCountryData.length === 0) {
+      return;
+    }
+    let dateForGraph = selectedCountryData[0]["data"].map(
+      (country) => country["date"]
+    );
+
+    let vaccineCountries = selectedCountryData.map((country) => {
+      return {
+        name: country.name,
+        data: country.data.map((dataPoint) => dataPoint["total_vaccines"]),
+      };
+    });
+    let newData = getGraphObj(dateForGraph, vaccineCountries);
+    setGraphState(newData);
+    setLoadCountryData(true);
   };
 
   useEffect(() => {
-    getCountryData(selectedCountries);
+    setSelectedCountriesData();
   }, [selectedCountries]);
 
   return (
@@ -86,8 +135,9 @@ const CountryData = () => {
             </Button>
             <Autocomplete
               onChange={(event, newInputValue) => {
-                console.log(newInputValue[0]["countryId"]);
-                setSelectedCountries(newInputValue[0]["countryId"]);
+                setSelectedCountries(
+                  newInputValue.map((element) => element["countryId"])
+                );
               }}
               multiple
               id="checkboxes-tags-demo"
