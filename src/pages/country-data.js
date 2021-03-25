@@ -9,7 +9,6 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
 
 const CountryData = () => {
   const [loadCountryData, setLoadCountryData] = useState(false);
