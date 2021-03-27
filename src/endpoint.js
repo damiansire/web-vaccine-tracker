@@ -1,7 +1,9 @@
-const vaccineApiEndpoint = "http://localhost:3005/api/v1/countries/"
+const urlBase = "api.thecovidvaccines.com/";
+
+const vaccineApiEndpoint = `${urlBase}/api/v1/`;
 
 const getVaccineApiEndpointForCountry = (country) => {
-    return vaccineApiEndpoint + country
-}
+  return `${vaccineApiEndpoint}/countries/${country}`;
+};
 
 export default getVaccineApiEndpointForCountry;
