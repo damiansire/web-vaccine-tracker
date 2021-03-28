@@ -1,17 +1,38 @@
 import React, { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
-import Button from "@material-ui/core/Button";
-
-import Checkbox from "@material-ui/core/Checkbox";
-import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
-import Grid from "@material-ui/core/Grid";
+import { makeStyles } from "@material-ui/core/styles";
+import { Col, Row, Container } from "react-bootstrap";
+import {
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Button,
+  Checkbox,
+  TextField,
+} from "@material-ui/core";
+//Components
+import CountriesGraphs from "../components/CountriesGraphs.jsx";
+import CompareCountriesTable from "../components/CompareCountriesTable.jsx";
 
 const { sortDateAsc } = require("../utils/sorts");
 
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
+
 const CountriesData = () => {
+  const classes = useStyles();
+
   const [loadCountryData, setLoadCountryData] = useState(false);
   const [state, setGraphState] = useState({});
   const [graphType, setGraphType] = useState("line");
@@ -117,38 +138,27 @@ const CountriesData = () => {
     setSelectedCountriesData();
   }, [selectedCountries]);
 
+  const handleSelectGraphType = (event) => {
+    setGraphType(event.target.value);
+  };
   return (
     <div className="app">
       {loadCountryData && (
         <>
-          {/* Buttons for choice the graphType */}
-
           <div>
-            <Button
-              variant="outlined"
-              size="large"
-              color="primary"
-              onClick={() => {
-                setGraphType("line");
-              }}
-            >
-              Graficos de Lineas
-            </Button>
+            <FormControl className={classes.formControl}>
+              <InputLabel id="demo-simple-select-label">Age</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={graphType}
+                onChange={handleSelectGraphType}
+              >
+                <MenuItem value={"line"}>Graficos de Lineas</MenuItem>
+                <MenuItem value={"bar"}>Graficos de Barra</MenuItem>
+              </Select>
+            </FormControl>
           </div>
-          <div>
-            <Button
-              variant="outlined"
-              size="large"
-              color="primary"
-              onClick={() => {
-                setGraphType("bar");
-              }}
-            >
-              Graficos de Barra
-            </Button>
-          </div>
-
-          {/* Check the redunt code */}
 
           <Autocomplete
             onChange={(event, newInputValue) => {
@@ -184,14 +194,15 @@ const CountriesData = () => {
           />
 
           <div className="row">
-            <div className="mixed-chart" key={graphType}>
-              <Chart
-                options={state.options}
-                series={state.series}
-                type={graphType}
-                width="1000"
-              />
-            </div>
+            <CountriesGraphs
+              options={state.options}
+              series={state.series}
+              type={graphType}
+            />
+            <CompareCountriesTable
+              options={state.options}
+              series={state.series}
+            />
           </div>
         </>
       )}

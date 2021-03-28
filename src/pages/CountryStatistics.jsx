@@ -7,7 +7,7 @@ import {
   getAvailablesCountries,
   getCountryData,
 } from "../adapters/countries.js";
-import CountryDataTable from "../components/countryDataTable.js";
+import CountryDataTable from "../components/CountryDataTable.js";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
