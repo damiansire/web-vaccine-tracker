@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
-import getVaccineApiEndpointForCountry from "../endpoint";
 import Button from "@material-ui/core/Button";
 
 import Checkbox from "@material-ui/core/Checkbox";
@@ -9,6 +8,8 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import Grid from "@material-ui/core/Grid";
+
+const { sortDateAsc } = require("../utils/sorts");
 
 const CountriesData = () => {
   const [loadCountryData, setLoadCountryData] = useState(false);
@@ -33,8 +34,8 @@ const CountriesData = () => {
 
     const saveCountryDataInCached = (countryId, countryVaccinesData) => {
       countriesDataCached[countryId] = {
-        total_vaccines: countryVaccinesData,
-        countryId: countryId,
+        data: countryVaccinesData,
+        countryName: countryId,
       };
     };
 
@@ -48,23 +49,27 @@ const CountriesData = () => {
         let contriesData = await Promise.all(
           notCachedCountries.map(async (country) => {
             let countryResponse = await fetch(
-              getVaccineApiEndpointForCountry(country)
+              `http://localhost:3005/api/v1/countries/${country}`
             );
             return countryResponse.json();
           })
         );
 
         contriesData.forEach((countryData) => {
+          countryData["data"] = countryData["data"].sort((a, b) =>
+            sortDateAsc(a, b)
+          );
+
           saveCountryDataInCached(
-            countryData["countryId"],
-            countryData["vaccine"]
+            countryData["countryName"],
+            countryData["data"]
           );
         });
       }
       return selectedCountries.map((countryName) => {
         return {
-          name: countriesDataCached[countryName]["countryId"],
-          data: countriesDataCached[countryName]["total_vaccines"],
+          name: countriesDataCached[countryName]["countryName"],
+          data: countriesDataCached[countryName]["data"],
         };
       });
     };
@@ -94,11 +99,14 @@ const CountriesData = () => {
       let dateForGraph = selectedCountryData[0]["data"].map(
         (country) => country["date"]
       );
-
       let vaccineCountries = selectedCountryData.map((country) => {
         return {
           name: country.name,
-          data: country.data.map((dataPoint) => dataPoint["total_vaccines"]),
+          data: country.data.map((dataPoint) =>
+            dataPoint["daily_vaccinations"]
+              ? dataPoint["daily_vaccinations"]
+              : 0
+          ),
         };
       });
       let newData = getGraphObj(dateForGraph, vaccineCountries);
@@ -113,101 +121,78 @@ const CountriesData = () => {
     <div className="app">
       {loadCountryData && (
         <>
-          <Grid container style={{ padding: 20 }}>
-            <Grid
-              container
-              direction="row"
-              item
-              xs={8}
-              justify="space-evenly"
-              alignItems="center"
+          {/* Buttons for choice the graphType */}
+
+          <div>
+            <Button
+              variant="outlined"
+              size="large"
+              color="primary"
+              onClick={() => {
+                setGraphType("line");
+              }}
             >
-              <div>
-                <Button
-                  variant="outlined"
-                  size="large"
-                  color="primary"
-                  onClick={() => {
-                    setGraphType("line");
-                  }}
-                >
-                  Graficos de Lineas
-                </Button>
-              </div>
-              <div>
-                <Button
-                  variant="outlined"
-                  size="large"
-                  color="primary"
-                  onClick={() => {
-                    setGraphType("bar");
-                  }}
-                >
-                  Graficos de Barra
-                </Button>
-              </div>
-            </Grid>
-            <Grid xs={4} container alignItems="center" justify="space-evenly">
-              <Grid item>
-                <Autocomplete
-                  onChange={(event, newInputValue) => {
-                    setSelectedCountries(
-                      newInputValue.map((element) => element["countryId"])
-                    );
-                  }}
-                  multiple
-                  id="checkboxes-tags-demo"
-                  options={allCountries}
-                  disableCloseOnSelect
-                  getOptionLabel={(option) => option.countryId}
-                  renderOption={(option, { selected }) => (
-                    <>
-                      <Checkbox
-                        icon={icon}
-                        checkedIcon={checkedIcon}
-                        style={{ marginRight: 8 }}
-                        checked={selected}
-                      />
-                      {option.countryId}
-                    </>
-                  )}
-                  style={{ width: 400 }}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      variant="outlined"
-                      label="Select countries"
-                      placeholder="Favorites"
-                    />
-                  )}
+              Graficos de Lineas
+            </Button>
+          </div>
+          <div>
+            <Button
+              variant="outlined"
+              size="large"
+              color="primary"
+              onClick={() => {
+                setGraphType("bar");
+              }}
+            >
+              Graficos de Barra
+            </Button>
+          </div>
+
+          {/* Check the redunt code */}
+
+          <Autocomplete
+            onChange={(event, newInputValue) => {
+              setSelectedCountries(
+                newInputValue.map((element) => element["countryId"])
+              );
+            }}
+            multiple
+            id="checkboxes-tags-demo"
+            options={allCountries}
+            disableCloseOnSelect
+            getOptionLabel={(option) => option.countryId}
+            renderOption={(option, { selected }) => (
+              <>
+                <Checkbox
+                  icon={icon}
+                  checkedIcon={checkedIcon}
+                  style={{ marginRight: 8 }}
+                  checked={selected}
                 />
-              </Grid>
-            </Grid>
-            <Grid item xs={8}>
-              <div className="row">
-                {graphType === "bar" && (
-                  <div className="mixed-chart">
-                    <Chart
-                      options={state.options}
-                      series={state.series}
-                      type={graphType}
-                      width="1000"
-                    />
-                  </div>
-                )}
-                {graphType === "line" && (
-                  <div className="mixed-chart">
-                    <Chart
-                      options={state.options}
-                      series={state.series}
-                      type={graphType}
-                      width="1000"
-                    />
-                  </div>
-                )}
-              </div>
-            </Grid>
-          </Grid>
+                {option.countryId}
+              </>
+            )}
+            style={{ width: 400 }}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                variant="outlined"
+                label="Select countries"
+                placeholder="Favorites"
+              />
+            )}
+          />
+
+          <div className="row">
+            <div className="mixed-chart" key={graphType}>
+              <Chart
+                options={state.options}
+                series={state.series}
+                type={graphType}
+                width="1000"
+              />
+            </div>
+          </div>
         </>
       )}
     </div>
