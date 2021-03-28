@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Chart from "react-apexcharts";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import { makeStyles } from "@material-ui/core/styles";
-import { Col, Row, Container } from "react-bootstrap";
 import {
   FormControl,
   InputLabel,
@@ -14,6 +12,8 @@ import {
   Checkbox,
   TextField,
 } from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
+
 //Components
 import CountriesGraphs from "../components/CountriesGraphs.jsx";
 import CompareCountriesTable from "../components/CompareCountriesTable.jsx";
@@ -21,12 +21,8 @@ import CompareCountriesTable from "../components/CompareCountriesTable.jsx";
 const { sortDateAsc } = require("../utils/sorts");
 
 const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
+  selectionOption: {
+    marginTop: 30,
   },
 }));
 
@@ -34,7 +30,7 @@ const CountriesData = () => {
   const classes = useStyles();
 
   const [loadCountryData, setLoadCountryData] = useState(false);
-  const [state, setGraphState] = useState({});
+  const [selectedCountriesData, setCountriesDataState] = useState({});
   const [graphType, setGraphType] = useState("line");
   const [selectedCountries, setSelectedCountries] = useState(["Argentina"]);
 
@@ -46,6 +42,7 @@ const CountriesData = () => {
     { countryId: "Colombia" },
     { countryId: "Venezuela" },
   ];
+
   const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
   const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
@@ -95,43 +92,13 @@ const CountriesData = () => {
       });
     };
 
-    const getGraphObj = (dates, countriesDataArray) => {
-      //Dates es un array de fechas en formato string
-      //CountriesDataArray es de la forma [ { name: countryId, data: vaccineCountry } ]
-      return {
-        options: {
-          chart: {
-            id: "basic-bar",
-          },
-          xaxis: {
-            categories: dates,
-          },
-        },
-        series: countriesDataArray,
-      };
-    };
-
     const setSelectedCountriesData = async () => {
       let selectedCountryData = await getSelectedCountriesDataForGraph();
       //TODO: Controlar caso en el que no hay paises seleccionados
       if (selectedCountryData.length === 0) {
         return;
       }
-      let dateForGraph = selectedCountryData[0]["data"].map(
-        (country) => country["date"]
-      );
-      let vaccineCountries = selectedCountryData.map((country) => {
-        return {
-          name: country.name,
-          data: country.data.map((dataPoint) =>
-            dataPoint["daily_vaccinations"]
-              ? dataPoint["daily_vaccinations"]
-              : 0
-          ),
-        };
-      });
-      let newData = getGraphObj(dateForGraph, vaccineCountries);
-      setGraphState(newData);
+      setCountriesDataState(selectedCountryData);
       setLoadCountryData(true);
     };
 
@@ -141,70 +108,84 @@ const CountriesData = () => {
   const handleSelectGraphType = (event) => {
     setGraphType(event.target.value);
   };
+
+  const renderSelect = (option, { selected }) => {
+    return (
+      <React.Fragment>
+        <Checkbox
+          icon={icon}
+          checkedIcon={checkedIcon}
+          style={{ marginRight: 8 }}
+          checked={selected}
+          value={option.countryId}
+        />
+        {option.countryId}
+      </React.Fragment>
+    );
+  };
+
   return (
     <div className="app">
       {loadCountryData && (
-        <>
-          <div>
-            <FormControl className={classes.formControl}>
-              <InputLabel id="demo-simple-select-label">Age</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={graphType}
-                onChange={handleSelectGraphType}
-              >
-                <MenuItem value={"line"}>Graficos de Lineas</MenuItem>
-                <MenuItem value={"bar"}>Graficos de Barra</MenuItem>
-              </Select>
-            </FormControl>
-          </div>
-
-          <Autocomplete
-            onChange={(event, newInputValue) => {
-              setSelectedCountries(
-                newInputValue.map((element) => element["countryId"])
-              );
-            }}
-            multiple
-            id="checkboxes-tags-demo"
-            options={allCountries}
-            disableCloseOnSelect
-            getOptionLabel={(option) => option.countryId}
-            renderOption={(option, { selected }) => (
-              <>
-                <Checkbox
-                  icon={icon}
-                  checkedIcon={checkedIcon}
-                  style={{ marginRight: 8 }}
-                  checked={selected}
-                />
-                {option.countryId}
-              </>
-            )}
-            style={{ width: 400 }}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                variant="outlined"
-                label="Select countries"
-                placeholder="Favorites"
+        <Grid container spacing={3}>
+          <Grid
+            container
+            xs={12}
+            className={classes.selectionOption}
+            direction="row"
+            justify="center"
+            alignItems="center"
+          >
+            <Grid item xs={4}>
+              <FormControl className={classes.formControl}>
+                <InputLabel id="demo-simple-select-label">Age</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={graphType}
+                  onChange={handleSelectGraphType}
+                >
+                  <MenuItem value={"line"}>Graficos de Lineas</MenuItem>
+                  <MenuItem value={"bar"}>Graficos de Barra</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={4}>
+              <Autocomplete
+                onChange={(event, newInputValue) => {
+                  setSelectedCountries(
+                    newInputValue.map((element) => element["countryId"])
+                  );
+                }}
+                multiple
+                id="checkboxes-tags-demo"
+                options={allCountries}
+                disableCloseOnSelect
+                getOptionLabel={(option) => option.countryId}
+                renderOption={renderSelect}
+                style={{ width: 400 }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    variant="outlined"
+                    label="Select countries"
+                    placeholder="Favorites"
+                  />
+                )}
               />
-            )}
-          />
-
-          <div className="row">
+            </Grid>
+          </Grid>
+          <Grid item xs={10}>
             <CountriesGraphs
-              options={state.options}
-              series={state.series}
-              type={graphType}
+              optionsSelectedData="daily_vaccinations"
+              countriesData={selectedCountriesData}
+              graphType={graphType}
             />
-            <CompareCountriesTable
-              options={state.options}
-              series={state.series}
-            />
-          </div>
-        </>
+          </Grid>
+          <Grid item xs={12}>
+            <CompareCountriesTable countriesData={selectedCountriesData} />
+          </Grid>
+        </Grid>
       )}
     </div>
   );

@@ -4,10 +4,9 @@ import CountryData from "./pages/CountryStatistics";
 function App() {
   return (
     <>
-      <CountryData />
       <CountriesData />
     </>
   );
 }
-
+//<CountryData />
 export default App;

@@ -54,7 +54,7 @@ const CountryData = () => {
           </Select>
         </FormControl>
       )}
-      <CountryDataTable countryData={selectedCountry ? selectedCountry : {}} />
+      <CountryDataTable countryData={selectedCountry || {}} />
     </div>
   );
 };
