@@ -11,7 +11,9 @@ import {
   Button,
   Checkbox,
   TextField,
+  FormHelperText,
 } from "@material-ui/core";
+
 import Grid from "@material-ui/core/Grid";
 
 //Components
@@ -23,6 +25,9 @@ const { sortDateAsc } = require("../utils/sorts");
 const useStyles = makeStyles((theme) => ({
   selectionOption: {
     marginTop: 30,
+  },
+  columnLayout: {
+    height: "100%",
   },
 }));
 
@@ -124,65 +129,106 @@ const CountriesData = () => {
     );
   };
 
+  const selectDataAttribute = (event) => {
+    console.log(event.target.value);
+  };
+
   return (
     <div className="app">
       {loadCountryData && (
         <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <Autocomplete
+              ListboxProps={{ style: { maxHeight: "150px" } }}
+              fullWidth={true}
+              onChange={(event, newInputValue) => {
+                setSelectedCountries(
+                  newInputValue.map((element) => element["countryId"])
+                );
+              }}
+              multiple
+              id="checkboxes-tags-demo"
+              options={allCountries}
+              disableCloseOnSelect
+              getOptionLabel={(option) => option.countryId}
+              renderOption={renderSelect}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  variant="outlined"
+                  label="Select countries"
+                  placeholder="Favorites"
+                />
+              )}
+            />
+          </Grid>
+
           <Grid
             container
             xs={12}
-            className={classes.selectionOption}
             direction="row"
             justify="center"
             alignItems="center"
           >
-            <Grid item xs={4}>
-              <FormControl className={classes.formControl}>
-                <InputLabel id="demo-simple-select-label">Age</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={graphType}
-                  onChange={handleSelectGraphType}
-                >
-                  <MenuItem value={"line"}>Graficos de Lineas</MenuItem>
-                  <MenuItem value={"bar"}>Graficos de Barra</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={4}>
-              <Autocomplete
-                onChange={(event, newInputValue) => {
-                  setSelectedCountries(
-                    newInputValue.map((element) => element["countryId"])
-                  );
-                }}
-                multiple
-                id="checkboxes-tags-demo"
-                options={allCountries}
-                disableCloseOnSelect
-                getOptionLabel={(option) => option.countryId}
-                renderOption={renderSelect}
-                style={{ width: 400 }}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    variant="outlined"
-                    label="Select countries"
-                    placeholder="Favorites"
-                  />
-                )}
+            <Grid item xs={10}>
+              <CountriesGraphs
+                optionsSelectedData="daily_vaccinations"
+                countriesData={selectedCountriesData}
+                graphType={graphType}
               />
             </Grid>
+
+            <Grid item xs={2} className={classes.columnLayout}>
+              <Grid
+                container
+                direction="column"
+                justify="space-evenly"
+                alignItems="center"
+                className={classes.columnLayout}
+              >
+                <Grid>
+                  <FormControl>
+                    <InputLabel id="demo-simple-select-label">
+                      Tipo de grafica
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={graphType}
+                      onChange={handleSelectGraphType}
+                    >
+                      <MenuItem value={"line"}>Graficos de Lineas</MenuItem>
+                      <MenuItem value={"bar"}>Graficos de Barra</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid>
+                  <FormControl>
+                    <InputLabel htmlFor="age-native-simple">
+                      Dato a ver
+                    </InputLabel>
+                    <Select
+                      variant="outlined"
+                      native
+                      onChange={selectDataAttribute}
+                    >
+                      {[
+                        "Vacunados por dia",
+                        "Dosis dadas",
+                        "Marca de vacunas",
+                      ].map((dataOption) => (
+                        <option value={dataOption} key={dataOption}>
+                          {dataOption}
+                        </option>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
+              </Grid>
+            </Grid>
           </Grid>
+
           <Grid item xs={10}>
-            <CountriesGraphs
-              optionsSelectedData="daily_vaccinations"
-              countriesData={selectedCountriesData}
-              graphType={graphType}
-            />
-          </Grid>
-          <Grid item xs={12}>
             <CompareCountriesTable countriesData={selectedCountriesData} />
           </Grid>
         </Grid>
