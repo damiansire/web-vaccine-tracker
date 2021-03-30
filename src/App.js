@@ -3,7 +3,7 @@ import CountriesData from "./pages/CountriesDataCompare";
 import CountryData from "./pages/CountryStatistics";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box, Container } from "@material-ui/core";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar.jsx";
 
 const useStyles = makeStyles((theme) => ({
   layout: {

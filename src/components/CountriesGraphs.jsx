@@ -2,7 +2,6 @@ import React from "react";
 import Chart from "react-apexcharts";
 
 const getGraphObj = (countriesData) => {
-  debugger;
   let dates = countriesData[0]["data"].map((dataPoint) => dataPoint["date"]);
   return {
     options: {
