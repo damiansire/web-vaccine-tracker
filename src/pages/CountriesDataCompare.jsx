@@ -8,19 +8,17 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  Button,
-  ButtonGroup,
   Checkbox,
   TextField,
 } from "@material-ui/core";
 
 import Grid from "@material-ui/core/Grid";
-
 import { getAvailablesCountries } from "../adapters/countries.js";
 
 //Components
-import CountriesGraphs from "../components/CountriesGraphs.jsx";
-import CompareCountriesTable from "../components/CompareCountriesTable.jsx";
+import CountriesGraphs from "../components/CountriesGraphs";
+import CompareCountriesTable from "../components/CompareCountriesTable";
+import DoubleButton from "../components/DoubleButton";
 
 const { sortDateAsc } = require("../utils/sorts");
 const { normalizeCountries } = require("../utils/missingDate");
@@ -137,7 +135,13 @@ const CountriesData = () => {
   }, [selectedCountries]);
 
   const handleSelectGraphType = (event) => {
-    setGraphType(event.target.value);
+    debugger;
+    //Arreglar esto en un futuro xD
+    if (event.target.parentElement.value) {
+      setGraphType(event.target.parentElement.value);
+    } else if (event.target.value) {
+      setGraphType(event.target.value);
+    }
   };
 
   const renderSelect = (option, { selected }) => {
@@ -225,37 +229,28 @@ const CountriesData = () => {
                 className={classes.columnLayout}
               >
                 <Grid>
-                  <div className={classes.optionElement}>
-                    <span>Como ver la informacion:</span>
-                  </div>
-                  <ButtonGroup
-                    size="large"
-                    color="primary"
-                    aria-label="large outlined primary button group"
-                    onClick={selectViewData}
-                  >
-                    <Button value="Graph">Grafico</Button>
-                    <Button value="Table">Tabla</Button>
-                  </ButtonGroup>
+                  <DoubleButton
+                    buttonsHandle={selectViewData}
+                    buttonsDescription="Como ver la informacion:"
+                    button1Text="Grafico"
+                    valueButton1="Graph"
+                    button2Text="Tabla"
+                    valueButton2="Table"
+                    selectedOption={viewInfo}
+                  />
                 </Grid>
 
                 <Grid>
-                  <FormControl>
-                    <InputLabel id="demo-simple-select-label">
-                      Tipo de grafica
-                    </InputLabel>
-                    <Select
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
-                      value={graphType}
-                      onChange={handleSelectGraphType}
-                    >
-                      <MenuItem value={"line"}>Graficos de Lineas</MenuItem>
-                      <MenuItem value={"bar"}>Graficos de Barra</MenuItem>
-                    </Select>
-                  </FormControl>
+                  <DoubleButton
+                    buttonsDescription="Selecciona tipo de grafica:"
+                    buttonsHandle={handleSelectGraphType}
+                    button1Text="Lineas"
+                    valueButton1="line"
+                    button2Text="Barra"
+                    valueButton2="bar"
+                    selectedOption={graphType}
+                  />
                 </Grid>
-
                 <Grid>
                   <FormControl>
                     <InputLabel htmlFor="age-native-simple">
