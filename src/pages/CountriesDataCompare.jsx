@@ -9,6 +9,7 @@ import {
   Select,
   MenuItem,
   Button,
+  ButtonGroup,
   Checkbox,
   TextField,
   FormHelperText,
@@ -29,6 +30,10 @@ const useStyles = makeStyles((theme) => ({
   columnLayout: {
     height: "100%",
   },
+  optionElement: {
+    marginBottom: 10,
+    textAlign: "center",
+  },
 }));
 
 const CountriesData = () => {
@@ -37,7 +42,13 @@ const CountriesData = () => {
   const [loadCountryData, setLoadCountryData] = useState(false);
   const [selectedCountriesData, setCountriesDataState] = useState({});
   const [graphType, setGraphType] = useState("line");
-  const [selectedCountries, setSelectedCountries] = useState(["Argentina"]);
+  const [selectedCountries, setSelectedCountries] = useState([
+    "Argentina",
+    "Uruguay",
+    "Chile",
+    "Colombia",
+  ]);
+  const [viewInfo, setViewInfo] = useState("Graph");
 
   const allCountries = [
     { countryId: "Uruguay" },
@@ -133,6 +144,15 @@ const CountriesData = () => {
     console.log(event.target.value);
   };
 
+  const selectViewData = (event) => {
+    //Arreglar esto en un futuro xD
+    if (event.target.parentElement.value) {
+      setViewInfo(event.target.parentElement.value);
+    } else if (event.target.value) {
+      setViewInfo(event.target.value);
+    }
+  };
+
   return (
     <div className="app">
       {loadCountryData && (
@@ -171,11 +191,16 @@ const CountriesData = () => {
             alignItems="center"
           >
             <Grid item xs={10}>
-              <CountriesGraphs
-                optionsSelectedData="daily_vaccinations"
-                countriesData={selectedCountriesData}
-                graphType={graphType}
-              />
+              {viewInfo === "Graph" && (
+                <CountriesGraphs
+                  optionsSelectedData="daily_vaccinations"
+                  countriesData={selectedCountriesData}
+                  graphType={graphType}
+                />
+              )}
+              {viewInfo === "Table" && (
+                <CompareCountriesTable countriesData={selectedCountriesData} />
+              )}
             </Grid>
 
             <Grid item xs={2} className={classes.columnLayout}>
@@ -186,6 +211,21 @@ const CountriesData = () => {
                 alignItems="center"
                 className={classes.columnLayout}
               >
+                <Grid>
+                  <div className={classes.optionElement}>
+                    <span>Como ver la informacion:</span>
+                  </div>
+                  <ButtonGroup
+                    size="large"
+                    color="primary"
+                    aria-label="large outlined primary button group"
+                    onClick={selectViewData}
+                  >
+                    <Button value="Graph">Grafico</Button>
+                    <Button value="Table">Tabla</Button>
+                  </ButtonGroup>
+                </Grid>
+
                 <Grid>
                   <FormControl>
                     <InputLabel id="demo-simple-select-label">
@@ -202,6 +242,7 @@ const CountriesData = () => {
                     </Select>
                   </FormControl>
                 </Grid>
+
                 <Grid>
                   <FormControl>
                     <InputLabel htmlFor="age-native-simple">
@@ -226,10 +267,6 @@ const CountriesData = () => {
                 </Grid>
               </Grid>
             </Grid>
-          </Grid>
-
-          <Grid item xs={10}>
-            <CompareCountriesTable countriesData={selectedCountriesData} />
           </Grid>
         </Grid>
       )}
