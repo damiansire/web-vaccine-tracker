@@ -12,10 +12,11 @@ import {
   ButtonGroup,
   Checkbox,
   TextField,
-  FormHelperText,
 } from "@material-ui/core";
 
 import Grid from "@material-ui/core/Grid";
+
+import { getAvailablesCountries } from "../adapters/countries.js";
 
 //Components
 import CountriesGraphs from "../components/CountriesGraphs.jsx";
@@ -50,14 +51,13 @@ const CountriesData = () => {
   ]);
   const [viewInfo, setViewInfo] = useState("Graph");
 
-  const allCountries = [
-    { countryId: "Uruguay" },
-    { countryId: "Argentina" },
-    { countryId: "Chile" },
-    { countryId: "Bolivia" },
-    { countryId: "Colombia" },
-    { countryId: "Venezuela" },
-  ];
+  const [availablesCountries, setAvailablesCountries] = useState([]);
+
+  useEffect(() => {
+    getAvailablesCountries().then((data) => {
+      setAvailablesCountries(data);
+    });
+  }, []);
 
   const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
   const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -133,9 +133,9 @@ const CountriesData = () => {
           checkedIcon={checkedIcon}
           style={{ marginRight: 8 }}
           checked={selected}
-          value={option.countryId}
+          value={option}
         />
-        {option.countryId}
+        {option}
       </React.Fragment>
     );
   };
@@ -162,22 +162,20 @@ const CountriesData = () => {
               ListboxProps={{ style: { maxHeight: "150px" } }}
               fullWidth={true}
               onChange={(event, newInputValue) => {
-                setSelectedCountries(
-                  newInputValue.map((element) => element["countryId"])
-                );
+                setSelectedCountries(newInputValue.map((element) => element));
               }}
               multiple
               id="checkboxes-tags-demo"
-              options={allCountries}
+              options={availablesCountries}
               disableCloseOnSelect
-              getOptionLabel={(option) => option.countryId}
+              getOptionLabel={(option) => option}
               renderOption={renderSelect}
               renderInput={(params) => (
                 <TextField
                   {...params}
                   variant="outlined"
-                  label="Select countries"
-                  placeholder="Favorites"
+                  label="Elije un pais"
+                  placeholder="Haz click y elige un pais :) "
                 />
               )}
             />
