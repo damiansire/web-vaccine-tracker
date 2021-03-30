@@ -23,6 +23,7 @@ import CountriesGraphs from "../components/CountriesGraphs.jsx";
 import CompareCountriesTable from "../components/CompareCountriesTable.jsx";
 
 const { sortDateAsc } = require("../utils/sorts");
+const { normalizeCountries } = require("../utils/missingDate");
 
 const useStyles = makeStyles((theme) => ({
   selectionOption: {
@@ -100,12 +101,26 @@ const CountriesData = () => {
           );
         });
       }
-      return selectedCountries.map((countryName) => {
+      let selectedCountriesWithoutNormalize = selectedCountries.map(
+        (countryName) => {
+          return {
+            name: countriesDataCached[countryName]["countryName"],
+            data: countriesDataCached[countryName]["data"],
+          };
+        }
+      );
+
+      let countriesWithMissingDates = normalizeCountries(
+        selectedCountriesWithoutNormalize
+      );
+
+      countriesWithMissingDates = countriesWithMissingDates.map((country) => {
         return {
-          name: countriesDataCached[countryName]["countryName"],
-          data: countriesDataCached[countryName]["data"],
+          name: country.name,
+          data: country.data.sort((a, b) => sortDateAsc(a, b)),
         };
       });
+      return countriesWithMissingDates;
     };
 
     const setSelectedCountriesData = async () => {

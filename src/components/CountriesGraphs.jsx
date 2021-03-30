@@ -2,8 +2,7 @@ import React from "react";
 import Chart from "react-apexcharts";
 
 const getGraphObj = (countriesData) => {
-  //Dates es un array de fechas en formato string
-  //CountriesDataArray es de la forma [ { name: countryId, data: vaccineCountry } ]
+  debugger;
   let dates = countriesData[0]["data"].map((dataPoint) => dataPoint["date"]);
   return {
     options: {
