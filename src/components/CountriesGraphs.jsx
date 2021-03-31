@@ -26,11 +26,10 @@ const CountriesGraphs = (props) => {
     );
 
     return {
-      name: country.countryName,
+      name: country.name,
       data: countryData,
     };
   });
-
   return (
     <div className="mixed-chart" key={props.graphType}>
       <Chart options={grapOptions} series={series} type={props.graphType} />
