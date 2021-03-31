@@ -245,7 +245,10 @@ const CountriesData = () => {
                 />
               )}
               {viewInfo === "Table" && (
-                <CompareCountriesTable countriesData={selectedCountriesData} />
+                <CompareCountriesTable
+                  countriesData={selectedCountriesData}
+                  optionsSelectedData={selectedProperty}
+                />
               )}
             </Grid>
 
@@ -257,6 +260,8 @@ const CountriesData = () => {
                 alignItems="center"
                 className={classes.columnLayout}
               >
+                <Grid>{selectedProperty}</Grid>
+
                 <Grid>
                   <FormControl>
                     <InputLabel htmlFor="age-native-simple">
