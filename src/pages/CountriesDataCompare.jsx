@@ -112,7 +112,6 @@ const CountriesData = () => {
 
       //Agrega las fechas que faltan en los datos, para que todos los paises
       //Tengan la misma cantidad de elementos
-      debugger;
       if (!sameOrigin) {
         countriesDataFromCached = normalizeCountries(countriesDataFromCached);
       }
