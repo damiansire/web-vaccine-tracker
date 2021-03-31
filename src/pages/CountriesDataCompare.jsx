@@ -258,6 +258,27 @@ const CountriesData = () => {
                 className={classes.columnLayout}
               >
                 <Grid>
+                  <FormControl>
+                    <InputLabel htmlFor="age-native-simple">
+                      Dato a ver
+                    </InputLabel>
+                    <Select
+                      variant="outlined"
+                      native
+                      onChange={(event) => {
+                        setSelectedProperty(event.target.value);
+                      }}
+                    >
+                      {countryAttributeNames.map((dataOption) => (
+                        <option value={dataOption.key} key={dataOption.key}>
+                          {dataOption.text}
+                        </option>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
+
+                <Grid>
                   <DoubleButton
                     buttonsHandle={selectViewData}
                     buttonsDescription="Como ver la informacion:"
@@ -295,27 +316,6 @@ const CountriesData = () => {
                     }
                     label="Mover al inicio"
                   />
-                </Grid>
-
-                <Grid>
-                  <FormControl>
-                    <InputLabel htmlFor="age-native-simple">
-                      Dato a ver
-                    </InputLabel>
-                    <Select
-                      variant="outlined"
-                      native
-                      onChange={(event) => {
-                        setSelectedProperty(event.target.value);
-                      }}
-                    >
-                      {countryAttributeNames.map((dataOption) => (
-                        <option value={dataOption.key} key={dataOption.key}>
-                          {dataOption.text}
-                        </option>
-                      ))}
-                    </Select>
-                  </FormControl>
                 </Grid>
               </Grid>
             </Grid>
