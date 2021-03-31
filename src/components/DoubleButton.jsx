@@ -7,6 +7,9 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 10,
     textAlign: "center",
   },
+  cursorPointer: {
+    cursor: "pointer",
+  },
 }));
 
 const DoubleButton = (props) => {
@@ -24,12 +27,14 @@ const DoubleButton = (props) => {
         onClick={props.buttonsHandle}
       >
         <Button
+          className={classes.cursorPointer}
           color={selectedFirstButton && "primary"}
           value={props.valueButton1}
         >
           {props.button1Text}
         </Button>
         <Button
+          className={classes.cursorPointer}
           color={!selectedFirstButton && "primary"}
           value={props.valueButton2}
         >
