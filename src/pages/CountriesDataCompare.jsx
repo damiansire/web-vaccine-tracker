@@ -55,6 +55,35 @@ const CountriesData = () => {
 
   const [sameOrigin, setSameOrigin] = useState(false);
 
+  const countryAttributeNames = [
+    {
+      key: "daily_vaccinations",
+      text: "Vacunacion diaria",
+    },
+    {
+      key: "daily_vaccinations_per_million",
+      text: "Vacunacion diaria por millon",
+    },
+    {
+      key: "people_fully_vaccinated",
+      text: "Personas full vacunas",
+    },
+    {
+      key: "people_fully_vaccinated_per_hundred",
+      text: "Full vacunadas por 100K",
+    },
+    { key: "people_vaccinated", text: "Vacunadas" },
+    {
+      key: "people_vaccinated_per_hundred",
+      text: "Vacunadas por 100k",
+    },
+    {
+      key: "total_dose_vaccinations",
+      text: "Total de dosis aplicadas",
+    },
+    { key: "vaccine_type", text: "Tipo de vacuna" },
+  ];
+
   useEffect(() => {
     getAvailablesCountries().then((data) => {
       setAvailablesCountries(data);
@@ -281,13 +310,9 @@ const CountriesData = () => {
                       native
                       onChange={selectDataAttribute}
                     >
-                      {[
-                        "Vacunados por dia",
-                        "Dosis dadas",
-                        "Marca de vacunas",
-                      ].map((dataOption) => (
-                        <option value={dataOption} key={dataOption}>
-                          {dataOption}
+                      {countryAttributeNames.map((dataOption) => (
+                        <option value={dataOption.key} key={dataOption.key}>
+                          {dataOption.text}
                         </option>
                       ))}
                     </Select>
