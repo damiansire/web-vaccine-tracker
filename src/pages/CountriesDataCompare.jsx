@@ -5,6 +5,7 @@ import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   FormControl,
+  FormControlLabel,
   InputLabel,
   Select,
   MenuItem,
@@ -51,6 +52,8 @@ const CountriesData = () => {
   const [viewInfo, setViewInfo] = useState("Graph");
 
   const [availablesCountries, setAvailablesCountries] = useState([]);
+
+  const [sameOrigin, setSameOrigin] = useState(false);
 
   useEffect(() => {
     getAvailablesCountries().then((data) => {
@@ -99,26 +102,29 @@ const CountriesData = () => {
           );
         });
       }
-      let selectedCountriesWithoutNormalize = selectedCountries.map(
-        (countryName) => {
-          return {
-            name: countriesDataCached[countryName]["countryName"],
-            data: countriesDataCached[countryName]["data"],
-          };
-        }
-      );
 
-      let countriesWithMissingDates = normalizeCountries(
-        selectedCountriesWithoutNormalize
-      );
+      let countriesDataFromCached = selectedCountries.map((countryName) => {
+        return {
+          name: countriesDataCached[countryName]["countryName"],
+          data: countriesDataCached[countryName]["data"],
+        };
+      });
 
-      countriesWithMissingDates = countriesWithMissingDates.map((country) => {
+      //Agrega las fechas que faltan en los datos, para que todos los paises
+      //Tengan la misma cantidad de elementos
+      debugger;
+      if (!sameOrigin) {
+        countriesDataFromCached = normalizeCountries(countriesDataFromCached);
+      }
+
+      //Ordena los paises
+      countriesDataFromCached = countriesDataFromCached.map((country) => {
         return {
           name: country.name,
           data: country.data.sort((a, b) => sortDateAsc(a, b)),
         };
       });
-      return countriesWithMissingDates;
+      return countriesDataFromCached;
     };
 
     const setSelectedCountriesData = async () => {
@@ -132,10 +138,9 @@ const CountriesData = () => {
     };
 
     setSelectedCountriesData();
-  }, [selectedCountries]);
+  }, [selectedCountries, sameOrigin]);
 
   const handleSelectGraphType = (event) => {
-    debugger;
     //Arreglar esto en un futuro xD
     if (event.target.parentElement.value) {
       setGraphType(event.target.parentElement.value);
@@ -249,6 +254,22 @@ const CountriesData = () => {
                     button2Text="Barra"
                     valueButton2="bar"
                     selectedOption={graphType}
+                  />
+                </Grid>
+
+                <Grid>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={sameOrigin}
+                        onChange={() => {
+                          setSameOrigin(!sameOrigin);
+                        }}
+                        name="checkedB"
+                        color="primary"
+                      />
+                    }
+                    label="Mover al inicio"
                   />
                 </Grid>
                 <Grid>
