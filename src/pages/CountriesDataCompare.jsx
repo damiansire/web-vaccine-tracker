@@ -229,13 +229,7 @@ const CountriesData = () => {
             />
           </Grid>
 
-          <Grid
-            container
-            xs={12}
-            direction="row"
-            justify="center"
-            alignItems="center"
-          >
+          <Grid container direction="row" justify="center" alignItems="center">
             <Grid item xs={10}>
               {viewInfo === "Graph" && (
                 <CountriesGraphs
