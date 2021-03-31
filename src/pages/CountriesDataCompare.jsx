@@ -39,21 +39,21 @@ const useStyles = makeStyles((theme) => ({
 
 const CountriesData = () => {
   const classes = useStyles();
-
   const [loadCountryData, setLoadCountryData] = useState(false);
   const [selectedCountriesData, setCountriesDataState] = useState({});
   const [graphType, setGraphType] = useState("line");
+  const [viewInfo, setViewInfo] = useState("Graph");
+  const [availablesCountries, setAvailablesCountries] = useState([]);
+  const [sameOrigin, setSameOrigin] = useState(false);
+  const [selectedProperty, setSelectedProperty] = useState(
+    "daily_vaccinations"
+  );
   const [selectedCountries, setSelectedCountries] = useState([
     "Argentina",
     "Uruguay",
     "Chile",
     "Colombia",
   ]);
-  const [viewInfo, setViewInfo] = useState("Graph");
-
-  const [availablesCountries, setAvailablesCountries] = useState([]);
-
-  const [sameOrigin, setSameOrigin] = useState(false);
 
   const countryAttributeNames = [
     {
@@ -192,10 +192,6 @@ const CountriesData = () => {
     );
   };
 
-  const selectDataAttribute = (event) => {
-    console.log(event.target.value);
-  };
-
   const selectViewData = (event) => {
     //Arreglar esto en un futuro xD
     if (event.target.parentElement.value) {
@@ -243,7 +239,7 @@ const CountriesData = () => {
             <Grid item xs={10}>
               {viewInfo === "Graph" && (
                 <CountriesGraphs
-                  optionsSelectedData="daily_vaccinations"
+                  optionsSelectedData={selectedProperty}
                   countriesData={selectedCountriesData}
                   graphType={graphType}
                 />
@@ -300,6 +296,7 @@ const CountriesData = () => {
                     label="Mover al inicio"
                   />
                 </Grid>
+
                 <Grid>
                   <FormControl>
                     <InputLabel htmlFor="age-native-simple">
@@ -308,7 +305,9 @@ const CountriesData = () => {
                     <Select
                       variant="outlined"
                       native
-                      onChange={selectDataAttribute}
+                      onChange={(event) => {
+                        setSelectedProperty(event.target.value);
+                      }}
                     >
                       {countryAttributeNames.map((dataOption) => (
                         <option value={dataOption.key} key={dataOption.key}>
