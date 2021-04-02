@@ -8,7 +8,6 @@ import {
   FormControlLabel,
   InputLabel,
   Select,
-  MenuItem,
   Checkbox,
   TextField,
 } from "@material-ui/core";
@@ -103,7 +102,6 @@ const CountriesData = () => {
         countryName: countryId,
       };
     };
-    const apiEndpoint = process.env.REACT_APP_VACCINATION_API_ENDPOINT;
 
     const getSelectedCountriesDataForGraph = async () => {
       //Get not cached element
@@ -117,7 +115,7 @@ const CountriesData = () => {
             return getCountryData(country)
           })
         );
-
+          debugger;
         contriesData.forEach((countryData) => {
           countryData["data"] = countryData["data"].sort((a, b) =>
             sortDateAsc(a, b)
