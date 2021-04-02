@@ -103,6 +103,7 @@ const CountriesData = () => {
         countryName: countryId,
       };
     };
+    const apiEndpoint = process.env.REACT_APP_VACCINATION_API_ENDPOINT;
 
     const getSelectedCountriesDataForGraph = async () => {
       //Get not cached element
@@ -114,7 +115,7 @@ const CountriesData = () => {
         let contriesData = await Promise.all(
           notCachedCountries.map(async (country) => {
             let countryResponse = await fetch(
-              `http://localhost:3005/api/v1/countries/${country}`
+              `${apiEndpoint}/countries/${country}`
             );
             return countryResponse.json();
           })
