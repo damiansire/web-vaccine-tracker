@@ -6,6 +6,7 @@ import HealingIcon from "@material-ui/icons/Healing";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
+import { Link, Route } from "wouter";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,15 +40,21 @@ const Navbar = () => {
         <Typography variant="h6" className={classes.title}>
           Vacunas del coronavirus aplicación
         </Typography>
-        <Button className={classes.menuButton} color="inherit">
-          Comparar evolucion en paises
-        </Button>
-        <Button className={classes.menuButton} color="inherit">
-          Ver estadisticas en un pais
-        </Button>
-        <Button className={classes.menuButton} color="inherit">
-          Ranking de paises
-        </Button>
+        <Link href="/">
+          <Button className={classes.menuButton} color="inherit">
+            Comparar evolucion en paises
+          </Button>
+        </Link>
+        <Link href="/country">
+          <Button className={classes.menuButton} color="inherit">
+            Ver estadisticas en un pais
+          </Button>
+        </Link>
+        <Link href="/ranking">
+          <Button className={classes.menuButton} color="inherit">
+            Ranking de paises
+          </Button>
+        </Link>
       </Toolbar>
     </AppBar>
   );
