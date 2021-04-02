@@ -14,7 +14,7 @@ import {
 } from "@material-ui/core";
 
 import Grid from "@material-ui/core/Grid";
-import { getAvailablesCountries } from "../adapters/countries.js";
+import { getAvailablesCountries, getCountryData } from "../adapters/countries.js";
 
 //Components
 import CountriesGraphs from "../components/CountriesGraphs";
@@ -114,10 +114,7 @@ const CountriesData = () => {
         //Get countries data not cached and cached it
         let contriesData = await Promise.all(
           notCachedCountries.map(async (country) => {
-            let countryResponse = await fetch(
-              `${apiEndpoint}/countries/${country}`
-            );
-            return countryResponse.json();
+            return getCountryData(country)
           })
         );
 
