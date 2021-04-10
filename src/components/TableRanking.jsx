@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
@@ -36,7 +36,7 @@ const TableRanking = (props) => {
 
   const useStyles = makeStyles({
     root: {
-      width: "45%",
+      width: "100%",
     },
     container: {
       maxHeight: 440,
