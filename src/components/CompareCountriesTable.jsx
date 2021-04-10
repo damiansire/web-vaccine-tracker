@@ -40,7 +40,6 @@ const CountriesTable = (props) => {
       rows[index][countryName] = dataPoint[selectedProp];
     });
   }
-  debugger;
   return (
     <div style={{ height: 600, width: "100%" }}>
       <DataGrid rows={rows} columns={columns} pageSize={20} checkboxSelection />
