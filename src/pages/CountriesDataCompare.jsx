@@ -13,7 +13,10 @@ import {
 } from "@material-ui/core";
 
 import Grid from "@material-ui/core/Grid";
-import { getAvailablesCountries, getCountryData } from "../adapters/countries.js";
+import {
+  getAvailablesCountries,
+  getCountryData,
+} from "../adapters/countries.js";
 
 //Components
 import CountriesGraphs from "../components/CountriesGraphs";
@@ -112,10 +115,9 @@ const CountriesData = () => {
         //Get countries data not cached and cached it
         let contriesData = await Promise.all(
           notCachedCountries.map(async (country) => {
-            return getCountryData(country)
+            return getCountryData(country);
           })
         );
-          debugger;
         contriesData.forEach((countryData) => {
           countryData["data"] = countryData["data"].sort((a, b) =>
             sortDateAsc(a, b)
