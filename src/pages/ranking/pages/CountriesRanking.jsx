@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-import { getLastDataCountries } from "../adapters/rankings.js";
+import { getLastDataCountries } from "../../../adapters/rankings.js";
 
 import TableRanking from "../components/TableRanking";
 
 import Grid from "@material-ui/core/Grid";
-import { Button } from "@material-ui/core";
+import RankingTypesButtons from "../dummy-components/RankingTypesButtons.jsx";
 
 const CountriesRanking = () => {
   const [lastDataCountries, setLastDataCountries] = useState([]);
@@ -21,6 +21,32 @@ const CountriesRanking = () => {
       title: "Total de vacunas dadas hasta el momento",
       usedOnlyTodayData: false,
       attribute: "total_dose_vaccinations",
+    },
+    {
+      title: "Vacunas aplicadas hoy",
+      usedOnlyTodayData: false,
+      attribute: "daily_vaccinations",
+    },
+    {
+      title: "Vacunas aplicadas hoy por millon",
+      usedOnlyTodayData: false,
+      attribute: "daily_vaccinations_per_million",
+    },
+    {
+      title: "Inmunisadas",
+      usedOnlyTodayData: false,
+      attribute: "people_fully_vaccinated",
+    },
+
+    {
+      title: "Inmunisadas por 100/K",
+      usedOnlyTodayData: false,
+      attribute: "people_fully_vaccinated_per_hundred",
+    },
+    {
+      title: "Vacunas que aplica",
+      usedOnlyTodayData: false,
+      attribute: "vaccine_type",
     },
   ];
 
@@ -40,10 +66,9 @@ const CountriesRanking = () => {
         )}
       </Grid>
       <Grid item xs={4}>
-        <h5>Elige el tipo de ranking</h5>
-        <Button variant="contained" color="primary">
-          Ranking por 100k
-        </Button>
+        <RankingTypesButtons
+          rankingTablesOptions={rankingTablesOptions}
+        ></RankingTypesButtons>
       </Grid>
     </Grid>
   );

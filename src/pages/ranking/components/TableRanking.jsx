@@ -9,7 +9,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 
-const { formatNumberWithPoint } = require("../utils/numberFormat");
+const { formatNumberWithPoint } = require("../../../utils/numberFormat");
 
 //Que es mejor, pasar directamente al componente la info ya filtrada tipo: daily_vaccination, countryid
 //O pasarla toda y filtrarla aca, teniendo en cuenta, que va a ser dinamico
@@ -23,7 +23,6 @@ const TableRanking = (props) => {
   let countriesDataSort = props.data.sort(function (a, b) {
     return b[attribute] - a[attribute];
   });
-
   countriesDataSort = countriesDataSort.map((country, index) => {
     return {
       position: index + 1,

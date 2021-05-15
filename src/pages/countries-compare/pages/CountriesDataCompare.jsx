@@ -16,15 +16,15 @@ import Grid from "@material-ui/core/Grid";
 import {
   getAvailablesCountries,
   getCountryData,
-} from "../adapters/countries.js";
+} from "../../../adapters/countries.js";
 
 //Components
 import CountriesGraphs from "../components/CountriesGraphs";
 import CompareCountriesTable from "../components/CompareCountriesTable";
 import DoubleButton from "../components/DoubleButton";
 
-const { sortDateAsc } = require("../utils/sorts");
-const { normalizeCountries } = require("../utils/missingDate");
+const { sortDateAsc } = require("../../../utils/sorts");
+const { normalizeCountries } = require("../../../utils/missingDate");
 
 const useStyles = makeStyles((theme) => ({
   selectionOption: {
