@@ -47,9 +47,8 @@ const CountriesData = () => {
   const [viewInfo, setViewInfo] = useState("Graph");
   const [availablesCountries, setAvailablesCountries] = useState([]);
   const [sameOrigin, setSameOrigin] = useState(false);
-  const [selectedProperty, setSelectedProperty] = useState(
-    "daily_vaccinations"
-  );
+  const [selectedProperty, setSelectedProperty] =
+    useState("daily_vaccinations");
   const [selectedCountries, setSelectedCountries] = useState([
     "Argentina",
     "Uruguay",
@@ -191,7 +190,6 @@ const CountriesData = () => {
   };
 
   const selectViewData = (event) => {
-    //Arreglar esto en un futuro xD
     if (event.target.parentElement.value) {
       setViewInfo(event.target.parentElement.value);
     } else if (event.target.value) {
@@ -288,15 +286,17 @@ const CountriesData = () => {
                 </Grid>
 
                 <Grid>
-                  <DoubleButton
-                    buttonsDescription="Selecciona tipo de grafica:"
-                    buttonsHandle={handleSelectGraphType}
-                    button1Text="Lineas"
-                    valueButton1="line"
-                    button2Text="Barra"
-                    valueButton2="bar"
-                    selectedOption={graphType}
-                  />
+                  {viewInfo === "Graph" && (
+                    <DoubleButton
+                      buttonsDescription="Selecciona tipo de grafica:"
+                      buttonsHandle={handleSelectGraphType}
+                      button1Text="Lineas"
+                      valueButton1="line"
+                      button2Text="Barra"
+                      valueButton2="bar"
+                      selectedOption={graphType}
+                    />
+                  )}
                 </Grid>
 
                 <Grid>
