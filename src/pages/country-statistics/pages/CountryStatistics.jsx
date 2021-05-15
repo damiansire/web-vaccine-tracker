@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import {
   getAvailablesCountries,
   getCountryData,
-} from "../adapters/countries.js";
+} from "../../../adapters/countries.js";
 import CountryDataTable from "../components/CountryDataTable";
 
 const useStyles = makeStyles((theme) => ({

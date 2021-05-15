@@ -19,7 +19,6 @@ const CountriesGraphs = (props) => {
   let grapOptions = getGraphObj(props.countriesData);
 
   let selectedCountriesData = props.countriesData;
-
   let series = selectedCountriesData.map((country) => {
     const countryData = country["data"].map(
       (dataPoint) => dataPoint[props.optionsSelectedData] || 0

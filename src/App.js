@@ -1,11 +1,11 @@
 import "./App.css";
-import CountriesData from "./pages/CountriesDataCompare";
-import CountriesRanking from "./pages/CountriesRanking";
-import CountryStatistics from "./pages/CountryStatistics";
+import CountriesData from "./pages/countries-compare/pages/CountriesDataCompare";
+import CountriesRanking from "./pages/ranking/pages/CountriesRanking";
+import CountryStatistics from "./pages/country-statistics/pages/CountryStatistics";
 
 import { Box, Container } from "@material-ui/core";
 import Navbar from "./components/Navbar.jsx";
-import { Router, Route, Switch } from "wouter";
+import { Route, Switch } from "wouter";
 
 function App() {
   return (
