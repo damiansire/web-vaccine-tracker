@@ -8,14 +8,6 @@ import Grid from "@material-ui/core/Grid";
 import RankingTypesButtons from "../dummy-components/RankingTypesButtons.jsx";
 
 const CountriesRanking = () => {
-  const [lastDataCountries, setLastDataCountries] = useState([]);
-
-  useEffect(() => {
-    getLastDataCountries().then((data) => {
-      setLastDataCountries(data.payload);
-    });
-  }, []);
-
   const rankingTablesOptions = [
     {
       title: "Total de vacunas dadas hasta el momento",
@@ -50,24 +42,38 @@ const CountriesRanking = () => {
     },
   ];
 
+  const [lastDataCountries, setLastDataCountries] = useState([]);
+  const [selectedOption, selectOption] = useState(rankingTablesOptions[0]);
+
+  useEffect(() => {
+    getLastDataCountries().then((data) => {
+      setLastDataCountries(data.payload);
+    });
+  }, []);
+
+  const setOptionHandle = (option) => {
+    selectOption(option);
+  };
+
   return (
     <Grid container spacing={3}>
       <Grid item xs={8}>
         {!!lastDataCountries.length && (
           <TableRanking
-            title={rankingTablesOptions[0].title}
+            title={selectedOption.title}
             data={
-              rankingTablesOptions[0].usedOnlyTodayData
+              selectedOption.usedOnlyTodayData
                 ? lastDataCountries
                 : lastDataCountries
             }
-            attribute={rankingTablesOptions[0].attribute}
+            attribute={selectedOption.attribute}
           />
         )}
       </Grid>
       <Grid item xs={4}>
         <RankingTypesButtons
           rankingTablesOptions={rankingTablesOptions}
+          selectOption={setOptionHandle}
         ></RankingTypesButtons>
       </Grid>
     </Grid>

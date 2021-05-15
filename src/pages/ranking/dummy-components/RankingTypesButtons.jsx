@@ -7,7 +7,13 @@ function RankingTypesButtons(props) {
       {props.rankingTablesOptions.map((option) => {
         console.log(props.rankingTablesOptions);
         return (
-          <Button variant="contained" color="primary">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => {
+              props.selectOption(option);
+            }}
+          >
             {option.title}
           </Button>
         );
