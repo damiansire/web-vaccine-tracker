@@ -7,7 +7,7 @@ import TableRanking from "../components/TableRanking";
 import Grid from "@material-ui/core/Grid";
 import RankingTypesButtons from "../dummy-components/RankingTypesButtons.jsx";
 
-const CountriesRanking = () => {
+const AllCountriesRanking = () => {
   const rankingTablesOptions = [
     {
       title: "Total de vacunas dadas hasta el momento",
@@ -80,4 +80,4 @@ const CountriesRanking = () => {
   );
 };
 
-export default CountriesRanking;
+export default AllCountriesRanking;

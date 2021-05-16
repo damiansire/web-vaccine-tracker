@@ -1,11 +1,12 @@
 import "./App.css";
 import CountriesData from "./pages/countries-compare/pages/CountriesDataCompare";
-import CountriesRanking from "./pages/ranking/pages/CountriesRanking";
+import AllCountriesRanking from "./pages/ranking/pages/AllCountriesRanking";
 import CountryStatistics from "./pages/country-statistics/pages/CountryStatistics";
 
 import { Box, Container } from "@material-ui/core";
 import Navbar from "./components/Navbar.jsx";
 import { Route, Switch } from "wouter";
+import AllRankings from "./pages/ranking/pages/AllRankings";
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
         <Switch>
           <Route path="/" component={CountriesData} />
           <Route path="/country" component={CountryStatistics} />
-          <Route path="/ranking" component={CountriesRanking} />
+          <Route path="/ranking" component={AllCountriesRanking} />
+          <Route path="/all-rankings" component={AllRankings} />
         </Switch>
       </Box>
     </Container>
