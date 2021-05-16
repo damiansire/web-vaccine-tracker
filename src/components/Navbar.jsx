@@ -55,6 +55,11 @@ const Navbar = () => {
             Ranking de paises
           </Button>
         </Link>
+        <Link href="/all-rankings">
+          <Button className={classes.menuButton} color="inherit">
+            Todos los rankings
+          </Button>
+        </Link>
       </Toolbar>
     </AppBar>
   );
