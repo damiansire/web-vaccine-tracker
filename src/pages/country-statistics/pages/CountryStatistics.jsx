@@ -8,6 +8,7 @@ import {
   getCountryData,
 } from "../../../adapters/countries.js";
 
+import CountriesSpecificPositionRanking from "../components/CountriesSpecificPositionRanking";
 import CountryDataTable from "../components/CountryDataTable";
 import CountriesMap from "../components/CountriesMap";
 
@@ -26,20 +27,25 @@ const CountryData = () => {
 
   const [availablesCountries, setAvailablesCountries] = useState([]);
   const [selectedCountry, setCountry] = useState({
-    countryId: "Uruguay",
+    countryName: "Uruguay",
     data: [],
   });
 
+  //Seteo iniciales de propiedades
   useEffect(() => {
     getAvailablesCountries().then((data) => {
       setAvailablesCountries(data);
-      selectCountry({ target: { value: "Uruguay" } });
     });
+    selectCountryByName("Uruguay");
   }, []);
 
   const selectCountry = (event) => {
-    let countryId = event.target.value;
-    getCountryData(countryId).then((countryData) => {
+    let countryName = event.target.value;
+    selectCountryByName(countryName);
+  };
+
+  const selectCountryByName = (countryName) => {
+    getCountryData(countryName).then((countryData) => {
       setCountry(countryData);
     });
   };
@@ -50,21 +56,31 @@ const CountryData = () => {
         <CountryDataTable countryData={selectedCountry || {}} />
       </div>
       <div className="col-span-4">
-        <div>
-          {!!availablesCountries.length && (
-            <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="age-native-simple">Age</InputLabel>
-              <Select native onChange={selectCountry}>
-                {availablesCountries.map((countryId) => (
-                  <option value={countryId} key={countryId}>
-                    {countryId}
-                  </option>
-                ))}
-              </Select>
-            </FormControl>
-          )}
+        <div className="grid grid-cols-2">
+          <div>
+            {!!availablesCountries.length && (
+              <FormControl className={classes.formControl}>
+                <InputLabel htmlFor="age-native-simple">
+                  Pais seleccionado
+                </InputLabel>
+                <Select native onChange={selectCountry}>
+                  {availablesCountries.map((countryName) => (
+                    <option value={countryName} key={countryName}>
+                      {countryName}
+                    </option>
+                  ))}
+                </Select>
+              </FormControl>
+            )}
+          </div>
+          <div className="flex flex-wrap content-start">
+            Pais seleccionado: {selectedCountry.countryName}
+          </div>
         </div>
-        <CountriesMap />
+        <CountriesMap selectCountryByName={selectCountryByName} />
+        <CountriesSpecificPositionRanking
+          countryName={selectedCountry.countryName}
+        />
       </div>
     </div>
   );

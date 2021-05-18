@@ -2,7 +2,6 @@ import React from "react";
 
 const CountryDataTable = (props) => {
   let data = props.countryData.data;
-  console.log(data);
   return (
     <table class="shadow-lg bg-white">
       <tr>
