@@ -5,7 +5,6 @@ function RankingTypesButtons(props) {
     <>
       <h5>Elige el tipo de ranking</h5>
       {props.rankingTablesOptions.map((option) => {
-        console.log(props.rankingTablesOptions);
         return (
           <Button
             variant="contained"

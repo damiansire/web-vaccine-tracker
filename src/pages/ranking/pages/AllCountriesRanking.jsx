@@ -46,7 +46,7 @@ const AllCountriesRanking = () => {
 
   useEffect(() => {
     getLastDataCountries().then((data) => {
-      setLastDataCountries(data.payload);
+      setLastDataCountries(data);
     });
   }, []);
 
