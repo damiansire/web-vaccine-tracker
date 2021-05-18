@@ -7,7 +7,9 @@ import {
   getAvailablesCountries,
   getCountryData,
 } from "../../../adapters/countries.js";
+
 import CountryDataTable from "../components/CountryDataTable";
+import CountriesMap from "../components/CountriesMap";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -29,7 +31,10 @@ const CountryData = () => {
   });
 
   useEffect(() => {
-    getAvailablesCountries().then((data) => setAvailablesCountries(data));
+    getAvailablesCountries().then((data) => {
+      setAvailablesCountries(data);
+      selectCountry({ target: { value: "Uruguay" } });
+    });
   }, []);
 
   const selectCountry = (event) => {
@@ -40,21 +45,27 @@ const CountryData = () => {
   };
 
   return (
-    <div>
-      <h3>{selectedCountry["countryId"]}</h3>
-      {!!availablesCountries.length && (
-        <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="age-native-simple">Age</InputLabel>
-          <Select native onChange={selectCountry}>
-            {availablesCountries.map((countryId) => (
-              <option value={countryId} key={countryId}>
-                {countryId}
-              </option>
-            ))}
-          </Select>
-        </FormControl>
-      )}
-      <CountryDataTable countryData={selectedCountry || {}} />
+    <div className="grid grid-cols-10 justify-items-center gap-4 min-h-full">
+      <div className="col-span-6">
+        <CountryDataTable countryData={selectedCountry || {}} />
+      </div>
+      <div className="col-span-4">
+        <div>
+          {!!availablesCountries.length && (
+            <FormControl className={classes.formControl}>
+              <InputLabel htmlFor="age-native-simple">Age</InputLabel>
+              <Select native onChange={selectCountry}>
+                {availablesCountries.map((countryId) => (
+                  <option value={countryId} key={countryId}>
+                    {countryId}
+                  </option>
+                ))}
+              </Select>
+            </FormControl>
+          )}
+        </div>
+        <CountriesMap />
+      </div>
     </div>
   );
 };

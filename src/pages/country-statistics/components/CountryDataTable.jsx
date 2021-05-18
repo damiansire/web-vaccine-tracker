@@ -1,51 +1,67 @@
 import React from "react";
-import { DataGrid } from "@material-ui/data-grid";
 
 const CountryDataTable = (props) => {
-  let columns = [
-    { field: "date", headerName: "Fecha", width: 120 },
-    {
-      field: "daily_vaccinations",
-      headerName: "Vacunadas hoy",
-      width: 150,
-    },
-    {
-      field: "daily_vaccinations_per_million",
-      headerName: "Vacunas millon/hab",
-      width: 180,
-    },
-    {
-      field: "people_vaccinated",
-      headerName: "Vacunadas",
-      width: 140,
-    },
-    {
-      field: "people_vaccinated_per_hundred",
-      headerName: "Vacunadas por 100k/hab",
-      width: 220,
-    },
-    {
-      field: "total_dose_vaccinations",
-      headerName: "Total de dosis aplicadas",
-      width: 200,
-    },
-    { field: "vaccine_type", headerName: "Marca de la vacuna", width: 200 },
-    {
-      field: "people_fully_vaccinated_per_hundred",
-      headerName: "Inmunizadas 100k/hab",
-      width: 200,
-    },
-  ];
-
-  for (let index = 0; index < props.countryData.data.length; index++) {
-    props.countryData.data[index]["id"] = index;
-  }
-
-  const rows = !!props.countryData.data.length ? props.countryData.data : [];
+  let data = props.countryData.data;
+  console.log(data);
   return (
-    <div style={{ height: 600, width: "100%" }}>
-      <DataGrid rows={rows} columns={columns} pageSize={20} checkboxSelection />
-    </div>
+    <table class="shadow-lg bg-white">
+      <tr>
+        <th rowspan="2" class="bg-blue-100 border text-center p-2">
+          Fecha
+        </th>
+        <th rowspan={data.length + 2}></th>
+        <th colspan="2" class="bg-blue-100 border text-center p-2">
+          Vacunas ese dia
+        </th>
+        <th rowspan={data.length + 2}> </th>
+        <th colspan="2" class="bg-blue-100 border text-center p-2">
+          Acumulado Personas
+        </th>
+        <th rowspan={data.length + 2}></th>
+        <th colspan="2" class="bg-blue-100 border text-center p-2">
+          Inmunizadas
+        </th>
+        <th rowspan={data.length + 2}></th>
+        <th rowspan="2" class="bg-blue-100 border text-center p-2">
+          Total de dosis
+        </th>
+      </tr>
+      <tr>
+        <th class="bg-blue-100 border text-center p-2">Cantidad</th>
+        <th class="bg-blue-100 border text-center p-2">Millon/Hab</th>
+        <th class="bg-blue-100 border text-center p-2">Vacunadas</th>
+        <th class="bg-blue-100 border text-center p-2">100.000/Hab</th>
+        <th class="bg-blue-100 border text-center p-2">Cantidad</th>
+        <th class="bg-blue-100 border text-center p-2">100.000/Hab</th>
+      </tr>
+
+      {data.map((row) => {
+        return (
+          <>
+            <tr>
+              <td class="border text-center p-2">{row.date}</td>
+              <td class="border text-center p-2">{row.daily_vaccinations}</td>
+              <td class="border text-center p-2">
+                {row.daily_vaccinations_per_million}
+              </td>
+              <td class="border text-center p-2">{row.people_vaccinated}</td>
+              <td class="border text-center p-2">
+                {row.people_vaccinated_per_hundred}
+              </td>
+              <td class="border text-center p-2">
+                {row.people_fully_vaccinated}
+              </td>
+              <td class="border text-center p-2">
+                {row.people_fully_vaccinated_per_hundred}
+              </td>
+              <td class="border text-center p-2">
+                {row.total_dose_vaccinations}
+              </td>
+            </tr>
+          </>
+        );
+      })}
+    </table>
   );
 };
 
