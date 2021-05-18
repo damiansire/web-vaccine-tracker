@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import { getLastDataCountries } from "../../../adapters/rankings.js";
 
 import TableRanking from "../components/TableRanking";
-
 import Grid from "@material-ui/core/Grid";
 import RankingTypesButtons from "../dummy-components/RankingTypesButtons.jsx";
 
@@ -71,10 +70,12 @@ const AllCountriesRanking = () => {
         )}
       </Grid>
       <Grid item xs={4}>
-        <RankingTypesButtons
-          rankingTablesOptions={rankingTablesOptions}
-          selectOption={setOptionHandle}
-        ></RankingTypesButtons>
+        <div>
+          <RankingTypesButtons
+            rankingTablesOptions={rankingTablesOptions}
+            selectOption={setOptionHandle}
+          ></RankingTypesButtons>
+        </div>
       </Grid>
     </Grid>
   );
