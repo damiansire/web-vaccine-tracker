@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Autocomplete from "@material-ui/lab/Autocomplete";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
+
+import OptionsSelected from "../components/SelectCountryComponent/OptionsSelected";
 
 import {
   FormControl,
@@ -9,7 +10,6 @@ import {
   InputLabel,
   Select,
   Checkbox,
-  TextField,
 } from "@material-ui/core";
 
 import {
@@ -186,8 +186,8 @@ const CountriesData = () => {
     <>
       {loadCountryData && (
         <div className="grid grid-cols-12 justify-items-center gap-4 min-h-full">
-          <div className="col-span-2 grid grid-cols-1 justify-items-center gap-4 align-middle">
-            <div className="col-span-1">
+          <div className="col-span-2 flex flex-col justify-items-center gap-4 align-middle p-4">
+            <div className="col-span-1 my-1">
               <FormControl>
                 <InputLabel htmlFor="age-native-simple">Dato a ver</InputLabel>
                 <Select
@@ -206,7 +206,7 @@ const CountriesData = () => {
               </FormControl>
             </div>
 
-            <div className="col-span-1">
+            <div className="col-span-1 my-1">
               <DoubleButton
                 buttonsHandle={selectViewData}
                 button1Text="Grafico"
@@ -217,7 +217,7 @@ const CountriesData = () => {
               />
             </div>
 
-            <div className="col-span-1">
+            <div className="col-span-1 my-1">
               {viewInfo === "Graph" && (
                 <DoubleButton
                   buttonsHandle={handleSelectGraphType}
@@ -230,7 +230,7 @@ const CountriesData = () => {
               )}
             </div>
 
-            <div className="col-span-1">
+            <div className="col-span-1 my-1 text-center">
               <FormControlLabel
                 control={
                   <Checkbox
@@ -245,9 +245,16 @@ const CountriesData = () => {
                 label="Mover al inicio"
               />
             </div>
+
+            <div className="col-span-1 my-1 ">
+              <OptionsSelected
+                selectedCountries={selectedCountries}
+                setSelectedCountries={setSelectedCountries}
+              />
+            </div>
           </div>
 
-          <div className="col-span-8 w-full justify-items-center gap-4 align-middle">
+          <div className="col-span-8 self-center w-full justify-items-center gap-4 align-middle">
             {viewInfo === "Graph" && (
               <CountriesGraphs
                 optionsSelectedData={selectedProperty}
