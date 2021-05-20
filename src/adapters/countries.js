@@ -9,6 +9,5 @@ export const getAvailablesCountries = async () => {
 export const getCountryData = async (countryId) => {
   let response = await fetch(`${apiEndpoint}/countries/${countryId}`);
   let data = await response.json();
-  console.log(data);
   return data;
 };
