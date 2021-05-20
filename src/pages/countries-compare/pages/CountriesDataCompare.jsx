@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
-import { makeStyles } from "@material-ui/core/styles";
+
 import {
   FormControl,
   FormControlLabel,
@@ -12,7 +12,6 @@ import {
   TextField,
 } from "@material-ui/core";
 
-import Grid from "@material-ui/core/Grid";
 import {
   getAvailablesCountries,
   getCountryData,
@@ -22,25 +21,11 @@ import {
 import CountriesGraphs from "../components/CountriesGraphs";
 import CompareCountriesTable from "../components/CompareCountriesTable";
 import DoubleButton from "../components/DoubleButton";
-
+import SelectCountry from "../components/SelectCountryComponent/SelectCountry";
 const { sortDateAsc } = require("../../../utils/sorts");
 const { normalizeCountries } = require("../../../utils/missingDate");
 
-const useStyles = makeStyles((theme) => ({
-  selectionOption: {
-    marginTop: 30,
-  },
-  columnLayout: {
-    height: "100%",
-  },
-  optionElement: {
-    marginBottom: 10,
-    textAlign: "center",
-  },
-}));
-
 const CountriesData = () => {
-  const classes = useStyles();
   const [loadCountryData, setLoadCountryData] = useState(false);
   const [selectedCountriesData, setCountriesDataState] = useState({});
   const [graphType, setGraphType] = useState("line");
@@ -198,128 +183,96 @@ const CountriesData = () => {
   };
 
   return (
-    <div className="app">
+    <>
       {loadCountryData && (
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <Autocomplete
-              ListboxProps={{ style: { maxHeight: "150px" } }}
-              fullWidth={true}
-              onChange={(event, newInputValue) => {
-                setSelectedCountries(newInputValue.map((element) => element));
-              }}
-              multiple
-              id="checkboxes-tags-demo"
-              options={availablesCountries}
-              disableCloseOnSelect
-              getOptionLabel={(option) => option}
-              renderOption={renderSelect}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
+        <div className="grid grid-cols-12 justify-items-center gap-4 min-h-full">
+          <div className="col-span-2 grid grid-cols-1 justify-items-center gap-4 align-middle">
+            <div className="col-span-1">
+              <FormControl>
+                <InputLabel htmlFor="age-native-simple">Dato a ver</InputLabel>
+                <Select
                   variant="outlined"
-                  label="Elije un pais"
-                  placeholder="Haz click y elige un pais :) "
-                />
-              )}
-            />
-          </Grid>
+                  native
+                  onChange={(event) => {
+                    setSelectedProperty(event.target.value);
+                  }}
+                >
+                  {countryAttributeNames.map((dataOption) => (
+                    <option value={dataOption.key} key={dataOption.key}>
+                      {dataOption.text}
+                    </option>
+                  ))}
+                </Select>
+              </FormControl>
+            </div>
 
-          <Grid container direction="row" justify="center" alignItems="center">
-            <Grid item xs={10}>
+            <div className="col-span-1">
+              <DoubleButton
+                buttonsHandle={selectViewData}
+                button1Text="Grafico"
+                valueButton1="Graph"
+                button2Text="Tabla"
+                valueButton2="Table"
+                selectedOption={viewInfo}
+              />
+            </div>
+
+            <div className="col-span-1">
               {viewInfo === "Graph" && (
-                <CountriesGraphs
-                  optionsSelectedData={selectedProperty}
-                  countriesData={selectedCountriesData}
-                  graphType={graphType}
+                <DoubleButton
+                  buttonsHandle={handleSelectGraphType}
+                  button1Text="Lineas"
+                  valueButton1="line"
+                  button2Text="Barra"
+                  valueButton2="bar"
+                  selectedOption={graphType}
                 />
               )}
-              {viewInfo === "Table" && (
-                <CompareCountriesTable
-                  countriesData={selectedCountriesData}
-                  optionsSelectedData={selectedProperty}
-                />
-              )}
-            </Grid>
+            </div>
 
-            <Grid item xs={2} className={classes.columnLayout}>
-              <Grid
-                container
-                direction="column"
-                justify="space-evenly"
-                alignItems="center"
-                className={classes.columnLayout}
-              >
-                <Grid>{selectedProperty}</Grid>
-
-                <Grid>
-                  <FormControl>
-                    <InputLabel htmlFor="age-native-simple">
-                      Dato a ver
-                    </InputLabel>
-                    <Select
-                      variant="outlined"
-                      native
-                      onChange={(event) => {
-                        setSelectedProperty(event.target.value);
-                      }}
-                    >
-                      {countryAttributeNames.map((dataOption) => (
-                        <option value={dataOption.key} key={dataOption.key}>
-                          {dataOption.text}
-                        </option>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </Grid>
-
-                <Grid>
-                  <DoubleButton
-                    buttonsHandle={selectViewData}
-                    buttonsDescription="Como ver la informacion:"
-                    button1Text="Grafico"
-                    valueButton1="Graph"
-                    button2Text="Tabla"
-                    valueButton2="Table"
-                    selectedOption={viewInfo}
+            <div className="col-span-1">
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={sameOrigin}
+                    onChange={() => {
+                      setSameOrigin(!sameOrigin);
+                    }}
+                    name="checkedB"
+                    color="primary"
                   />
-                </Grid>
+                }
+                label="Mover al inicio"
+              />
+            </div>
+          </div>
 
-                <Grid>
-                  {viewInfo === "Graph" && (
-                    <DoubleButton
-                      buttonsDescription="Selecciona tipo de grafica:"
-                      buttonsHandle={handleSelectGraphType}
-                      button1Text="Lineas"
-                      valueButton1="line"
-                      button2Text="Barra"
-                      valueButton2="bar"
-                      selectedOption={graphType}
-                    />
-                  )}
-                </Grid>
+          <div className="col-span-8 w-full justify-items-center gap-4 align-middle">
+            {viewInfo === "Graph" && (
+              <CountriesGraphs
+                optionsSelectedData={selectedProperty}
+                countriesData={selectedCountriesData}
+                graphType={graphType}
+              />
+            )}
+            {viewInfo === "Table" && (
+              <CompareCountriesTable
+                countriesData={selectedCountriesData}
+                optionsSelectedData={selectedProperty}
+              />
+            )}
+          </div>
 
-                <Grid>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={sameOrigin}
-                        onChange={() => {
-                          setSameOrigin(!sameOrigin);
-                        }}
-                        name="checkedB"
-                        color="primary"
-                      />
-                    }
-                    label="Mover al inicio"
-                  />
-                </Grid>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
+          <div className="col-span-2 max-h-screen h-screen">
+            <SelectCountry
+              availablesCountries={availablesCountries}
+              selectedCountries={selectedCountries}
+              setSelectedCountries={setSelectedCountries}
+            />
+          </div>
+        </div>
       )}
-    </div>
+    </>
   );
 };
 
