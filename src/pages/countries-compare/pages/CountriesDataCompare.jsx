@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
-import CheckBoxIcon from "@material-ui/icons/CheckBox";
 
 import OptionsSelected from "../components/SelectCountryComponent/OptionsSelected";
 
@@ -75,9 +73,6 @@ const CountriesData = () => {
       setAvailablesCountries(data);
     });
   }, []);
-
-  const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
-  const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
   useEffect(() => {
     //Create a cache
@@ -157,21 +152,6 @@ const CountriesData = () => {
     } else if (event.target.value) {
       setGraphType(event.target.value);
     }
-  };
-
-  const renderSelect = (option, { selected }) => {
-    return (
-      <React.Fragment>
-        <Checkbox
-          icon={icon}
-          checkedIcon={checkedIcon}
-          style={{ marginRight: 8 }}
-          checked={selected}
-          value={option}
-        />
-        {option}
-      </React.Fragment>
-    );
   };
 
   const selectViewData = (event) => {

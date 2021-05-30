@@ -6,7 +6,7 @@ import HealingIcon from "@material-ui/icons/Healing";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
-import { Link, Route } from "wouter";
+import { Link } from "wouter";
 
 const useStyles = makeStyles((theme) => ({
   root: {

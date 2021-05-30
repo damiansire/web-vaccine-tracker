@@ -18,10 +18,10 @@ function CountriesSpecificPositionRanking(props) {
       ];
       let actualCountryRanking = {};
       actualCountryRanking.date = data.find(
-        (country) => country.countryId == countryId
+        (country) => country.countryId === countryId
       )?.date;
       for (let field of fieldsToMakeRanking) {
-        let clearData = data.filter((country) => country[field] != "");
+        let clearData = data.filter((country) => country[field] !== "");
         let orderRanking = clearData.sort(function (a, b) {
           return b[field] - a[field];
         });
