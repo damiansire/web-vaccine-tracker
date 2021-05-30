@@ -45,7 +45,7 @@ const TableRanking = (props) => {
   //Logica de la tabla
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(20);
+  const [rowsPerPage, setRowsPerPage] = React.useState(50);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -64,7 +64,12 @@ const TableRanking = (props) => {
 
   return (
     <>
-      <div class="flex justify-center mt-4 mb-7 text-4xl">
+      <div
+        class={
+          "flex justify-center mt-4 mb-7 " +
+          (props.small ? "text-2xl" : "text-4xl")
+        }
+      >
         <h1>{props.title}</h1>
       </div>
       <Paper className={classes.root}>
@@ -111,7 +116,7 @@ const TableRanking = (props) => {
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[20, 50, 100]}
+          rowsPerPageOptions={[20, 50, 100, 211]}
           component="div"
           count={countriesDataSort.length}
           rowsPerPage={rowsPerPage}
