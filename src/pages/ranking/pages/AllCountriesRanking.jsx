@@ -39,14 +39,17 @@ const AllCountriesRanking = () => {
       usedOnlyTodayData: false,
       attribute: "people_fully_vaccinated_per_hundred",
     },
+  ];
+
+  /*
+,
     {
       title: "Vacunas que aplica",
       buttonText: "Vacunas que aplica",
       usedOnlyTodayData: false,
       attribute: "vaccine_type",
     },
-  ];
-
+  */
   const [lastDataCountries, setLastDataCountries] = useState([]);
   const [selectedOption, selectOption] = useState(rankingTablesOptions[0]);
 
