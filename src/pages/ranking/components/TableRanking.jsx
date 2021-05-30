@@ -64,7 +64,9 @@ const TableRanking = (props) => {
 
   return (
     <>
-      <h1>{props.title}</h1>
+      <div class="flex justify-center mt-4 mb-7 text-4xl">
+        <h1>{props.title}</h1>
+      </div>
       <Paper className={classes.root}>
         <TableContainer className={classes.container}>
           <Table stickyHeader aria-label="sticky table">

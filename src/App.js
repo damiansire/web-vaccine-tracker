@@ -9,7 +9,7 @@ import AllRankings from "./pages/ranking/pages/AllRankings";
 
 function App() {
   return (
-    <div className="grid min-h-screen">
+    <div className="min-h-screen">
       <div>
         <Navbar />
       </div>

@@ -10,32 +10,38 @@ const AllCountriesRanking = () => {
   const rankingTablesOptions = [
     {
       title: "Total de vacunas dadas hasta el momento",
+      buttonText: "Total de vacunas",
       usedOnlyTodayData: false,
       attribute: "total_dose_vaccinations",
     },
     {
       title: "Vacunas aplicadas hoy",
+      buttonText: "Vacunas aplicadas hoy",
       usedOnlyTodayData: false,
       attribute: "daily_vaccinations",
     },
     {
       title: "Vacunas aplicadas hoy por millon",
+      buttonText: "Vacunas aplicadas hoy por millon",
       usedOnlyTodayData: false,
       attribute: "daily_vaccinations_per_million",
     },
     {
       title: "Inmunisadas",
+      buttonText: "Inmunisadas",
       usedOnlyTodayData: false,
       attribute: "people_fully_vaccinated",
     },
 
     {
       title: "Inmunisadas por 100/K",
+      buttonText: "Inmunisadas por 100/K",
       usedOnlyTodayData: false,
       attribute: "people_fully_vaccinated_per_hundred",
     },
     {
       title: "Vacunas que aplica",
+      buttonText: "Vacunas que aplica",
       usedOnlyTodayData: false,
       attribute: "vaccine_type",
     },
@@ -55,8 +61,16 @@ const AllCountriesRanking = () => {
   };
 
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={8}>
+    <div class="grid grid-rows-12">
+      <div class="row-span-2">
+        <div>
+          <RankingTypesButtons
+            rankingTablesOptions={rankingTablesOptions}
+            selectOption={setOptionHandle}
+          ></RankingTypesButtons>
+        </div>
+      </div>
+      <div class="row-span-10">
         {!!lastDataCountries.length && (
           <TableRanking
             title={selectedOption.title}
@@ -68,16 +82,8 @@ const AllCountriesRanking = () => {
             attribute={selectedOption.attribute}
           />
         )}
-      </Grid>
-      <Grid item xs={4}>
-        <div>
-          <RankingTypesButtons
-            rankingTablesOptions={rankingTablesOptions}
-            selectOption={setOptionHandle}
-          ></RankingTypesButtons>
-        </div>
-      </Grid>
-    </Grid>
+      </div>
+    </div>
   );
 };
 
