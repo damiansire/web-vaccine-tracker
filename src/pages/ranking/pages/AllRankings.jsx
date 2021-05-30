@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import { getLastDataCountries } from "../../../adapters/rankings.js";
 
 import TableRanking from "../components/TableRanking";
-import RankingTypesButtons from "../dummy-components/RankingTypesButtons.jsx";
 
 function AllRankings() {
   const rankingTablesOptions = [
