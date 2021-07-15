@@ -9,16 +9,17 @@ import AllRankings from "./pages/ranking/pages/AllRankings";
 
 function App() {
   return (
-    <div className="min-h-screen">
+    <div className="max-h-screen overflow-hidden">
+      <Navbar />
+
       <div>
-        <Navbar />
+        <Switch>
+          <Route path="/" component={CountriesData} />
+          <Route path="/country" component={CountryStatistics} />
+          <Route path="/ranking" component={AllCountriesRanking} />
+          <Route path="/all-rankings" component={AllRankings} />
+        </Switch>
       </div>
-      <Switch>
-        <Route path="/" component={CountriesData} />
-        <Route path="/country" component={CountryStatistics} />
-        <Route path="/ranking" component={AllCountriesRanking} />
-        <Route path="/all-rankings" component={AllRankings} />
-      </Switch>
     </div>
   );
 }

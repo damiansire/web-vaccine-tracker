@@ -1,17 +1,38 @@
 import React from "react";
-import SelectOptions from "./SelectOptions";
 function SelectCountry(props) {
+  const selectCountry = (countryName) => {
+    props.setSelectedCountries((lastSelected) => {
+      return [...lastSelected, countryName];
+    });
+  };
+
   return (
-    <div className="w-full flex flex-col items-center h-64 mx-auto">
-      <div className="w-full pl-4 pt-4">
-        <div className="flex flex-col items-center relative">
-          <SelectOptions
-            setSelectedCountries={props.setSelectedCountries}
-            selectedCountries={props.selectedCountries}
-            availablesCountries={props.availablesCountries}
-          />
-        </div>
-      </div>
+    <div className="w-full overflow-scroll" style={{ height: "92vh" }}>
+      {props.availablesCountries
+        .filter((country) => {
+          return !props.selectedCountries.includes(country);
+        })
+        .map((countryName) => {
+          return (
+            <SelectOption
+              countryName={countryName}
+              selectCountry={selectCountry}
+            />
+          );
+        })}
+    </div>
+  );
+}
+
+function SelectOption(props) {
+  return (
+    <div
+      className="cursor-pointer w-full p-3 text-center border-black bg-gray-300 border-b hover:bg-red-300"
+      onClick={() => {
+        props.selectCountry(props.countryName);
+      }}
+    >
+      {props.countryName}
     </div>
   );
 }
