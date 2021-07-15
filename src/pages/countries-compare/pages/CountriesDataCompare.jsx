@@ -165,92 +165,96 @@ const CountriesData = () => {
   return (
     <>
       {loadCountryData && (
-        <div className="grid grid-cols-12 justify-items-center gap-4 min-h-full">
-          <div className="col-span-2 flex flex-col justify-items-center gap-4 align-middle p-4">
-            <div className="col-span-1 my-1">
-              <FormControl>
-                <InputLabel htmlFor="age-native-simple">Dato a ver</InputLabel>
-                <Select
-                  variant="outlined"
-                  native
-                  onChange={(event) => {
-                    setSelectedProperty(event.target.value);
-                  }}
-                >
-                  {countryAttributeNames.map((dataOption) => (
-                    <option value={dataOption.key} key={dataOption.key}>
-                      {dataOption.text}
-                    </option>
-                  ))}
-                </Select>
-              </FormControl>
-            </div>
-
-            <div className="col-span-1 my-1">
-              <DoubleButton
-                buttonsHandle={selectViewData}
-                button1Text="Grafico"
-                valueButton1="Graph"
-                button2Text="Tabla"
-                valueButton2="Table"
-                selectedOption={viewInfo}
-              />
-            </div>
-
-            <div className="col-span-1 my-1">
-              {viewInfo === "Graph" && (
-                <DoubleButton
-                  buttonsHandle={handleSelectGraphType}
-                  button1Text="Lineas"
-                  valueButton1="line"
-                  button2Text="Barra"
-                  valueButton2="bar"
-                  selectedOption={graphType}
-                />
-              )}
-            </div>
-
-            <div className="col-span-1 my-1 text-center">
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={sameOrigin}
-                    onChange={() => {
-                      setSameOrigin(!sameOrigin);
-                    }}
-                    name="checkedB"
-                    color="primary"
-                  />
-                }
-                label="Mover al inicio"
-              />
-            </div>
-
-            <div className="col-span-1 my-1 ">
+        <div className="grid grid-cols-12 justify-items-center gap-4">
+          <div className="col-span-10 w-full justify-items-center gap-4 align-middle">
+            <div className="">
               <OptionsSelected
                 selectedCountries={selectedCountries}
                 setSelectedCountries={setSelectedCountries}
               />
             </div>
+
+            <div className="grid grid-cols-4 flex flex-col justify-items-center gap-4 align-middle p-4">
+              <div className="col-span-1 my-1">
+                <FormControl>
+                  <InputLabel htmlFor="age-native-simple">
+                    Dato a ver
+                  </InputLabel>
+                  <Select
+                    variant="outlined"
+                    native
+                    onChange={(event) => {
+                      setSelectedProperty(event.target.value);
+                    }}
+                  >
+                    {countryAttributeNames.map((dataOption) => (
+                      <option value={dataOption.key} key={dataOption.key}>
+                        {dataOption.text}
+                      </option>
+                    ))}
+                  </Select>
+                </FormControl>
+              </div>
+
+              <div className="col-span-1 my-1">
+                <DoubleButton
+                  buttonsHandle={selectViewData}
+                  button1Text="Grafico"
+                  valueButton1="Graph"
+                  button2Text="Tabla"
+                  valueButton2="Table"
+                  selectedOption={viewInfo}
+                />
+              </div>
+
+              <div className="col-span-1 my-1">
+                {viewInfo === "Graph" && (
+                  <DoubleButton
+                    buttonsHandle={handleSelectGraphType}
+                    button1Text="Lineas"
+                    valueButton1="line"
+                    button2Text="Barra"
+                    valueButton2="bar"
+                    selectedOption={graphType}
+                  />
+                )}
+              </div>
+
+              <div className="col-span-1 my-1 text-center">
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={sameOrigin}
+                      onChange={() => {
+                        setSameOrigin(!sameOrigin);
+                      }}
+                      name="checkedB"
+                      color="primary"
+                    />
+                  }
+                  label="Mover al inicio"
+                />
+              </div>
+            </div>
+
+            <div>
+              {viewInfo === "Graph" && (
+                <CountriesGraphs
+                  optionsSelectedData={selectedProperty}
+                  countriesData={selectedCountriesData}
+                  graphType={graphType}
+                />
+              )}
+              {viewInfo === "Table" && (
+                <CompareCountriesTable
+                  countriesData={selectedCountriesData}
+                  optionsSelectedData={selectedProperty}
+                />
+              )}
+            </div>
           </div>
 
-          <div className="col-span-8 self-center w-full justify-items-center gap-4 align-middle">
-            {viewInfo === "Graph" && (
-              <CountriesGraphs
-                optionsSelectedData={selectedProperty}
-                countriesData={selectedCountriesData}
-                graphType={graphType}
-              />
-            )}
-            {viewInfo === "Table" && (
-              <CompareCountriesTable
-                countriesData={selectedCountriesData}
-                optionsSelectedData={selectedProperty}
-              />
-            )}
-          </div>
-
-          <div className="col-span-2 max-h-screen h-screen">
+          <div className="col-span-2 ">
             <SelectCountry
               availablesCountries={availablesCountries}
               selectedCountries={selectedCountries}
