@@ -7,10 +7,13 @@ function SelectCountry(props) {
   };
 
   return (
-    <div className="w-full overflow-scroll" style={{ height: "92vh" }}>
+    <div className="w-full overflow-scroll" style={{ height: "82vh" }}>
       {props.availablesCountries
         .filter((country) => {
-          return !props.selectedCountries.includes(country);
+          return (
+            !props.selectedCountries.includes(country) &&
+            country.toLowerCase().includes(props.searchTerm.toLowerCase())
+          );
         })
         .map((countryName) => {
           return (
