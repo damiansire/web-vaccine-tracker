@@ -65,7 +65,7 @@ function CountriesSpecificPositionRanking(props) {
             {actualCountryRankingData.people_fully_vaccinated}
           </td>
           <th class="bg-blue-100 border text-center p-2">
-            Total inmunizadas 100.000/hab
+            Total inmunizadas % Poblacion
           </th>
           <td class="border text-center p-2">
             {actualCountryRankingData.people_fully_vaccinated_per_hundred}
@@ -79,7 +79,7 @@ function CountriesSpecificPositionRanking(props) {
           </td>
           <tr>
             <th class="bg-blue-100 border text-center p-2">
-              Personas vacunadas 100.000/hab
+              Personas vacunadas % Poblacion
             </th>
             <td class="border text-center p-2">
               {actualCountryRankingData.people_vaccinated_per_hundred}

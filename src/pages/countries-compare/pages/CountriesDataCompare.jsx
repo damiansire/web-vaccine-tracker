@@ -20,19 +20,21 @@ import CountriesGraphs from "../components/CountriesGraphs";
 import CompareCountriesTable from "../components/CompareCountriesTable";
 import DoubleButton from "../components/DoubleButton";
 import SelectCountry from "../components/SelectCountryComponent/SelectCountry";
+import SquareGraph from "../../../components/graphs/Square-Graph";
+import TodayDataTable from "../components/TodayDataTable";
 const { sortDateAsc } = require("../../../utils/sorts");
 const { normalizeCountries } = require("../../../utils/missingDate");
 
 const CountriesData = () => {
   const [loadCountryData, setLoadCountryData] = useState(false);
   const [selectedCountriesData, setCountriesDataState] = useState({});
-  const [graphType, setGraphType] = useState("line");
   const [viewInfo, setViewInfo] = useState("Graph");
   const [availablesCountries, setAvailablesCountries] = useState([]);
   const [sameOrigin, setSameOrigin] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedProperty, setSelectedProperty] =
-    useState("daily_vaccinations");
+  const [selectedProperty, setSelectedProperty] = useState(
+    "people_vaccinated_per_hundred"
+  );
   const [selectedCountries, setSelectedCountries] = useState([
     "Argentina",
     "Uruguay",
@@ -41,6 +43,14 @@ const CountriesData = () => {
   ]);
 
   const countryAttributeNames = [
+    {
+      key: "people_vaccinated_per_hundred",
+      text: "% Poblacion vacunada",
+    },
+    {
+      key: "people_fully_vaccinated_per_hundred",
+      text: "% Poblacion Inmunizada",
+    },
     {
       key: "daily_vaccinations",
       text: "Vacunacion diaria",
@@ -53,15 +63,7 @@ const CountriesData = () => {
       key: "people_fully_vaccinated",
       text: "Personas full vacunas",
     },
-    {
-      key: "people_fully_vaccinated_per_hundred",
-      text: "Full vacunadas por 100K",
-    },
     { key: "people_vaccinated", text: "Vacunadas" },
-    {
-      key: "people_vaccinated_per_hundred",
-      text: "Vacunadas por 100k",
-    },
     {
       key: "total_dose_vaccinations",
       text: "Total de dosis aplicadas",
@@ -74,6 +76,33 @@ const CountriesData = () => {
       setAvailablesCountries(data);
     });
   }, []);
+
+  const countryAttributeDescripcion = {
+    people_fully_vaccinated_per_hundred:
+      "Porcentaje de la población que ha recibido todas las dosis de las vacunas.",
+    people_vaccinated_per_hundred:
+      "Porcentaje de la poblacion con al menos una dosis",
+    daily_vaccinations: "Cantidad total de dosis administradas el día de hoy.",
+    daily_vaccinations_per_million:
+      "Cantidad total de dosis aplicadas el dia de hoy por millon de habitantes",
+    people_fully_vaccinated:
+      "Cantidad de personas que han recibido todas las dosis de las vacunas.",
+    people_vaccinated: "Cantidad de personas vacunadas con al menos una dosis.",
+    total_dose_vaccinations:
+      "Total de dosis aplicadas. Si una persona se da 2 dosis, se cuenta dos veces.",
+    vaccine_type: "Tipo de vacuna",
+  };
+
+  const countryAttributeNamesTranslate = {
+    people_vaccinated_per_hundred: "% Poblacion vacunada",
+    people_fully_vaccinated_per_hundred: "% Poblacion Inmunizada",
+    daily_vaccinations: "Vacunacion diaria",
+    daily_vaccinations_per_million: "Vacunacion diaria por millon",
+    people_fully_vaccinated: "Personas full vacunas",
+    people_vaccinated: "Vacunadas",
+    total_dose_vaccinations: "Total de dosis aplicadas",
+    vaccine_type: "Tipo de vacuna",
+  };
 
   useEffect(() => {
     //Create a cache
@@ -146,15 +175,6 @@ const CountriesData = () => {
     setSelectedCountriesData();
   }, [selectedCountries, sameOrigin]);
 
-  const handleSelectGraphType = (event) => {
-    //Arreglar esto en un futuro xD
-    if (event.target.parentElement.value) {
-      setGraphType(event.target.parentElement.value);
-    } else if (event.target.value) {
-      setGraphType(event.target.value);
-    }
-  };
-
   const selectViewData = (event) => {
     if (event.target.parentElement.value) {
       setViewInfo(event.target.parentElement.value);
@@ -168,36 +188,11 @@ const CountriesData = () => {
       {loadCountryData && (
         <div className="grid grid-cols-12 justify-items-center gap-4">
           <div className="col-span-10 w-full justify-items-center gap-4 align-middle">
-            <div className="">
-              <OptionsSelected
-                selectedCountries={selectedCountries}
-                setSelectedCountries={setSelectedCountries}
-              />
-            </div>
-
-            <div className="grid grid-cols-4 flex flex-col justify-items-center gap-4 align-middle p-4">
-              <div className="col-span-1 my-1">
-                <FormControl>
-                  <InputLabel htmlFor="age-native-simple">
-                    Dato a ver
-                  </InputLabel>
-                  <Select
-                    variant="outlined"
-                    native
-                    onChange={(event) => {
-                      setSelectedProperty(event.target.value);
-                    }}
-                  >
-                    {countryAttributeNames.map((dataOption) => (
-                      <option value={dataOption.key} key={dataOption.key}>
-                        {dataOption.text}
-                      </option>
-                    ))}
-                  </Select>
-                </FormControl>
+            <div className="grid grid-cols-12 m-2">
+              <div className="col-start-4 col-span-7 text-center text-3xl self-center">
+                GRAFICO DE EVOLUCIÓN
               </div>
-
-              <div className="col-span-1 my-1">
+              <div className="col-span-1">
                 <DoubleButton
                   buttonsHandle={selectViewData}
                   button1Text="Grafico"
@@ -207,51 +202,95 @@ const CountriesData = () => {
                   selectedOption={viewInfo}
                 />
               </div>
+            </div>
+            <div className="grid grid-cols-12">
+              <div className="col-span-2 flex flex-col justify-items-center gap-4 align-middle p-4">
+                <div className="col-start-2 col-span-1 my-1">
+                  <FormControl>
+                    <InputLabel htmlFor="age-native-simple">
+                      Dato a ver
+                    </InputLabel>
+                    <Select
+                      variant="outlined"
+                      native
+                      onChange={(event) => {
+                        setSelectedProperty(event.target.value);
+                      }}
+                    >
+                      {countryAttributeNames.map((dataOption) => (
+                        <option value={dataOption.key} key={dataOption.key}>
+                          {dataOption.text}
+                        </option>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </div>
 
-              <div className="col-span-1 my-1">
+                <div class="col-span-1 bg-gray-200  justify-center items-center">
+                  <div class="max-w-sm bg-white border-2 border-gray-300 p-6 rounded-md tracking-wide shadow-lg">
+                    <div
+                      id="header"
+                      class="flex items-center place-content-center mb-4"
+                    >
+                      <div id="header-text" class="leading-5  sm">
+                        <h4 id="name" class="text-lg font-semibold text-center">
+                          {countryAttributeNamesTranslate[selectedProperty]}
+                        </h4>
+                      </div>
+                    </div>
+                    <div id="quote">
+                      <p class="italic text-gray-600">
+                        {countryAttributeDescripcion[selectedProperty]}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-span-1 my-1 text-center">
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={sameOrigin}
+                        onChange={() => {
+                          setSameOrigin(!sameOrigin);
+                        }}
+                        name="checkedB"
+                        color="primary"
+                      />
+                    }
+                    label="Mover graficas al 0"
+                  />
+                </div>
+                <span className="text-center font-medium">
+                  Paises seleccionados
+                </span>
+                <OptionsSelected
+                  selectedCountries={selectedCountries}
+                  setSelectedCountries={setSelectedCountries}
+                />
+              </div>
+              <div className="col-span-10">
                 {viewInfo === "Graph" && (
-                  <DoubleButton
-                    buttonsHandle={handleSelectGraphType}
-                    button1Text="Lineas"
-                    valueButton1="line"
-                    button2Text="Barra"
-                    valueButton2="bar"
-                    selectedOption={graphType}
+                  <CountriesGraphs
+                    optionsSelectedData={selectedProperty}
+                    countriesData={selectedCountriesData}
+                  />
+                )}
+                {viewInfo === "Graph" && (
+                  <div className="text-center font-medium my-3">
+                    Comparación de la situación de paises
+                  </div>
+                )}
+                {viewInfo === "Graph" && (
+                  <TodayDataTable countriesData={selectedCountriesData} />
+                )}
+                {viewInfo === "Table" && (
+                  <CompareCountriesTable
+                    countriesData={selectedCountriesData}
+                    optionsSelectedData={selectedProperty}
                   />
                 )}
               </div>
-
-              <div className="col-span-1 my-1 text-center">
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={sameOrigin}
-                      onChange={() => {
-                        setSameOrigin(!sameOrigin);
-                      }}
-                      name="checkedB"
-                      color="primary"
-                    />
-                  }
-                  label="Mover al inicio"
-                />
-              </div>
-            </div>
-
-            <div>
-              {viewInfo === "Graph" && (
-                <CountriesGraphs
-                  optionsSelectedData={selectedProperty}
-                  countriesData={selectedCountriesData}
-                  graphType={graphType}
-                />
-              )}
-              {viewInfo === "Table" && (
-                <CompareCountriesTable
-                  countriesData={selectedCountriesData}
-                  optionsSelectedData={selectedProperty}
-                />
-              )}
             </div>
           </div>
 

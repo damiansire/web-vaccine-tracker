@@ -29,9 +29,9 @@ const CountryDataTable = (props) => {
         <th class="bg-blue-100 border text-center p-2">Cantidad</th>
         <th class="bg-blue-100 border text-center p-2">Millon/Hab</th>
         <th class="bg-blue-100 border text-center p-2">Vacunadas</th>
-        <th class="bg-blue-100 border text-center p-2">100.000/Hab</th>
+        <th class="bg-blue-100 border text-center p-2">% Poblacion</th>
         <th class="bg-blue-100 border text-center p-2">Cantidad</th>
-        <th class="bg-blue-100 border text-center p-2">100.000/Hab</th>
+        <th class="bg-blue-100 border text-center p-2">% Poblacion</th>
       </tr>
 
       {data.map((row) => {
@@ -45,13 +45,13 @@ const CountryDataTable = (props) => {
               </td>
               <td class="border text-center p-2">{row.people_vaccinated}</td>
               <td class="border text-center p-2">
-                {row.people_vaccinated_per_hundred}
+                {row.people_vaccinated_per_hundred}%
               </td>
               <td class="border text-center p-2">
                 {row.people_fully_vaccinated}
               </td>
               <td class="border text-center p-2">
-                {row.people_fully_vaccinated_per_hundred}
+                {row.people_fully_vaccinated_per_hundred}%
               </td>
               <td class="border text-center p-2">
                 {row.total_dose_vaccinations}

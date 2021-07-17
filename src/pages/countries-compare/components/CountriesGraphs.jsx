@@ -40,6 +40,17 @@ import {
   DatasetComponent,
 } from "echarts/components";
 
+const countryAttributeNames = {
+  daily_vaccinations: "Vacunacion diaria",
+  daily_vaccinations_per_million: "Vacunacion diaria por millon",
+  people_fully_vaccinated: "Personas full vacunas",
+  people_fully_vaccinated_per_hundred: "% Poblacion Inmunizada",
+  people_vaccinated: "Vacunadas",
+  people_vaccinated_per_hundred: "% Poblacion vacunada",
+  total_dose_vaccinations: "Total de dosis aplicadas",
+  vaccine_type: "Tipo de vacuna",
+};
+
 const getGraphObj = (countriesData, optionSelected) => {
   let dates = countriesData[0]["data"].map((dataPoint) => dataPoint["date"]);
 
@@ -59,7 +70,7 @@ const getGraphObj = (countriesData, optionSelected) => {
 
   return {
     title: {
-      text: "Vacunacion Diaria - Hardcode",
+      text: countryAttributeNames[optionSelected],
     },
     tooltip: {
       trigger: "axis",
@@ -103,22 +114,6 @@ const CountriesGraphs = (props) => {
   let grapOptions = getGraphObj(props.countriesData, props.optionsSelectedData);
 
   return <ReactECharts option={grapOptions} style={{ height: 400 }} />;
-  let selectedCountriesData = props.countriesData;
-  let series = selectedCountriesData.map((country) => {
-    const countryData = country["data"].map(
-      (dataPoint) => dataPoint[props.optionsSelectedData] || 0
-    );
-
-    return {
-      name: country.name,
-      data: countryData,
-    };
-  });
-  return (
-    <div className="mixed-chart" key={props.graphType}>
-      <Chart options={grapOptions} series={series} type={props.graphType} />
-    </div>
-  );
 };
 
 export default CountriesGraphs;
