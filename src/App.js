@@ -9,7 +9,7 @@ import AllRankings from "./pages/ranking/pages/AllRankings";
 
 function App() {
   return (
-    <div className="max-h-screen overflow-hidden">
+    <div className="max-h-screen">
       <Navbar />
 
       <div>
