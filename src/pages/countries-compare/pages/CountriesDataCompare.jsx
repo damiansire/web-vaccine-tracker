@@ -20,7 +20,6 @@ import CountriesGraphs from "../components/CountriesGraphs";
 import CompareCountriesTable from "../components/CompareCountriesTable";
 import DoubleButton from "../components/DoubleButton";
 import SelectCountry from "../components/SelectCountryComponent/SelectCountry";
-import SquareGraph from "../../../components/graphs/Square-Graph";
 import TodayDataTable from "../components/TodayDataTable";
 const { sortDateAsc } = require("../../../utils/sorts");
 const { normalizeCountries } = require("../../../utils/missingDate");
