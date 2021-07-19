@@ -65,7 +65,7 @@ const TableRanking = (props) => {
   return (
     <>
       <div
-        class={
+        className={
           "flex justify-center mt-4 mb-7 " +
           (props.small ? "text-2xl" : "text-4xl")
         }

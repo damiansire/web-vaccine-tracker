@@ -6,6 +6,7 @@ import CountryStatistics from "./pages/country-statistics/pages/CountryStatistic
 import Navbar from "./components/Navbar.jsx";
 import { Route, Switch } from "wouter";
 import AllRankings from "./pages/ranking/pages/AllRankings";
+import WorldSituation from "./pages/world-situation/pages/WorldSituation"
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/country" component={CountryStatistics} />
           <Route path="/ranking" component={AllCountriesRanking} />
           <Route path="/all-rankings" component={AllRankings} />
+          <Route path="/world-situation" component={WorldSituation} />
         </Switch>
       </div>
     </div>

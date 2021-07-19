@@ -49,11 +49,11 @@ function AllRankings() {
   }, []);
 
   return (
-    <div class="grid grid-rows-12 grid-cols-6 px-4">
+    <div className="grid grid-rows-12 grid-cols-6 px-4">
       {!!lastDataCountries.length &&
         rankingTablesOptions.map((option) => {
           return (
-            <div class="col-span-2 px-4">
+            <div className="col-span-2 px-4">
               <TableRanking
                 title={option.title}
                 data={lastDataCountries}
