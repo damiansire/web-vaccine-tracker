@@ -45,6 +45,11 @@ const Navbar = () => {
             Comparar evolucion en paises
           </Button>
         </Link>
+        <Link href="/world-situation">
+          <Button className={classes.menuButton} color="inherit">
+            Situación mundial
+          </Button>
+        </Link>
         <Link href="/country">
           <Button className={classes.menuButton} color="inherit">
             Ver estadisticas en un pais
@@ -60,6 +65,8 @@ const Navbar = () => {
             Todos los rankings
           </Button>
         </Link>
+
+
       </Toolbar>
     </AppBar>
   );

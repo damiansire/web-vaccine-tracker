@@ -39,62 +39,61 @@ function CountriesSpecificPositionRanking(props) {
       <table>
         <caption>Ranking de paises:</caption>
         <caption>
-          {" "}
-          Ejemplo: {countryId} ocupa el puesto{" "}
-          {actualCountryRankingData.daily_vaccinations} que mas vacuno el{" "}
+          Ejemplo: {countryId} ocupa el puesto
+          {actualCountryRankingData.daily_vaccinations} que mas vacuno el
           {actualCountryRankingData.date}
         </caption>
-        <tr>
-          <th class="bg-blue-100 border text-center p-2">Vacunacion diaria</th>
-          <td class="border text-center p-2">
-            {actualCountryRankingData.daily_vaccinations}
-          </td>
-          <th class="bg-blue-100 border text-center p-2">
-            Vacunacion hoy millon/habitantes
-          </th>
-          <td class="border text-center p-2">
-            {actualCountryRankingData.daily_vaccinations_per_million}
-          </td>
-        </tr>
-
-        <tr>
-          <th class="bg-blue-100 border text-center p-2">
-            Total de inmunizadas
-          </th>
-          <td class="border text-center p-2">
-            {actualCountryRankingData.people_fully_vaccinated}
-          </td>
-          <th class="bg-blue-100 border text-center p-2">
-            Total inmunizadas % Poblacion
-          </th>
-          <td class="border text-center p-2">
-            {actualCountryRankingData.people_fully_vaccinated_per_hundred}
-          </td>
-        </tr>
-
-        <tr>
-          <th class="bg-blue-100 border text-center p-2">Personas vacunadas</th>
-          <td class="border text-center p-2">
-            {actualCountryRankingData.people_vaccinated}
-          </td>
+        <tbody>
           <tr>
-            <th class="bg-blue-100 border text-center p-2">
+            <th className="bg-blue-100 border text-center p-2">Vacunacion diaria</th>
+            <td className="border text-center p-2">
+              {actualCountryRankingData.daily_vaccinations}
+            </td>
+            <th className="bg-blue-100 border text-center p-2">
+              Vacunacion hoy millon/habitantes
+            </th>
+            <td className="border text-center p-2">
+              {actualCountryRankingData.daily_vaccinations_per_million}
+            </td>
+          </tr>
+
+          <tr>
+            <th className="bg-blue-100 border text-center p-2">
+              Total de inmunizadas
+            </th>
+            <td className="border text-center p-2">
+              {actualCountryRankingData.people_fully_vaccinated}
+            </td>
+            <th className="bg-blue-100 border text-center p-2">
+              Total inmunizadas % Poblacion
+            </th>
+            <td className="border text-center p-2">
+              {actualCountryRankingData.people_fully_vaccinated_per_hundred}
+            </td>
+          </tr>
+
+          <tr>
+            <th className="bg-blue-100 border text-center p-2">Personas vacunadas</th>
+            <td className="border text-center p-2">
+              {actualCountryRankingData.people_vaccinated}
+            </td>
+            <th className="bg-blue-100 border text-center p-2">
               Personas vacunadas % Poblacion
             </th>
-            <td class="border text-center p-2">
+            <td className="border text-center p-2">
               {actualCountryRankingData.people_vaccinated_per_hundred}
             </td>
           </tr>
-        </tr>
 
-        <tr>
-          <th class="bg-blue-100 border text-center p-2">
-            Total de dosis dadas
-          </th>
-          <td class="border text-center p-2">
-            {actualCountryRankingData.total_dose_vaccinations}
-          </td>
-        </tr>
+          <tr>
+            <th className="bg-blue-100 border text-center p-2">
+              Total de dosis dadas
+            </th>
+            <td className="border text-center p-2">
+              {actualCountryRankingData.total_dose_vaccinations}
+            </td>
+          </tr>
+        </tbody>
       </table>
     </div>
   );

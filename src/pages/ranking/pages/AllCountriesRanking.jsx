@@ -63,8 +63,8 @@ const AllCountriesRanking = () => {
   };
 
   return (
-    <div class="grid grid-rows-12">
-      <div class="row-span-2">
+    <div className="grid grid-rows-12">
+      <div className="row-span-2">
         <div>
           <RankingTypesButtons
             rankingTablesOptions={rankingTablesOptions}
@@ -72,7 +72,7 @@ const AllCountriesRanking = () => {
           ></RankingTypesButtons>
         </div>
       </div>
-      <div class="row-span-10">
+      <div className="row-span-10">
         {!!lastDataCountries.length && (
           <TableRanking
             title={selectedOption.title}
