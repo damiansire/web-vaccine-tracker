@@ -1,12 +1,10 @@
 import React from "react";
-import Chart from "react-apexcharts";
 
 // import the core library.
 import ReactECharts from "echarts-for-react";
 // Import the echarts core module, which provides the necessary interfaces for using echarts.
 import * as echarts from "echarts/core";
 
-import { LineChart } from "echarts/charts";
 import {
   // GridSimpleComponent,
   GridComponent,
@@ -37,7 +35,6 @@ import {
   // VisualMapPiecewiseComponent,
   // AriaComponent,
   // TransformComponent,
-  DatasetComponent,
 } from "echarts/components";
 
 const countryAttributeNames = {

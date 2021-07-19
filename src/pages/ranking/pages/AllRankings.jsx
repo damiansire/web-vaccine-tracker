@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import { getLastDataCountries } from "../../../adapters/rankings.js";
 
 import TableRanking from "../components/TableRanking";
+import SquareGraph from "../../../components/graphs/Square-Graph"
+
 
 function AllRankings() {
   const rankingTablesOptions = [
@@ -60,6 +62,7 @@ function AllRankings() {
                 attribute={option.attribute}
                 small={true}
               />
+              <SquareGraph />
             </div>
           );
         })}
