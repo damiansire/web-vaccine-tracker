@@ -50,7 +50,7 @@ const Navbar = () => {
             Situación mundial
           </Button>
         </Link>
-        <Link href="/country">
+        <Link href="/country/Uruguay">
           <Button className={classes.menuButton} color="inherit">
             Ver estadisticas en un pais
           </Button>
