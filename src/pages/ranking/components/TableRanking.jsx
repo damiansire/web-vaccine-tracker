@@ -56,22 +56,37 @@ const TableRanking = (props) => {
     setPage(0);
   };
 
+  const countryAttributeNames = {
+    daily_vaccinations: "Vacunacion diaria",
+    daily_vaccinations_per_million: "Vacunacion diaria por millon",
+    people_fully_vaccinated: "Personas full vacunas",
+    people_fully_vaccinated_per_hundred: "% Poblacion Inmunizada",
+    people_vaccinated: "Vacunadas",
+    people_vaccinated_per_hundred: "% Poblacion vacunada",
+    total_dose_vaccinations: "Total de dosis aplicadas",
+    vaccine_type: "Tipo de vacuna",
+  };
+
+
   const columns = [
     { id: "position", label: "Posicion", minWidth: 50 },
     { id: "countryId", label: "Pais", minWidth: 50 },
-    { id: "attribute", label: attribute, minWidth: 50 },
+    { id: "attribute", label: countryAttributeNames[attribute], minWidth: 50 },
   ];
 
   return (
     <>
-      <div
-        className={
-          "flex justify-center mt-4 mb-7 " +
-          (props.small ? "text-2xl" : "text-4xl")
-        }
-      >
-        <h1>{props.title}</h1>
-      </div>
+      {
+        !!props.title &&
+        < div
+          className={
+            "flex justify-center mt-4 mb-7 " +
+            (props.small ? "text-2xl" : "text-4xl")
+          }
+        >
+          <h1>{props.title}</h1>
+        </div>
+      }
       <Paper className={classes.root}>
         <TableContainer className={classes.container}>
           <Table stickyHeader aria-label="sticky table">

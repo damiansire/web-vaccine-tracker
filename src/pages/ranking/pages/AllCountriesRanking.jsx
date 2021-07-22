@@ -67,6 +67,7 @@ const AllCountriesRanking = () => {
       <div className="row-span-2">
         <div>
           <RankingTypesButtons
+            isRanking={true}
             rankingTablesOptions={rankingTablesOptions}
             selectOption={setOptionHandle}
           ></RankingTypesButtons>

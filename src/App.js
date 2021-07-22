@@ -16,7 +16,7 @@ function App() {
       <div>
         <Switch>
           <Route path="/" component={CountriesData} />
-          <Route path="/country" component={CountryStatistics} />
+          <Route path="/country/:countryId" component={CountryStatistics} />
           <Route path="/ranking" component={AllCountriesRanking} />
           <Route path="/all-rankings" component={AllRankings} />
           <Route path="/world-situation" component={WorldSituation} />
