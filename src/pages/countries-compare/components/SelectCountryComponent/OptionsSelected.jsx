@@ -13,7 +13,7 @@ function OptionsSelected(props) {
       <div className="my-2 p-1 flex border border-gray-200 bg-white rounded svelte-1l8159u">
         <div className="flex flex-auto flex-wrap">
           {props.selectedCountries.map((name) => (
-            <OptionSelected
+            <OptionSelected key={name}
               optionName={name}
               desSelectCountry={desSelectCountry}
             />
