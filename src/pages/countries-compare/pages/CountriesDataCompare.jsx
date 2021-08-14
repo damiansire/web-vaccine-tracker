@@ -269,8 +269,10 @@ const CountriesData = () => {
                 />
               </div>
               <div className="col-span-10">
+                {/* Add key={selectedCountriesData} beucase the graph have a problem with refersh when remove country */}
                 {viewInfo === "Graph" && (
                   <CountriesGraphs
+                    key={selectedCountriesData}
                     optionsSelectedData={selectedProperty}
                     countriesData={selectedCountriesData}
                   />
