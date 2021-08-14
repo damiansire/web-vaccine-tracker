@@ -55,15 +55,15 @@ const CountryData = () => {
       <div className="col-span-6">
         <CountryDataTable countryData={selectedCountry || {}} />
       </div>
-      <div className="col-span-4">
+      <div className="col-span-3">
         <div className="grid grid-cols-2">
+          <div className="self-center text-3xl">
+            Pais seleccionado:
+          </div>
           <div>
             {!!availablesCountries.length && (
               <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="age-native-simple">
-                  Pais seleccionado
-                </InputLabel>
-                <Select native onChange={selectCountry}>
+                <Select native onChange={selectCountry} value={selectedCountry.countryName} >
                   {availablesCountries.map((countryName) => (
                     <option value={countryName} key={countryName}>
                       {countryName}
@@ -72,9 +72,6 @@ const CountryData = () => {
                 </Select>
               </FormControl>
             )}
-          </div>
-          <div className="flex flex-wrap content-start">
-            Pais seleccionado: {selectedCountry.countryName}
           </div>
         </div>
         <CountriesMap selectCountryByName={selectCountryByName} />

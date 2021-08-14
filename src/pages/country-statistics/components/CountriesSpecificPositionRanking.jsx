@@ -36,7 +36,7 @@ function CountriesSpecificPositionRanking(props) {
 
   return (
     <div>
-      <table>
+      <table className="mx-auto">
         <caption className="text-3xl">Ranking de paises:</caption>
         <caption className="text-xl my-3">
           Por ejemplo: <b>{countryId}</b> ocupa el puesto <b>{actualCountryRankingData.daily_vaccinations}</b> que mas vacuno el <b>{actualCountryRankingData.date}</b>
