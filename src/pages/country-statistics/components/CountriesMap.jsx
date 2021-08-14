@@ -97,7 +97,7 @@ function CountriesMap(props) {
     <div>
       {!!data.length && (
         <WorldMap
-          size={props.size ? props.size : "lg"}
+          size={props.size ? props.size : "xl"}
           onClickFunction={clickAction}
           color="red"
           value-suffix="people"
