@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar.jsx";
 import { Route, Switch } from "wouter";
 import AllRankings from "./pages/ranking/pages/AllRankings";
 import WorldSituation from "./pages/world-situation/pages/WorldSituation"
+import InformationSources from "./pages/information-sources/pages/InformationSources";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/ranking" component={AllCountriesRanking} />
           <Route path="/all-rankings" component={AllRankings} />
           <Route path="/world-situation" component={WorldSituation} />
+          <Route path="/information-source" component={InformationSources} />
         </Switch>
       </div>
     </div>

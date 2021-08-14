@@ -65,6 +65,11 @@ const Navbar = () => {
             Todos los rankings
           </Button>
         </Link>
+        <Link href="/information-source">
+          <Button className={classes.menuButton} color="inherit">
+            Fuentes
+          </Button>
+        </Link>
 
 
       </Toolbar>
