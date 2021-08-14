@@ -51,7 +51,6 @@ const InformationSources = () => {
                     />
                     <svg
                         version="1.1"
-                        space-x-1
                         className="h-4 text-dark inline ml-2"
                         xmlns="http://www.w3.org/2000/svg"
                         x="0px"
