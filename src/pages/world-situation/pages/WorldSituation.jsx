@@ -14,13 +14,13 @@ const WorldSituation = () => {
             title: "Porcentaje de la poblacion Inmunisada",
             buttonText: "Poblacion Inmunisada",
             usedOnlyTodayData: false,
-            attribute: "people_vaccinated_per_hundred",
+            attribute: "people_fully_vaccinated_per_hundred",
         },
         {
             title: "Porcentaje de la poblacion vacunada",
             buttonText: "Poblacion vacunada",
             usedOnlyTodayData: false,
-            attribute: "people_fully_vaccinated_per_hundred",
+            attribute: "people_vaccinated_per_hundred",
         },
         {
             title: "Vacunas aplicadas hoy por millon",
