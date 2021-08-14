@@ -37,9 +37,13 @@ const WorldSituation = () => {
         selectOption(option);
     };
 
-    useEffect(async () => {
+    async function fetchData() {
         let lastData = await getLastDataCountries();
         setData(lastData)
+    }
+
+    useEffect(() => {
+        fetchData();
     }, [])
 
     const selectCountryByName = (event) => {
