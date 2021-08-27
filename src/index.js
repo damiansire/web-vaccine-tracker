@@ -5,9 +5,6 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import ReactGA from "react-ga";
 
-const TRACKING_ID = "G-FE1ZHTLMMG"; // YOUR_OWN_TRACKING_ID
-ReactGA.initialize(TRACKING_ID);
-
 ReactDOM.render(
   <React.StrictMode>
     <App />
