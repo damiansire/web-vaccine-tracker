@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import OptionsSelected from "../components/SelectCountryComponent/OptionsSelected";
+import ReactGA from "react-ga";
 
 import {
   FormControl,
@@ -25,6 +26,7 @@ const { sortDateAsc } = require("../../../utils/sorts");
 const { normalizeCountries } = require("../../../utils/missingDate");
 
 const CountriesData = () => {
+
   const [loadCountryData, setLoadCountryData] = useState(false);
   const [selectedCountriesData, setCountriesDataState] = useState({});
   const [viewInfo, setViewInfo] = useState("Graph");
@@ -181,6 +183,10 @@ const CountriesData = () => {
       setViewInfo(event.target.value);
     }
   };
+
+  useEffect(() => {
+    ReactGA.pageview('/homepage');
+  }, []);
 
   return (
     <>
