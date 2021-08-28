@@ -54,25 +54,25 @@ const WorldSituation = () => {
         <div className="min-h-full">
             <div>
                 <div className="grid grid-cols-12">
-                    <div className="col-span-8 col-start-2 grid grid-cols-12">
+                    <div className="col-span-12 sm:col-span-8 sm:col-start-2 grid grid-cols-12">
 
                         <div className="grid grid-cols-12 col-span-12 ">
-                            <div className="col-span-6">
+                            <div className="col-span-12 sm:col-span-6">
                                 <RankingTypesButtons
                                     isRanking={false}
                                     rankingTablesOptions={rankingTablesOptions}
                                     selectOption={setOptionHandle}
                                 ></RankingTypesButtons>
                             </div>
-                            <div className="col-span-6 text-center text-3xl self-center" >
+                            <div className="col-span-12 sm:col-span-6 text-center text-3xl self-center" >
                                 {selectedOption.title}
                             </div>
                         </div>
-                        <div className="col-span-12 col-start-1">
+                        <div className="col-span-12 sm:col-start-1">
                             <CountriesMap selectCountryByName={selectCountryByName} size="xxl" />
                         </div>
                     </div>
-                    <div className="col-span-3">
+                    <div className="col-span-12 sm:col-span-3">
 
                         <div className=" text-center p-5">
                             <ColorDefinition />
