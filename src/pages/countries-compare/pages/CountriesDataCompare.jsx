@@ -189,12 +189,12 @@ const CountriesData = () => {
     <>
       {loadCountryData && (
         <div className="grid grid-cols-12 justify-items-center gap-4">
-          <div className="col-span-10 w-full justify-items-center gap-4 align-middle">
+          <div className="col-span-12 sm:col-span-10 w-full justify-items-center gap-4 align-middle">
             <div className="grid grid-cols-12 m-2">
               <div className="col-start-4 col-span-7 text-center text-3xl self-center">
                 GRAFICO DE EVOLUCIÓN
               </div>
-              <div className="col-span-1">
+              <div className="text-center col-span-12 sm:col-span-1">
                 <DoubleButton
                   buttonsHandle={selectViewData}
                   button1Text="Grafico"
@@ -206,8 +206,8 @@ const CountriesData = () => {
               </div>
             </div>
             <div className="grid grid-cols-12">
-              <div className="col-span-2 flex flex-col justify-items-center gap-4 align-middle p-4">
-                <div className="col-start-2 col-span-1 my-1">
+              <div className="col-span-12 sm:col-span-2 flex flex-col justify-items-center gap-4 align-middle p-4">
+                <div className="col-span-12 sm:col-start-2 sm:col-span-1 my-1">
                   <FormControl>
                     <InputLabel htmlFor="age-native-simple">
                       Dato a ver
@@ -228,7 +228,7 @@ const CountriesData = () => {
                   </FormControl>
                 </div>
 
-                <div className="col-span-1 bg-gray-200  justify-center items-center">
+                <div className="col-span-12 sm:col-span-1 bg-gray-200  justify-center items-center">
                   <div className="max-w-sm bg-white border-2 border-gray-300 p-6 rounded-md tracking-wide shadow-lg">
                     <div
                       id="header"
@@ -271,7 +271,7 @@ const CountriesData = () => {
                   setSelectedCountries={setSelectedCountries}
                 />
               </div>
-              <div className="col-span-10">
+              <div className="col-span-12 sm:col-span-10">
                 {/* Add key={selectedCountriesData} beucase the graph have a problem with refersh when remove country */}
                 {viewInfo === "Graph" && (
                   <CountriesGraphs
@@ -298,7 +298,7 @@ const CountriesData = () => {
             </div>
           </div>
 
-          <div className="col-span-2 ">
+          <div className="col-span-12 sm:col-span-2 ">
             <div className="relative my-2">
               <input
                 type="search"
