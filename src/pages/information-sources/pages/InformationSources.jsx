@@ -71,12 +71,19 @@ const InformationSources = () => {
                     searchTerm={searchTerm}
                 />
             </div>
+
             <div className="col-span-6 border-4 border-indigo-400">
-                <h1 className="text-center text-3xl"> Fuentes de informacion</h1>
-                <h2 className="text-center text-2xl my-2">Pais seleccionado: <span className="extrabold"> {selectedCountry} </span></h2>
-                <ul>
-                    {countrySource.map(url => { return <li className="border-2 border-green-300 py-5 mx-1 my-5 text-center"><a href={url} rel="noreferrer" target="_blank">{url}</a></li> })}
-                </ul>
+                <div className="bg-red-200 m-5 ">
+                    <h2 className="text-center text-lg"> La informacion es obtenida de la API: <a target="_blank" className="font-semibold" href="http://api.thecovidvaccines.com/">http://api.thecovidvaccines.com</a></h2>
+                </div>
+                <div>
+
+                    <h1 className="text-center text-3xl"> Fuentes de informacion</h1>
+                    <h2 className="text-center text-2xl my-2">Pais seleccionado: <span className="extrabold"> {selectedCountry} </span></h2>
+                    <ul>
+                        {countrySource.map(url => { return <li className="border-2 border-green-300 py-5 mx-1 my-5 text-center"><a href={url} rel="noreferrer" target="_blank">{url}</a></li> })}
+                    </ul>
+                </div>
             </div>
         </div >
     );
