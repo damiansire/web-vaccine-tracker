@@ -7,7 +7,7 @@ function SelectCountry(props) {
   };
 
   return (
-    <div className="w-full overflow-scroll" style={{ height: "82vh" }}>
+    <div className="w-full overflow-scroll">
       {props.availablesCountries
         .filter((country) => {
           return (
@@ -31,7 +31,7 @@ function SelectCountry(props) {
 function SelectOption(props) {
   return (
     <div
-      className="cursor-pointer w-full p-3 text-center border-black bg-gray-300 border-b hover:bg-red-300"
+      className="cursor-pointer country-list__item"
       onClick={() => {
         props.selectCountry(props.countryName);
       }}

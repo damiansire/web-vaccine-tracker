@@ -21,7 +21,7 @@ const DoubleButton = (props) => {
         <span>{props.buttonsDescription}</span>
       </div>
       <ButtonGroup
-        size="large"
+        size="small"
         variant="contained"
         aria-label="large outlined primary button group"
         onClick={props.buttonsHandle}
