@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 
 import OptionsSelected from "../components/SelectCountryComponent/OptionsSelected";
-import ReactGA from "react-ga";
 
 import {
   FormControl,
@@ -184,9 +183,7 @@ const CountriesData = () => {
     }
   };
 
-  useEffect(() => {
-    ReactGA.pageview('/homepage');
-  }, []);
+
 
   return (
     <>
