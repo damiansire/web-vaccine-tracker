@@ -74,7 +74,7 @@ const InformationSources = () => {
 
             <div className="col-span-6 border-4 border-indigo-400">
                 <div className="bg-red-200 m-5 ">
-                    <h2 className="text-center text-lg"> La informacion es obtenida de la API: <a target="_blank" className="font-semibold" href="http://api.thecovidvaccines.com/">http://api.thecovidvaccines.com</a></h2>
+                    <h2 className="text-center text-lg"> La informacion es obtenida de la API: <a target="_blank" rel="noreferrer" className="font-semibold" href="http://api.thecovidvaccines.com/">http://api.thecovidvaccines.com</a></h2>
                 </div>
                 <div>
 
