@@ -6,16 +6,17 @@ import CountryStatistics from "./pages/country-statistics/pages/CountryStatistic
 import Navbar from "./components/Navbar.jsx";
 import { Route, Switch, useLocation } from "wouter";
 import AllRankings from "./pages/ranking/pages/AllRankings";
-import WorldSituation from "./pages/world-situation/pages/WorldSituation"
+import WorldSituation from "./pages/world-situation/pages/WorldSituation";
 import InformationSources from "./pages/information-sources/pages/InformationSources";
 import ReactGA from "react-ga";
 import React, { useEffect } from "react";
+import SideBar from "./components/sidebar";
 
 function usePageViews() {
   let location = useLocation();
   useEffect(() => {
     ReactGA.initialize("UA-155224346-6", {
-      debug: true
+      debug: true,
     });
     ReactGA.set({ page: location[0] });
     ReactGA.pageview(location[0]);
@@ -25,10 +26,15 @@ function usePageViews() {
 function App() {
   usePageViews();
   return (
-    <div className="max-h-screen">
-      <Navbar />
+    <div className="screen">
+      {/* ===== sidebar ===== */}
+      <div className="screen__sidebar">
+        <SideBar></SideBar>
+      </div>
+      {/* ===== /sidebar ===== */}
 
-      <div>
+      {/* ===== content ===== */}
+      <div className="screen__content">
         <Switch>
           <Route path="/" component={CountriesData} />
           <Route path="/country/:countryId" component={CountryStatistics} />
@@ -38,6 +44,7 @@ function App() {
           <Route path="/information-source" component={InformationSources} />
         </Switch>
       </div>
+      {/* ===== /content ===== */}
     </div>
   );
 }

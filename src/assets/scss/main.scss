@@ -1,0 +1,106 @@
+$bg: #f6f7fa;
+$accent: #703bda;
+$main: white;
+$textSecondary: #9fa5b8;
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700,900&display=swap");
+
+body {
+  background-color: $bg !important;
+  font-size: 16px;
+  font-family: "Roboto", sans-serif !important;
+}
+
+.screen {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: flex-start;
+
+  .screen__sidebar {
+    width: 25%;
+    height: 100%;
+    overflow-y: scroll;
+    background-color: $main;
+    padding: 0 1rem;
+  }
+
+  .screen__content {
+    width: 75%;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 1rem;
+  }
+}
+
+.sidebar {
+  .sidebar__logo {
+    width: 100%;
+    height: 10rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    img {
+      width: 5rem;
+      height: 5rem;
+    }
+    h1 {
+      font-size: 1.55rem;
+      font-weight: 900;
+      margin: 0;
+      padding: 0;
+      line-height: 0;
+      margin-top: 0.5rem;
+      color: $accent;
+    }
+  }
+  .sidebar__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    margin-top: 2rem;
+
+    .sidebar__list__item {
+      color: $textSecondary;
+      font-weight: bold;
+      padding: 0.5rem 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      border-radius: 8px;
+      padding: 0.5rem;
+      margin-bottom: 0.5rem;
+      transition: all 0.25s ease;
+    }
+
+    .sidebar__list__item__active {
+      font-weight: bold;
+      padding: 0.5rem 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      border-radius: 8px;
+      padding: 0.5rem;
+      margin-bottom: 0.5rem;
+      color: white;
+      background-color: $accent;
+      transition: all 0.25s ease;
+    }
+
+    .sidebar__list__item:hover {
+      color: white;
+      background-color: $accent;
+    }
+
+    span {
+      font-size: 0.8rem;
+    }
+
+    .sidebar__list__item__icon {
+      margin-right: 0.8rem;
+    }
+  }
+}
