@@ -30,17 +30,19 @@ const Navbar = () => {
   return (
     <AppBar position="static">
       <Toolbar>
-        <IconButton
-          edge="start"
-          className={classes.menuButton}
-          color="inherit"
-          aria-label="menu"
-        >
-          <HealingIcon style={{ color: "#000000" }} />
-        </IconButton>
-        <Typography variant="h6" className={classes.title}>
-          Vacunas del coronavirus aplicación
-        </Typography>
+        <div className="hidden sm:flex">
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="menu"
+          >
+            <HealingIcon style={{ color: "#000000" }} />
+          </IconButton>
+          <div className="sm:mr-20 sm:text-xl self-center ">
+            Vacunas del coronavirus aplicación
+          </div>
+        </div>
         <Link href="/">
           <Button className={classes.menuButton} color="inherit">
             Comparar evolucion en paises
@@ -74,7 +76,7 @@ const Navbar = () => {
 
 
       </Toolbar>
-    </AppBar>
+    </AppBar >
   );
 };
 
