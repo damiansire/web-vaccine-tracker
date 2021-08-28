@@ -68,7 +68,8 @@ const SideBar = () => {
     <div className="sidebar">
       <div className="sidebar__logo">
         <img src={LOGO}></img>
-        <h1>VCTRACKAPP</h1>
+        <h1>CORONAVIRUS</h1>
+        <h4>VACUNAS</h4>
       </div>
 
       <ul className="sidebar__list">
