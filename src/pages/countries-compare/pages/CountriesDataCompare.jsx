@@ -25,7 +25,6 @@ const { sortDateAsc } = require("../../../utils/sorts");
 const { normalizeCountries } = require("../../../utils/missingDate");
 
 const CountriesData = () => {
-
   const [loadCountryData, setLoadCountryData] = useState(false);
   const [selectedCountriesData, setCountriesDataState] = useState({});
   const [viewInfo, setViewInfo] = useState("Graph");
@@ -183,8 +182,6 @@ const CountriesData = () => {
     }
   };
 
-
-
   return (
     <>
       {loadCountryData && (
@@ -235,7 +232,10 @@ const CountriesData = () => {
                       className="flex items-center place-content-center mb-4"
                     >
                       <div id="header-text" className="leading-5  sm">
-                        <h4 id="name" className="text-lg font-semibold text-center">
+                        <h4
+                          id="name"
+                          className="text-lg font-semibold text-center"
+                        >
                           {countryAttributeNamesTranslate[selectedProperty]}
                         </h4>
                       </div>
