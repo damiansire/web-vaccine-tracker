@@ -51,10 +51,10 @@ const CountryData = () => {
 
   return (
     <div className="grid grid-cols-10 justify-items-center gap-4 min-h-full">
-      <div className="col-span-6">
+      <div className="col-span-10 sm:col-span-6">
         <CountryDataTable countryData={selectedCountry || {}} />
       </div>
-      <div className="col-span-3">
+      <div className="col-span-10 sm:col-span-3">
         <div className="grid grid-cols-2">
           <div className="self-center text-3xl">
             Pais seleccionado:
