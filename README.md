@@ -23,10 +23,6 @@ Luego un
 
 ### `npm start`
 
-Y la app va a estar corriendo, probablemente en el puerto 3000. 
-
-Entonces, debes de ir a tu navegador con localhost en el puerto 3000:
+Con esto la app va a estar corriendo, probablemente en el puerto 3000. Asi que ve a tu navegador y entra a:
 
 [http://localhost:3000](http://localhost:3000) 
-
-(Si no funciona bien, fijate en la consola en que puerto esta corriendo)
