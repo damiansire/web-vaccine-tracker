@@ -45,19 +45,19 @@ const CountriesData = () => {
   const countryAttributeNames = [
     {
       key: "people_vaccinated_per_hundred",
-      text: "% Poblacion vacunada",
+      text: "% Población vacunada",
     },
     {
       key: "people_fully_vaccinated_per_hundred",
-      text: "% Poblacion Inmunizada",
+      text: "% Población Inmunizada",
     },
     {
       key: "daily_vaccinations",
-      text: "Vacunacion diaria",
+      text: "Vacunación diaria",
     },
     {
       key: "daily_vaccinations_per_million",
-      text: "Vacunacion diaria por millon",
+      text: "Vacunación diaria por millón",
     },
     {
       key: "people_fully_vaccinated",
@@ -81,10 +81,10 @@ const CountriesData = () => {
     people_fully_vaccinated_per_hundred:
       "Porcentaje de la población que ha recibido todas las dosis de las vacunas.",
     people_vaccinated_per_hundred:
-      "Porcentaje de la poblacion con al menos una dosis",
+      "Porcentaje de la población con al menos una dosis",
     daily_vaccinations: "Cantidad total de dosis administradas el día de hoy.",
     daily_vaccinations_per_million:
-      "Cantidad total de dosis aplicadas el dia de hoy por millon de habitantes",
+      "Cantidad total de dosis aplicadas el día de hoy por millón de habitantes",
     people_fully_vaccinated:
       "Cantidad de personas que han recibido todas las dosis de las vacunas.",
     people_vaccinated: "Cantidad de personas vacunadas con al menos una dosis.",
@@ -94,10 +94,10 @@ const CountriesData = () => {
   };
 
   const countryAttributeNamesTranslate = {
-    people_vaccinated_per_hundred: "% Poblacion vacunada",
-    people_fully_vaccinated_per_hundred: "% Poblacion Inmunizada",
-    daily_vaccinations: "Vacunacion diaria",
-    daily_vaccinations_per_million: "Vacunacion diaria por millon",
+    people_vaccinated_per_hundred: "% Población vacunada",
+    people_fully_vaccinated_per_hundred: "% Población Inmunizada",
+    daily_vaccinations: "Vacunación diaria",
+    daily_vaccinations_per_million: "Vacunación diaria por millón",
     people_fully_vaccinated: "Personas full vacunas",
     people_vaccinated: "Vacunadas",
     total_dose_vaccinations: "Total de dosis aplicadas",
@@ -152,7 +152,7 @@ const CountriesData = () => {
         countriesDataFromCached = normalizeCountries(countriesDataFromCached);
       }
 
-      //Ordena los paises
+      //Ordena los países
       countriesDataFromCached = countriesDataFromCached.map((country) => {
         return {
           name: country.name,
@@ -164,7 +164,7 @@ const CountriesData = () => {
 
     const setSelectedCountriesData = async () => {
       let selectedCountryData = await getSelectedCountriesDataForGraph();
-      //TODO: Controlar caso en el que no hay paises seleccionados
+      //TODO: Controlar caso en el que no hay países seleccionados
       if (selectedCountryData.length === 0) {
         return;
       }
@@ -192,12 +192,12 @@ const CountriesData = () => {
           <div className="col-span-12 sm:col-span-10 w-full justify-items-center gap-4 align-middle">
             <div className="grid grid-cols-12 m-2">
               <div className="col-start-4 col-span-7 text-center text-3xl self-center">
-                GRAFICO DE EVOLUCIÓN
+                GRÁFICO DE EVOLUCIÓN
               </div>
               <div className="text-center col-span-12 sm:col-span-1">
                 <DoubleButton
                   buttonsHandle={selectViewData}
-                  button1Text="Grafico"
+                  button1Text="Gráfico"
                   valueButton1="Graph"
                   button2Text="Tabla"
                   valueButton2="Table"
@@ -260,11 +260,11 @@ const CountriesData = () => {
                         color="primary"
                       />
                     }
-                    label="Mover graficas al 0"
+                    label="Mover gráficas al 0"
                   />
                 </div>
                 <span className="text-center font-medium">
-                  Paises seleccionados
+                  Países seleccionados
                 </span>
                 <OptionsSelected
                   selectedCountries={selectedCountries}
@@ -282,7 +282,7 @@ const CountriesData = () => {
                 )}
                 {viewInfo === "Graph" && (
                   <div className="text-center font-medium my-3">
-                    Comparación de la situación de paises
+                    Comparación de la situación de países
                   </div>
                 )}
                 {viewInfo === "Graph" && (
@@ -303,7 +303,7 @@ const CountriesData = () => {
               <input
                 type="search"
                 className="bg-purple-white shadow rounded border-1 p-3 focus:bg-white focus:border-blue-400"
-                placeholder="Buscar pais..."
+                placeholder="Buscar país..."
                 onChange={(event) => {
                   setSearchTerm(event.target.value);
                 }}

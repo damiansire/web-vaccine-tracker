@@ -11,19 +11,19 @@ import { useLocation } from "wouter";
 const WorldSituation = () => {
     const rankingTablesOptions = [
         {
-            title: "Porcentaje de la poblacion Inmunisada",
-            buttonText: "Poblacion Inmunisada",
+            title: "Porcentaje de la población Inmunizada",
+            buttonText: "Población Inmunizada",
             usedOnlyTodayData: false,
             attribute: "people_fully_vaccinated_per_hundred",
         },
         {
-            title: "Porcentaje de la poblacion vacunada",
-            buttonText: "Poblacion vacunada",
+            title: "Porcentaje de la población vacunada",
+            buttonText: "Población vacunada",
             usedOnlyTodayData: false,
             attribute: "people_vaccinated_per_hundred",
         },
         {
-            title: "Vacunas aplicadas hoy por millon",
+            title: "Vacunas aplicadas hoy por millón",
             buttonText: "Vacunados hoy",
             usedOnlyTodayData: false,
             attribute: "daily_vaccinations_per_million",
