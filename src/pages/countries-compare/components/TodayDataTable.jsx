@@ -17,7 +17,7 @@ const TodayDataTable = (props) => {
       <table className="table-fill country-compare-evolution">
         <thead>
           <tr>
-            <th className="bg-blue-100 border text-center p-2">Pais</th>
+            <th className="bg-blue-100 border text-center p-2">País</th>
             <th className="bg-blue-100 border text-center p-2">
               Personas vacunadas
             </th>
@@ -34,7 +34,7 @@ const TodayDataTable = (props) => {
               Total de dosis aplicadas
             </th>
             <th className="bg-blue-100 border text-center p-2">
-              Fecha ultimo dato
+              Fecha último dato
             </th>
           </tr>
         </thead>

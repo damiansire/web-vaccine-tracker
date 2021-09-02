@@ -11,7 +11,7 @@ const CountryDataTable = (props) => {
           </th>
           <th rowSpan={data.length + 2}></th>
           <th colSpan="2" className="bg-blue-100 border text-center sm:p-2">
-            Vacunas ese dia
+            Vacunas ese día
           </th>
           <th rowSpan={data.length + 2}> </th>
           <th colSpan="2" className="bg-blue-100 border text-center sm:p-2">
@@ -28,11 +28,11 @@ const CountryDataTable = (props) => {
         </tr>
         <tr>
           <th className="bg-blue-100 border text-center sm:p-2">Cantidad</th>
-          <th className="bg-blue-100 border text-center sm:p-2">Millon/Hab</th>
+          <th className="bg-blue-100 border text-center sm:p-2">Millón/Hab</th>
           <th className="bg-blue-100 border text-center sm:p-2">Vacunadas</th>
-          <th className="bg-blue-100 border text-center sm:p-2">% Poblacion</th>
+          <th className="bg-blue-100 border text-center sm:p-2">% Población</th>
           <th className="bg-blue-100 border text-center sm:p-2">Cantidad</th>
-          <th className="bg-blue-100 border text-center sm:p-2">% Poblacion</th>
+          <th className="bg-blue-100 border text-center sm:p-2">% Población</th>
         </tr>
       </thead>
       <tbody>

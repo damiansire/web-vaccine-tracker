@@ -20,21 +20,21 @@ const AllCountriesRanking = () => {
       attribute: "daily_vaccinations",
     },
     {
-      title: "Vacunas aplicadas hoy por millon",
-      buttonText: "Vacunas aplicadas hoy por millon",
+      title: "Vacunas aplicadas hoy por millón",
+      buttonText: "Vacunas aplicadas hoy por millón",
       usedOnlyTodayData: false,
       attribute: "daily_vaccinations_per_million",
     },
     {
-      title: "Inmunisadas",
-      buttonText: "Inmunisadas",
+      title: "Inmunizadas",
+      buttonText: "Inmunizadas",
       usedOnlyTodayData: false,
       attribute: "people_fully_vaccinated",
     },
 
     {
-      title: "Inmunisadas por 100/K",
-      buttonText: "Inmunisadas por 100/K",
+      title: "Inmunizadas por 100/K",
+      buttonText: "Inmunizadas por 100/K",
       usedOnlyTodayData: false,
       attribute: "people_fully_vaccinated_per_hundred",
     },
