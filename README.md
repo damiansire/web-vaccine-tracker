@@ -2,7 +2,7 @@
 
 Antes de colaborar con el repo, crear un issues y avisarme por alguna red social.
 
-Si no haces esto, puede que mas de una persona este tocando el mismo codigo y puede haber trabajo repetido :( .
+Si no haces esto, puede que más de una persona esté tocando el mismo código y puede haber trabajo repetido :( .
 
 Instagram: www.instagram.com/damiansire
 
@@ -22,6 +22,6 @@ Luego un
 
 ### `npm start`
 
-Con esto la app va a estar corriendo, probablemente en el puerto 3000. Asi que ve a tu navegador y entra a:
+Con esto la app va a estar corriendo, probablemente en el puerto 3000. Así que ve a tu navegador y entra a:
 
 [http://localhost:3000](http://localhost:3000) 
