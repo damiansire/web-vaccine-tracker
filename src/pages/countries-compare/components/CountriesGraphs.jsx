@@ -38,12 +38,12 @@ import {
 } from "echarts/components";
 
 const countryAttributeNames = {
-  daily_vaccinations: "Vacunacion diaria",
-  daily_vaccinations_per_million: "Vacunacion diaria por millon",
+  daily_vaccinations: "Vacunación diaria",
+  daily_vaccinations_per_million: "Vacunación diaria por millón",
   people_fully_vaccinated: "Personas full vacunas",
-  people_fully_vaccinated_per_hundred: "% Poblacion Inmunizada",
+  people_fully_vaccinated_per_hundred: "% Población Inmunizada",
   people_vaccinated: "Vacunadas",
-  people_vaccinated_per_hundred: "% Poblacion vacunada",
+  people_vaccinated_per_hundred: "% Población vacunada",
   total_dose_vaccinations: "Total de dosis aplicadas",
   vaccine_type: "Tipo de vacuna",
 };

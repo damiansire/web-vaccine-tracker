@@ -57,7 +57,7 @@ const CountryData = () => {
       <div className="col-span-10 sm:col-span-3">
         <div className="grid grid-cols-2">
           <div className="self-center text-3xl">
-            Pais seleccionado:
+            País seleccionado:
           </div>
           <div>
             {!!availablesCountries.length && (

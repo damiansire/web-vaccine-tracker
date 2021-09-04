@@ -37,14 +37,14 @@ const InformationSources = () => {
         <div className="grid grid-cols-12 gap-4 h-screen">
             <div className="col-span-3 col-start-3 border-4 border-indigo-400">
                 <div>
-                    <h1 className="text-center text-3xl"> Seleccion el pais</h1>
+                    <h1 className="text-center text-3xl"> Selecciona el país</h1>
                 </div>
 
                 <div className="relative my-2 text-center">
                     <input
                         type="search"
                         className="bg-purple-white shadow rounded border-1 p-3 focus:bg-white focus:border-blue-400"
-                        placeholder="Buscar pais..."
+                        placeholder="Buscar país..."
                         onChange={(event) => {
                             setSearchTerm(event.target.value);
                         }}
@@ -74,12 +74,12 @@ const InformationSources = () => {
 
             <div className="col-span-6 border-4 border-indigo-400">
                 <div className="bg-red-200 m-5 ">
-                    <h2 className="text-center text-lg"> La informacion es obtenida de la API: <a target="_blank" rel="noreferrer" className="font-semibold" href="http://api.thecovidvaccines.com/">http://api.thecovidvaccines.com</a></h2>
+                    <h2 className="text-center text-lg"> La información es obtenida de la API: <a target="_blank" rel="noreferrer" className="font-semibold" href="http://api.thecovidvaccines.com/">http://api.thecovidvaccines.com</a></h2>
                 </div>
                 <div>
 
-                    <h1 className="text-center text-3xl"> Fuentes de informacion</h1>
-                    <h2 className="text-center text-2xl my-2">Pais seleccionado: <span className="extrabold"> {selectedCountry} </span></h2>
+                    <h1 className="text-center text-3xl"> Fuentes de información</h1>
+                    <h2 className="text-center text-2xl my-2">País seleccionado: <span className="extrabold"> {selectedCountry} </span></h2>
                     <ul>
                         {countrySource.map(url => { return <li className="border-2 border-green-300 py-5 mx-1 my-5 text-center"><a href={url} rel="noreferrer" target="_blank">{url}</a></li> })}
                     </ul>

@@ -37,18 +37,18 @@ function CountriesSpecificPositionRanking(props) {
   return (
     <div>
       <table className="mx-auto">
-        <caption className="text-3xl">Ranking de paises:</caption>
+        <caption className="text-3xl">Ranking de países:</caption>
         <caption className="text-xl my-3">
-          Por ejemplo: <b>{countryId}</b> ocupa el puesto <b>{actualCountryRankingData.daily_vaccinations}</b> que mas vacuno el <b>{actualCountryRankingData.date}</b>
+          Por ejemplo: <b>{countryId}</b> ocupa el puesto <b>{actualCountryRankingData.daily_vaccinations}</b> que más vacunó el <b>{actualCountryRankingData.date}</b>
         </caption>
         <tbody>
           <tr>
-            <th className="bg-blue-100 border text-center p-2">Vacunacion diaria</th>
+            <th className="bg-blue-100 border text-center p-2">Vacunación diaria</th>
             <td className="border text-center p-2">
               {actualCountryRankingData.daily_vaccinations}
             </td>
             <th className="bg-blue-100 border text-center p-2">
-              Vacunacion hoy millon/habitantes
+              Vacunación hoy millón/habitantes
             </th>
             <td className="border text-center p-2">
               {actualCountryRankingData.daily_vaccinations_per_million}
@@ -63,7 +63,7 @@ function CountriesSpecificPositionRanking(props) {
               {actualCountryRankingData.people_fully_vaccinated}
             </td>
             <th className="bg-blue-100 border text-center p-2">
-              Total inmunizadas % Poblacion
+              Total inmunizadas % Población
             </th>
             <td className="border text-center p-2">
               {actualCountryRankingData.people_fully_vaccinated_per_hundred}
@@ -76,7 +76,7 @@ function CountriesSpecificPositionRanking(props) {
               {actualCountryRankingData.people_vaccinated}
             </td>
             <th className="bg-blue-100 border text-center p-2">
-              Personas vacunadas % Poblacion
+              Personas vacunadas % Población
             </th>
             <td className="border text-center p-2">
               {actualCountryRankingData.people_vaccinated_per_hundred}

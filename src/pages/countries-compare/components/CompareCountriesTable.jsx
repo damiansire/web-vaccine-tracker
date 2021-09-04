@@ -29,13 +29,13 @@ const CountriesTable = (props) => {
 
   let selectedProp = props.optionsSelectedData;
 
-  //Recorre cada pais
+  //Recorre cada país
   for (let selectedCountry of countriesData) {
     //Obtengo su nombre
     let countryName = selectedCountry.name;
     //Le agrego el header
     columns.push(getCountryTableHeader(countryName));
-    //Recorre los data point, seleccion y los agrega
+    //Recorre los data point, selección y los agrega
     selectedCountry.data.forEach((dataPoint, index) => {
       rows[index][countryName] = dataPoint[selectedProp];
     });
