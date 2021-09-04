@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import styled from 'styled-components';
 
 import OptionsSelected from "../components/SelectCountryComponent/OptionsSelected";
 
@@ -23,6 +24,15 @@ import SelectCountry from "../components/SelectCountryComponent/SelectCountry";
 import TodayDataTable from "../components/TodayDataTable";
 const { sortDateAsc } = require("../../../utils/sorts");
 const { normalizeCountries } = require("../../../utils/missingDate");
+
+const StyledHomePageContainer = styled.div`
+  h1 {
+    font-size: 35px;
+    font-family: 'Roboto';
+  }
+
+`
+
 
 const CountriesData = () => {
 
@@ -186,13 +196,39 @@ const CountriesData = () => {
 
 
   return (
-    <>
+    <StyledHomePageContainer>
       {loadCountryData && (
-        <div className="grid grid-cols-12 justify-items-center gap-4">
+        <div className="">
+
+          <h1>Comparar evolución de Paises</h1>
+
+          <div id="quote">
+            <p className="italic text-gray-600">
+              {countryAttributeDescripcion[selectedProperty]}
+            </p>
+          </div>
+          <div>
+            <Select
+              variant="outlined"
+              native
+              onChange={(event) => {
+                setSelectedProperty(event.target.value);
+              }}
+            >
+              {countryAttributeNames.map((dataOption) => (
+                <option value={dataOption.key} key={dataOption.key}>
+                  {dataOption.text}
+                </option>
+              ))}
+            </Select>
+          </div>
+
           <div className="col-span-12 sm:col-span-10 w-full justify-items-center gap-4 align-middle">
             <div className="grid grid-cols-12 m-2">
-              <div className="col-start-4 col-span-7 text-center text-3xl self-center">
-                GRAFICO DE EVOLUCIÓN
+              <div>
+                <div className="col-start-4 col-span-7 text-center text-3xl self-center">
+                  GRAFICO DE EVOLUCIÓN
+                </div>
               </div>
               <div className="text-center col-span-12 sm:col-span-1">
                 <DoubleButton
@@ -212,19 +248,6 @@ const CountriesData = () => {
                     <InputLabel htmlFor="age-native-simple">
                       Dato a ver
                     </InputLabel>
-                    <Select
-                      variant="outlined"
-                      native
-                      onChange={(event) => {
-                        setSelectedProperty(event.target.value);
-                      }}
-                    >
-                      {countryAttributeNames.map((dataOption) => (
-                        <option value={dataOption.key} key={dataOption.key}>
-                          {dataOption.text}
-                        </option>
-                      ))}
-                    </Select>
                   </FormControl>
                 </div>
 
@@ -239,11 +262,6 @@ const CountriesData = () => {
                           {countryAttributeNamesTranslate[selectedProperty]}
                         </h4>
                       </div>
-                    </div>
-                    <div id="quote">
-                      <p className="italic text-gray-600">
-                        {countryAttributeDescripcion[selectedProperty]}
-                      </p>
                     </div>
                   </div>
                 </div>
@@ -334,7 +352,7 @@ const CountriesData = () => {
           </div>
         </div>
       )}
-    </>
+    </StyledHomePageContainer>
   );
 };
 
