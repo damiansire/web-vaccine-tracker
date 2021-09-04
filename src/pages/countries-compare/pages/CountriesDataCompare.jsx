@@ -320,7 +320,6 @@ const CountriesData = () => {
                 label='Mover graficas al 0'
               />
             </div>
-            {/* ===== /gráfica ===== */}
           </div>
           <div className='selected-countries-container'>
             <p>Paises seleccionados</p>
