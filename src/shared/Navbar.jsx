@@ -33,9 +33,8 @@ const Navbar = () => {
       </div>
       <div className="link">
         <Link href="/">
-          <Button className={classes.menuButton} color="inherit">
-            Comparar evolución en países
-          </Button>
+          <AppsIcon />
+          Comparar evolucion en paises
         </Link>
       </div>
       <div className="link">
@@ -46,16 +45,14 @@ const Navbar = () => {
       </div>
       <div className="link">
         <Link href="/country/Uruguay">
-          <Button className={classes.menuButton} color="inherit">
-            Ver estadísticas en un país
-          </Button>
+          <BarChartIcon />
+          Ver estadisticas en un pais
         </Link>
       </div>
       <div className="link">
         <Link href="/ranking">
-          <Button className={classes.menuButton} color="inherit">
-            Ranking de países
-          </Button>
+          <PieChartIcon />
+          Ranking de paises
         </Link>
       </div>
       <div className="link">
