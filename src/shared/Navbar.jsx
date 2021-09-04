@@ -29,7 +29,7 @@ const Navbar = () => {
   return (
     <StyledNavbarContainer>
       <div className="logo-container">
-        <img src="/logo.png" />
+        <img src="/logo.png" alt="Logo for corona app" />
       </div>
       <div className="link">
         <Link href="/">
