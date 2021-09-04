@@ -85,7 +85,6 @@ const CountriesData = () => {
   const [viewInfo, setViewInfo] = useState('Graph');
   const [availablesCountries, setAvailablesCountries] = useState([]);
   const [sameOrigin, setSameOrigin] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
   const [selectedProperty, setSelectedProperty] = useState(
     'people_vaccinated_per_hundred'
   );
@@ -144,17 +143,6 @@ const CountriesData = () => {
     people_vaccinated: 'Cantidad de personas vacunadas con al menos una dosis.',
     total_dose_vaccinations:
       'Total de dosis aplicadas. Si una persona se da 2 dosis, se cuenta dos veces.',
-    vaccine_type: 'Tipo de vacuna',
-  };
-
-  const countryAttributeNamesTranslate = {
-    people_vaccinated_per_hundred: '% Poblacion vacunada',
-    people_fully_vaccinated_per_hundred: '% Poblacion Inmunizada',
-    daily_vaccinations: 'Vacunacion diaria',
-    daily_vaccinations_per_million: 'Vacunacion diaria por millon',
-    people_fully_vaccinated: 'Personas full vacunas',
-    people_vaccinated: 'Vacunadas',
-    total_dose_vaccinations: 'Total de dosis aplicadas',
     vaccine_type: 'Tipo de vacuna',
   };
 
