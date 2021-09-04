@@ -1,82 +1,76 @@
 import React from "react";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import HealingIcon from "@material-ui/icons/Healing";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "wouter";
+import styled from 'styled-components';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-    backgroundColor: "steelblue",
-    marginLeft: 10,
-  },
-  title: {
-    flexGrow: 1,
-    marginLeft: 10,
-  },
-}));
+import AppsIcon from '@material-ui/icons/Apps';
+import PublicIcon from '@material-ui/icons/Public';
+import BarChartIcon from '@material-ui/icons/BarChart';
+import PieChartIcon from '@material-ui/icons/PieChart';
+import DonutSmallIcon from '@material-ui/icons/DonutSmall';
+import DescriptionIcon from '@material-ui/icons/Description';
+
+const StyledNavbarContainer = styled.div`
+  .logo-container {
+    width: 100%;
+    margin: 2rem 0;
+  }
+  .link {
+    font-family: 'Roboto';
+    color: gray;
+    text-transform: uppercase;
+    width: 100%;
+    margin: 1rem;
+  }
+`
+
 
 const Navbar = () => {
-  const classes = useStyles();
-
 
   return (
-    <AppBar position="static">
-      <Toolbar>
-        <div className="hidden sm:flex">
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <HealingIcon style={{ color: "#000000" }} />
-          </IconButton>
-          <div className="sm:mr-20 sm:text-xl self-center ">
-            Vacunas del coronavirus aplicación
-          </div>
-        </div>
+    <StyledNavbarContainer>
+      <div className="logo-container">
+        <img src="/logo.png" />
+      </div>
+      <div className="link">
         <Link href="/">
           <Button className={classes.menuButton} color="inherit">
             Comparar evolución en países
           </Button>
         </Link>
+      </div>
+      <div className="link">
         <Link href="/world-situation">
-          <Button className={classes.menuButton} color="inherit">
-            Situación mundial
-          </Button>
+          <PublicIcon />
+          Situación mundial
         </Link>
+      </div>
+      <div className="link">
         <Link href="/country/Uruguay">
           <Button className={classes.menuButton} color="inherit">
             Ver estadísticas en un país
           </Button>
         </Link>
+      </div>
+      <div className="link">
         <Link href="/ranking">
           <Button className={classes.menuButton} color="inherit">
             Ranking de países
           </Button>
         </Link>
+      </div>
+      <div className="link">
         <Link href="/all-rankings">
-          <Button className={classes.menuButton} color="inherit">
-            Todos los rankings
-          </Button>
+          <DonutSmallIcon />
+          Todos los rankings
         </Link>
+      </div>
+      <div className="link">
         <Link href="/information-source">
-          <Button className={classes.menuButton} color="inherit">
-            Fuentes
-          </Button>
+          <DescriptionIcon />
+          Fuentes
         </Link>
-
-
-      </Toolbar>
-    </AppBar >
+      </div>
+    </StyledNavbarContainer>
   );
 };
 
