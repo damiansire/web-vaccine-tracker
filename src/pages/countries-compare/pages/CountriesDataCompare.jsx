@@ -4,9 +4,7 @@ import styled from 'styled-components';
 import OptionsSelected from '../components/SelectCountryComponent/OptionsSelected';
 
 import {
-  FormControl,
   FormControlLabel,
-  InputLabel,
   Select,
   Checkbox,
 } from '@material-ui/core';
@@ -20,7 +18,6 @@ import {
 import CountriesGraphs from '../components/CountriesGraphs';
 import CompareCountriesTable from '../components/CompareCountriesTable';
 import DoubleButton from '../components/DoubleButton';
-import SelectCountry from '../components/SelectCountryComponent/SelectCountry';
 import TodayDataTable from '../components/TodayDataTable';
 const { sortDateAsc } = require('../../../utils/sorts');
 const { normalizeCountries } = require('../../../utils/missingDate');
@@ -101,20 +98,20 @@ const CountriesData = () => {
 
   const countryAttributeNames = [
     {
-      key: "people_vaccinated_per_hundred",
-      text: "% Población vacunada",
+      key: 'people_vaccinated_per_hundred',
+      text: '% Poblacion vacunada',
     },
     {
-      key: "people_fully_vaccinated_per_hundred",
-      text: "% Población Inmunizada",
+      key: 'people_fully_vaccinated_per_hundred',
+      text: '% Poblacion Inmunizada',
     },
     {
-      key: "daily_vaccinations",
-      text: "Vacunación diaria",
+      key: 'daily_vaccinations',
+      text: 'Vacunacion diaria',
     },
     {
-      key: "daily_vaccinations_per_million",
-      text: "Vacunación diaria por millón",
+      key: 'daily_vaccinations_per_million',
+      text: 'Vacunacion diaria por millon',
     },
     {
       key: 'people_fully_vaccinated',
@@ -138,10 +135,10 @@ const CountriesData = () => {
     people_fully_vaccinated_per_hundred:
       'Porcentaje de la población que ha recibido todas las dosis de las vacunas.',
     people_vaccinated_per_hundred:
-      "Porcentaje de la población con al menos una dosis",
-    daily_vaccinations: "Cantidad total de dosis administradas el día de hoy.",
+      'Porcentaje de la poblacion con al menos una dosis',
+    daily_vaccinations: 'Cantidad total de dosis administradas el día de hoy.',
     daily_vaccinations_per_million:
-      "Cantidad total de dosis aplicadas el día de hoy por millón de habitantes",
+      'Cantidad total de dosis aplicadas el dia de hoy por millon de habitantes',
     people_fully_vaccinated:
       'Cantidad de personas que han recibido todas las dosis de las vacunas.',
     people_vaccinated: 'Cantidad de personas vacunadas con al menos una dosis.',
@@ -151,14 +148,14 @@ const CountriesData = () => {
   };
 
   const countryAttributeNamesTranslate = {
-    people_vaccinated_per_hundred: "% Población vacunada",
-    people_fully_vaccinated_per_hundred: "% Población Inmunizada",
-    daily_vaccinations: "Vacunación diaria",
-    daily_vaccinations_per_million: "Vacunación diaria por millón",
-    people_fully_vaccinated: "Personas full vacunas",
-    people_vaccinated: "Vacunadas",
-    total_dose_vaccinations: "Total de dosis aplicadas",
-    vaccine_type: "Tipo de vacuna",
+    people_vaccinated_per_hundred: '% Poblacion vacunada',
+    people_fully_vaccinated_per_hundred: '% Poblacion Inmunizada',
+    daily_vaccinations: 'Vacunacion diaria',
+    daily_vaccinations_per_million: 'Vacunacion diaria por millon',
+    people_fully_vaccinated: 'Personas full vacunas',
+    people_vaccinated: 'Vacunadas',
+    total_dose_vaccinations: 'Total de dosis aplicadas',
+    vaccine_type: 'Tipo de vacuna',
   };
 
   useEffect(() => {
@@ -209,7 +206,7 @@ const CountriesData = () => {
         countriesDataFromCached = normalizeCountries(countriesDataFromCached);
       }
 
-      //Ordena los países
+      //Ordena los paises
       countriesDataFromCached = countriesDataFromCached.map((country) => {
         return {
           name: country.name,
@@ -221,7 +218,7 @@ const CountriesData = () => {
 
     const setSelectedCountriesData = async () => {
       let selectedCountryData = await getSelectedCountriesDataForGraph();
-      //TODO: Controlar caso en el que no hay países seleccionados
+      //TODO: Controlar caso en el que no hay paises seleccionados
       if (selectedCountryData.length === 0) {
         return;
       }
@@ -243,22 +240,11 @@ const CountriesData = () => {
   return (
     <StyledHomePageContainer>
       {loadCountryData && (
-        <div className="grid grid-cols-12 justify-items-center gap-4">
-          <div className="col-span-12 sm:col-span-10 w-full justify-items-center gap-4 align-middle">
-            <div className="grid grid-cols-12 m-2">
-              <div className="col-start-4 col-span-7 text-center text-3xl self-center">
-                GRÁFICO DE EVOLUCIÓN
-              </div>
-              <div className="text-center col-span-12 sm:col-span-1">
-                <DoubleButton
-                  buttonsHandle={selectViewData}
-                  button1Text="Gráfico"
-                  valueButton1="Graph"
-                  button2Text="Tabla"
-                  valueButton2="Table"
-                  selectedOption={viewInfo}
-                />
-              </div>
+        <div className=''>
+          <div className='header'>
+            <div>
+              <h1>Comparar evolución de Paises</h1>
+              <h2>{countryAttributeDescripcion[selectedProperty]}</h2>
             </div>
             <DoubleButton
               buttonsHandle={selectViewData}
@@ -290,27 +276,25 @@ const CountriesData = () => {
               <div className='search-input-container'>
                 <p>Buscar pais...</p>
 
-                <div className="col-span-1 my-1 text-center">
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={sameOrigin}
-                        onChange={() => {
-                          setSameOrigin(!sameOrigin);
-                        }}
-                        name="checkedB"
-                        color="primary"
-                      />
-                    }
-                    label="Mover gráficas al 0"
+                <svg
+                  version='1.1'
+                  className='h-4 text-dark inline ml-2'
+                  xmlns='http://www.w3.org/2000/svg'
+                  x='0px'
+                  y='0px'
+                  viewBox='0 0 52.966 52.966'
+                >
+                  <path
+                    d='M51.704,51.273L36.845,35.82c3.79-3.801,6.138-9.041,6.138-14.82c0-11.58-9.42-21-21-21s-21,9.42-21,21s9.42,21,21,21
+        c5.083,0,9.748-1.817,13.384-4.832l14.895,15.491c0.196,0.205,0.458,0.307,0.721,0.307c0.25,0,0.499-0.093,0.693-0.279
+        C52.074,52.304,52.086,51.671,51.704,51.273z M21.983,40c-10.477,0-19-8.523-19-19s8.523-19,19-19s19,8.523,19,19
+        S32.459,40,21.983,40z'
                   />
-                </div>
-                <span className="text-center font-medium">
-                  Países seleccionados
-                </span>
-                <OptionsSelected
-                  selectedCountries={selectedCountries}
-                  setSelectedCountries={setSelectedCountries}
+                </svg>
+                <input
+                  id='available-countries'
+                  list='availables-countries'
+                  type='text'
                 />
                 <datalist id='availables-countries'>
                   <option value='Chrome' />
@@ -329,34 +313,17 @@ const CountriesData = () => {
                     name='checkedB'
                     color='primary'
                   />
-                )}
-                {viewInfo === "Graph" && (
-                  <div className="text-center font-medium my-3">
-                    Comparación de la situación de países
-                  </div>
-                )}
-                {viewInfo === "Graph" && (
-                  <TodayDataTable countriesData={selectedCountriesData} />
-                )}
-                {viewInfo === "Table" && (
-                  <CompareCountriesTable
-                    countriesData={selectedCountriesData}
-                    optionsSelectedData={selectedProperty}
-                  />
-                )}
-              </div>
+                }
+                label='Mover graficas al 0'
+              />
             </div>
           </div>
-
-          <div className="col-span-12 sm:col-span-2 ">
-            <div className="relative my-2">
-              <input
-                type="search"
-                className="bg-purple-white shadow rounded border-1 p-3 focus:bg-white focus:border-blue-400"
-                placeholder="Buscar país..."
-                onChange={(event) => {
-                  setSearchTerm(event.target.value);
-                }}
+          <div className='selected-countries-container'>
+            <p>Paises seleccionados</p>
+            <div className='option-selected-countries-container'>
+              <OptionsSelected
+                selectedCountries={selectedCountries}
+                setSelectedCountries={setSelectedCountries}
               />
             </div>
           </div>
