@@ -26,6 +26,7 @@
     "react-ga": "^3.3.0",
     "react-scripts": "4.0.3",
     "react-svg-worldmap": "^1.1.0",
+    "styled-components": "^5.3.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.2",
     "web-vitals": "^1.1.1",
     "wouter": "^2.7.4"
