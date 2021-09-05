@@ -84,10 +84,12 @@ const CountriesData = () => {
   const [selectedCountriesData, setCountriesDataState] = useState({});
   const [viewInfo, setViewInfo] = useState('Graph');
   const [availablesCountries, setAvailablesCountries] = useState([]);
+  const [datalistOptions, setDatalistOptions] = useState([]);
   const [sameOrigin, setSameOrigin] = useState(false);
   const [selectedProperty, setSelectedProperty] = useState(
     'people_vaccinated_per_hundred'
   );
+
   const [selectedCountries, setSelectedCountries] = useState([
     'Argentina',
     'Uruguay',
@@ -123,6 +125,15 @@ const CountriesData = () => {
     },
     { key: 'vaccine_type', text: 'Tipo de vacuna' },
   ];
+
+  useEffect(() => {
+    if (Object.keys(selectedCountriesData).length !== 0) {
+      const selectedName = selectedCountriesData.map(x => x.name);
+      const notSelectedCountries = availablesCountries.filter(countryName => !selectedName.includes(countryName));
+      setDatalistOptions((last) => { return notSelectedCountries })
+    }
+
+  }, [selectedCountriesData]);
 
   useEffect(() => {
     getAvailablesCountries().then((data) => {
@@ -225,6 +236,12 @@ const CountriesData = () => {
     }
   };
 
+  const selectCountry = (countryName) => {
+    setSelectedCountries((lastSelected) => {
+      return [...lastSelected, countryName];
+    });
+  };
+
   return (
     <StyledHomePageContainer>
       {loadCountryData && (
@@ -283,9 +300,10 @@ const CountriesData = () => {
                   id='available-countries'
                   list='availables-countries'
                   type='text'
+                  onInput={(event) => { if (!event.nativeEvent.inputType) { selectCountry(event.target.value); event.target.value = ""; } }}
                 />
                 <datalist id='availables-countries'>
-                  {availablesCountries.map((countryName) => (
+                  {datalistOptions.map((countryName) => (
                     <option key={countryName} value={countryName} />
                   ))}
                 </datalist>
