@@ -285,7 +285,6 @@ const CountriesData = () => {
                   type='text'
                 />
                 <datalist id='availables-countries'>
-                  <option value='Chrome' />
                   {availablesCountries.map((countryName) => (
                     <option key={countryName} value={countryName} />
                   ))}
