@@ -133,7 +133,7 @@ const CountriesData = () => {
       setDatalistOptions((last) => { return notSelectedCountries })
     }
 
-  }, [selectedCountriesData]);
+  }, [selectedCountriesData, availablesCountries]);
 
   useEffect(() => {
     getAvailablesCountries().then((data) => {
