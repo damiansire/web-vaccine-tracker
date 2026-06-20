@@ -25,9 +25,9 @@ const StyleHomePageContainer = styled.div`
 function usePageViews() {
   let location = useLocation();
   useEffect(() => {
-    ReactGA.initialize('UA-155224346-6', {
-      debug: true,
-    });
+    ReactGA.initialize('UA-155224346-6');
+  }, []);
+  useEffect(() => {
     ReactGA.set({ page: location[0] });
     ReactGA.pageview(location[0]);
   }, [location]);
