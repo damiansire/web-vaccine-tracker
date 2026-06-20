@@ -94,7 +94,7 @@ const StyledNavbarContainer = styled.div`
 
 const Navbar = () => {
 
-  const [location, setLocation] = useLocation();
+  const [location] = useLocation();
 
 
   const SidebarItem = (props) => {
@@ -106,7 +106,6 @@ const Navbar = () => {
               ? "sidebar__list__item__active"
               : "sidebar__list__item"
           }
-          onClick={() => setLocation(`/${props.item.link}`)}
         >
           <div className="sidebar__list__item__icon"> {props.icon}</div>
           <span>{props.item.name}</span>
