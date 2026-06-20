@@ -65,8 +65,8 @@ const generateAllDates = (minDate, maxDate) => {
 };
 
 const stringToDate = (stringDate) => {
-  let dateObj = new Date(stringDate);
-  return new Date(dateObj.setDate(dateObj.getDate() + 1));
+  const [year, month, day] = stringDate.split("-").map(Number);
+  return new Date(year, month - 1, day);
 };
 
 const dateToString = (date) => {
