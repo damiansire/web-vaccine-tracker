@@ -2,14 +2,21 @@ import React from "react";
 
 const TodayDataTable = (props) => {
   const metodoHardcodeEliminarPlease = (countryData, atr) => {
-    if (countryData.data[countryData.data.length - 1][atr]) {
-      return countryData.data[countryData.data.length - 1][atr];
+    const series = countryData.data;
+    if (series.length && series[series.length - 1][atr] != null) {
+      return series[series.length - 1][atr];
     }
-    const data = countryData.data.filter((x) => x[atr] != null);
+    const data = series.filter((x) => x[atr] != null);
+    if (!data.length) {
+      return "—";
+    }
     return data[data.length - 1][atr];
   };
   const metodoHardcodeFECHAEliminarPlease = (countryData) => {
     let data = countryData.filter((x) => !Object.values(x).includes(null));
+    if (!data.length) {
+      return "—";
+    }
     return data[data.length - 1].date;
   };
   return (
