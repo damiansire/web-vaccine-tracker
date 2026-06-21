@@ -1,7 +1,8 @@
 // Carga perezosa y cacheada del dataset estático modular (reemplazo de la API
 // caída). Cada país/recurso vive en su propio JSON: con import() dinámico,
 // webpack los emite como chunks separados y una pantalla solo descarga el JSON
-// que realmente usa -> lazy load real, no un único blob gigante.
+// que realmente usa. Es code splitting real, aunque los archivos son chicos
+// (~1 KB/país): la ganancia es de organización, no de performance medible.
 
 // Cache de promesas: la descarga de cada recurso ocurre una sola vez por sesión.
 const cache = new Map();
@@ -45,6 +46,9 @@ export const loadIsoCodes = () =>
 
 // Serie temporal de un país: chunk propio + rehidratado a la forma que esperan
 // las tablas ({ countryName, data: [{ date, ... }] }).
+// Política de error explícita (igual que loadSources): un país sin archivo,
+// JSON corrupto o chunk que no descarga degrada a serie vacía en vez de
+// rechazar y tumbar el Promise.all que lo consume. El caller filtra los vacíos.
 export const loadCountry = (name) =>
   once(`country:${name}`, () =>
     import(`./countries/${slugify(name)}.json`)
@@ -53,6 +57,7 @@ export const loadCountry = (name) =>
         countryName: file.countryName,
         data: decodeColumnar(file),
       }))
+      .catch(() => ({ countryName: name, data: [] }))
   );
 
 // Fuentes de un país: chunk propio; país sin archivo -> lista vacía.

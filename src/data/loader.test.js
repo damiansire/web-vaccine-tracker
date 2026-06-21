@@ -1,4 +1,4 @@
-import { slugify, decodeColumnar } from "./loader";
+import { slugify, decodeColumnar, loadCountry } from "./loader";
 
 describe("slugify", () => {
   test("pasa nombres con espacios a kebab-case", () => {
@@ -30,5 +30,15 @@ describe("decodeColumnar", () => {
 
   test("serie vacia produce array vacio", () => {
     expect(decodeColumnar({ fields: ["date"], rows: [] })).toEqual([]);
+  });
+});
+
+describe("loadCountry", () => {
+  test("país sin archivo degrada a serie vacía en vez de rechazar", async () => {
+    // No existe src/data/countries/pais-inexistente-xyz.json -> el import()
+    // rechaza, pero loadCountry tiene .catch y resuelve a una serie neutra.
+    // Esto evita que un país faltante tumbe el Promise.all del comparador.
+    const result = await loadCountry("Pais Inexistente XYZ");
+    expect(result).toEqual({ countryName: "Pais Inexistente XYZ", data: [] });
   });
 });

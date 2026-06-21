@@ -90,11 +90,14 @@ const CountriesData = () => {
     'people_vaccinated_per_hundred'
   );
 
+  // Selección inicial: solo países presentes en el dataset estático (manifest).
+  // Hardcodear nombres que pueden no existir dejaba la home en blanco (el
+  // import() del país ausente rechazaba y tumbaba el Promise.all).
   const [selectedCountries, setSelectedCountries] = useState([
     'Argentina',
     'Uruguay',
     'Chile',
-    'Colombia',
+    'Brazil',
   ]);
 
   const countryAttributeNames = [
@@ -123,7 +126,9 @@ const CountriesData = () => {
       key: 'total_dose_vaccinations',
       text: 'Total de dosis aplicadas',
     },
-    { key: 'vaccine_type', text: 'Tipo de vacuna' },
+    // 'vaccine_type' se quitó: el dataset estático generado no emite ese campo
+    // (no está en FIELDS de generate-dataset.mjs), así que la opción mostraba
+    // gráfico/columna vacíos. Re-agregar cuando el generador emita el campo.
   ];
 
   useEffect(() => {
@@ -154,50 +159,28 @@ const CountriesData = () => {
     people_vaccinated: 'Cantidad de personas vacunadas con al menos una dosis.',
     total_dose_vaccinations:
       'Total de dosis aplicadas. Si una persona se da 2 dosis, se cuenta dos veces.',
-    vaccine_type: 'Tipo de vacuna',
   };
 
   useEffect(() => {
-    //Create a cache
-    const countriesDataCached = {};
-
-    const saveCountryDataInCached = (countryId, countryVaccinesData) => {
-      countriesDataCached[countryId] = {
-        data: countryVaccinesData,
-        countryName: countryId,
-      };
-    };
-
     const getSelectedCountriesDataForGraph = async () => {
-      //Get not cached element
-      let notCachedCountries = selectedCountries.filter(
-        (country) => !countriesDataCached.hasOwnProperty(country)
+      // getCountryData -> loadCountry ya cachea la descarga por sesión (once()
+      // en loader.js), así que cargamos directo sin una "cache" local que se
+      // recreaba en cada corrida del effect y nunca persistía.
+      let countriesData = await Promise.all(
+        selectedCountries.map((country) => getCountryData(country))
       );
-      if (notCachedCountries.length > 0) {
-        //Get countries data not cached and cached it
-        let contriesData = await Promise.all(
-          notCachedCountries.map(async (country) => {
-            return getCountryData(country);
-          })
-        );
-        contriesData.forEach((countryData) => {
-          countryData['data'] = countryData['data'].sort((a, b) =>
-            sortDateAsc(a, b)
-          );
 
-          saveCountryDataInCached(
-            countryData['countryName'],
-            countryData['data']
-          );
-        });
-      }
-
-      let countriesDataFromCached = selectedCountries.map((countryName) => {
-        return {
-          name: countriesDataCached[countryName]['countryName'],
-          data: countriesDataCached[countryName]['data'],
-        };
-      });
+      let countriesDataFromCached = countriesData
+        .map((countryData) => {
+          return {
+            name: countryData['countryName'],
+            data: countryData['data'],
+          };
+        })
+        // Un país sin datos (archivo ausente -> serie vacía vía loadCountry)
+        // se descarta: el gráfico y la tabla alinean por posición sobre
+        // countriesData[0], así que una serie vacía rompería el render.
+        .filter((country) => country.data.length > 0);
 
       //Agrega las fechas que faltan en los datos, para que todos los paises
       //Tengan la misma cantidad de elementos
@@ -225,7 +208,11 @@ const CountriesData = () => {
       setLoadCountryData(true);
     };
 
-    setSelectedCountriesData();
+    // Si algo rechaza de forma inesperada, no dejamos una promesa sin manejar
+    // (evita que un fallo de carga quede silencioso y la home en blanco).
+    setSelectedCountriesData().catch((err) => {
+      console.error('No se pudieron cargar los datos de países:', err);
+    });
   }, [selectedCountries, sameOrigin]);
 
   const selectViewData = (event) => {
