@@ -14,6 +14,7 @@ function OptionsSelected(props) {
         <div className="flex flex-auto flex-wrap">
           {props.selectedCountries.map((name) => (
             <OptionSelected
+              key={name}
               optionName={name}
               desSelectCountry={desSelectCountry}
             />
