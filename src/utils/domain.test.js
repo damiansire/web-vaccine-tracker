@@ -57,6 +57,10 @@ describe("normalizeCountries", () => {
       "2021-10-03",
     ];
 
+    // No debe mutar el input recibido.
+    expect(input[0].data).toHaveLength(2);
+    expect(input[1].data).toHaveLength(1);
+
     result.forEach((country) => {
       const dates = country.data.map((p) => p.date).sort();
       expect(dates).toEqual(expectedDates);

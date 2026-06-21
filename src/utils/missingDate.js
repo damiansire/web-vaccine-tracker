@@ -25,10 +25,10 @@ export const normalizeCountries = (allContries) => {
 const setMissingDates = (country, allDates) => {
   let countryDate = country.data.map((dataPoint) => dataPoint.date);
   let missingDate = allDates.filter((date) => !countryDate.includes(date));
-  missingDate.forEach((date) => {
-    country.data.push(getZeroDataPoint(date));
-  });
-  return country;
+  return {
+    ...country,
+    data: [...country.data, ...missingDate.map(getZeroDataPoint)],
+  };
 };
 
 const getMaxAndMinDatesInContries = (allContries) => {
