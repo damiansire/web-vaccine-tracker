@@ -20,7 +20,7 @@ const TableRanking = (props) => {
 
   //attribute en el return es un string pero arriba tengo una variable con ese nombre
   //Encontrar una mejor forma de hacer lo de los puntos
-  let countriesDataSort = props.data.sort(function (a, b) {
+  let countriesDataSort = [...props.data].sort(function (a, b) {
     return b[attribute] - a[attribute];
   });
   countriesDataSort = countriesDataSort.map((country, index) => {
