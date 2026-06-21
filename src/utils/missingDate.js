@@ -71,8 +71,8 @@ const stringToDate = (stringDate) => {
 
 const dateToString = (date) => {
   let year = date.getFullYear();
-  let month =
-    date.getMonth() < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+  let m = date.getMonth() + 1;
+  let month = m < 10 ? "0" + m : "" + m;
   let day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
   return year + "-" + month + "-" + day;
 };
