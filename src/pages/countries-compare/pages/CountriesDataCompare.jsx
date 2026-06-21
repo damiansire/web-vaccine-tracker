@@ -339,7 +339,7 @@ const CountriesData = () => {
               {/* Add key={selectedCountriesData} beucase the graph have a problem with refersh when remove country */}
               {viewInfo === 'Graph' && (
                 <CountriesGraphs
-                  key={selectedCountriesData}
+                  key={selectedCountries.join(',')}
                   optionsSelectedData={selectedProperty}
                   countriesData={selectedCountriesData}
                 />
