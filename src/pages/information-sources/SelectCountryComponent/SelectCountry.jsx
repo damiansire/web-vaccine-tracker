@@ -18,6 +18,7 @@ function SelectCountry(props) {
         .map((countryName) => {
           return (
             <SelectOption
+              key={countryName}
               countryName={countryName}
               selectCountry={selectCountry}
             />
