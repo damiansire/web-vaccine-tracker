@@ -20,11 +20,22 @@ const CountriesTable = (props) => {
   let columns = [{ field: "date", headerName: "Fecha", width: 120 }];
 
   let countriesData = props.countriesData;
-  let dataPointLength = countriesData[0].data.length;
+  // El país[0] no siempre tiene la serie más larga (con sameOrigin no se
+  // normaliza), así que tomo el máximo de longitudes para no indexar fuera de rango.
+  let dataPointLength = countriesData.reduce(
+    (max, country) => Math.max(max, country.data.length),
+    0
+  );
+  // El país con la serie más larga aporta las fechas de referencia.
+  let longestSeries = countriesData.reduce(
+    (longest, country) =>
+      country.data.length > longest.length ? country.data : longest,
+    []
+  );
   let rows = [];
   //Genera un array con dataPointLength element y su id
   for (let index = 0; index < dataPointLength; index++) {
-    rows.push({ id: index, date: props.countriesData[0].data[index].date });
+    rows.push({ id: index, date: longestSeries[index].date });
   }
 
   let selectedProp = props.optionsSelectedData;
