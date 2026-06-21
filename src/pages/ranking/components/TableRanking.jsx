@@ -11,6 +11,15 @@ import TableRow from "@material-ui/core/TableRow";
 
 const { formatNumberWithPoint } = require("../../../utils/numberFormat");
 
+const useStyles = makeStyles({
+  root: {
+    width: "100%",
+  },
+  container: {
+    maxHeight: 440,
+  },
+});
+
 //Que es mejor, pasar directamente al componente la info ya filtrada tipo: daily_vaccination, countryid
 //O pasarla toda y filtrarla aca, teniendo en cuenta, que va a ser dinamico
 //Me va a generar muchas lineas hacerlo atras, porque es para cada attributo
@@ -32,15 +41,6 @@ const TableRanking = (props) => {
   });
 
   //Mostrar en tabla
-
-  const useStyles = makeStyles({
-    root: {
-      width: "100%",
-    },
-    container: {
-      maxHeight: 440,
-    },
-  });
 
   //Logica de la tabla
   const classes = useStyles();
