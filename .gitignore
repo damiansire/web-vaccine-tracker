@@ -17,6 +17,9 @@ jspm_packages/
 # Distribution directories
 dist/
 
+# Test coverage
+coverage/
+
 # Typescript v1 declaration files
 typings/
 
