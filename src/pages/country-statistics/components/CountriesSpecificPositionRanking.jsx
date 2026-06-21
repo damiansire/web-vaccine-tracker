@@ -25,10 +25,11 @@ function CountriesSpecificPositionRanking(props) {
         let orderRanking = clearData.sort(function (a, b) {
           return b[field] - a[field];
         });
-        let countryPosition = orderRanking.findIndex(
+        let countryIndex = orderRanking.findIndex(
           (country) => country.countryId === countryId
         );
-        actualCountryRanking[field] = countryPosition;
+        // 1-indexado para ser consistente con TableRanking; "—" si no se encuentra.
+        actualCountryRanking[field] = countryIndex === -1 ? "—" : countryIndex + 1;
       }
       setActualCountryRankingData(actualCountryRanking);
     });
