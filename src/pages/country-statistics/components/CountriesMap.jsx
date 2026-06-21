@@ -63,7 +63,7 @@ function CountriesMap(props) {
 
   const stylingFunction = (countryData) => {
     let getColor = (value) => {
-      if (!value) {
+      if (value == null) {
         return "blue"
       }
       if (value > 70) {
