@@ -1,7 +1,7 @@
 import React from "react";
 
 const TodayDataTable = (props) => {
-  const metodoHardcodeEliminarPlease = (countryData, atr) => {
+  const latestNonNull = (countryData, atr) => {
     const series = countryData.data;
     if (series.length && series[series.length - 1][atr] != null) {
       return series[series.length - 1][atr];
@@ -12,12 +12,12 @@ const TodayDataTable = (props) => {
     }
     return data[data.length - 1][atr];
   };
-  const metodoHardcodeFECHAEliminarPlease = (countryData) => {
-    let data = countryData.filter((x) => !Object.values(x).includes(null));
-    if (!data.length) {
+  const latestDataDate = (series) => {
+    const withDate = series.filter((x) => x.date != null);
+    if (!withDate.length) {
       return "—";
     }
-    return data[data.length - 1].date;
+    return withDate[withDate.length - 1].date;
   };
   return (
     <>
@@ -51,37 +51,37 @@ const TodayDataTable = (props) => {
               <tr key={countryData.name}>
                 <td className="border text-center p-2">{countryData.name}</td>
                 <td className="border text-center p-2">
-                  {metodoHardcodeEliminarPlease(
+                  {latestNonNull(
                     countryData,
                     "people_vaccinated"
                   )}
                 </td>
                 <td className="border text-center p-2">
-                  {metodoHardcodeEliminarPlease(
+                  {latestNonNull(
                     countryData,
                     "people_vaccinated_per_hundred"
                   ) + "%"}
                 </td>
                 <td className="border text-center p-2">
-                  {metodoHardcodeEliminarPlease(
+                  {latestNonNull(
                     countryData,
                     "people_fully_vaccinated"
                   )}
                 </td>
                 <td className="border text-center p-2">
-                  {`${metodoHardcodeEliminarPlease(
+                  {`${latestNonNull(
                     countryData,
                     "people_fully_vaccinated_per_hundred"
                   )} %`}
                 </td>
                 <td className="border text-center p-2">
-                  {metodoHardcodeEliminarPlease(
+                  {latestNonNull(
                     countryData,
                     "total_dose_vaccinations"
                   )}
                 </td>
                 <td className="border text-center p-2">
-                  {metodoHardcodeFECHAEliminarPlease(countryData.data)}
+                  {latestDataDate(countryData.data)}
                 </td>
               </tr>
             );
