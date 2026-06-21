@@ -28,6 +28,10 @@ describe("sortDateAsc", () => {
       "2021-03-10",
     ]);
   });
+
+  test("devuelve 0 cuando las fechas son iguales (contrato de sort)", () => {
+    expect(sortDateAsc({ date: "2021-05-01" }, { date: "2021-05-01" })).toBe(0);
+  });
 });
 
 describe("normalizeCountries", () => {
