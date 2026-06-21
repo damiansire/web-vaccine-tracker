@@ -45,7 +45,6 @@ function AllRankings() {
   useEffect(() => {
     getLastDataCountries().then((data) => {
       setLastDataCountries(data);
-      console.log(data);
     });
   }, []);
 
@@ -54,7 +53,7 @@ function AllRankings() {
       {!!lastDataCountries.length &&
         rankingTablesOptions.map((option) => {
           return (
-            <div className="col-span-2 px-4">
+            <div className="col-span-2 px-4" key={option.attribute}>
               <TableRanking
                 title={option.title}
                 data={lastDataCountries}

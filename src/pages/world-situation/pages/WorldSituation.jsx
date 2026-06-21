@@ -31,7 +31,7 @@ const WorldSituation = () => {
     ];
     const [selectedOption, selectOption] = useState(rankingTablesOptions[0]);
     const [data, setData] = useState([]);
-    const [location, setLocation] = useLocation();
+    const setLocation = useLocation()[1];
 
     const setOptionHandle = (option) => {
         selectOption(option);
@@ -48,7 +48,6 @@ const WorldSituation = () => {
 
     const selectCountryByName = (event) => {
         setLocation(`/country/${event}`);
-        console.log(location)
     }
     return (
         <div className="min-h-full">

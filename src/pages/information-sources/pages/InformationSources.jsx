@@ -27,7 +27,6 @@ const InformationSources = () => {
     useEffect(() => {
         getSourcesForCountry(selectedCountry).then((sources) => {
             setCountrySource(sources);
-            console.log(sources);
         })
     }, [selectedCountry])
 
@@ -81,7 +80,7 @@ const InformationSources = () => {
                     <h1 className="text-center text-3xl"> Fuentes de información</h1>
                     <h2 className="text-center text-2xl my-2">País seleccionado: <span className="extrabold"> {selectedCountry} </span></h2>
                     <ul>
-                        {countrySource.map(url => { return <li className="border-2 border-green-300 py-5 mx-1 my-5 text-center"><a href={url} rel="noreferrer" target="_blank">{url}</a></li> })}
+                        {countrySource.map(url => { return <li key={url} className="border-2 border-green-300 py-5 mx-1 my-5 text-center"><a href={url} rel="noreferrer" target="_blank">{url}</a></li> })}
                     </ul>
                 </div>
             </div>
