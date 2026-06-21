@@ -12,6 +12,11 @@ describe("formatNumberWithPoint", () => {
     expect(formatNumberWithPoint(0)).toBe("0");
     expect(formatNumberWithPoint(999)).toBe("999");
   });
+
+  test("devuelve guion ante null/undefined sin lanzar", () => {
+    expect(formatNumberWithPoint(null)).toBe("—");
+    expect(formatNumberWithPoint(undefined)).toBe("—");
+  });
 });
 
 describe("sortDateAsc", () => {
