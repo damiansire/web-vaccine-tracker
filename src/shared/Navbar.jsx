@@ -92,27 +92,26 @@ const StyledNavbarContainer = styled.div`
 `
 
 
+const SidebarItem = (props) => {
+  return (
+    <Link href={props.item.link}>
+      <li
+        className={
+          props.item.link === props.location
+            ? "sidebar__list__item__active"
+            : "sidebar__list__item"
+        }
+      >
+        <div className="sidebar__list__item__icon"> {props.icon}</div>
+        <span>{props.item.name}</span>
+      </li>
+    </Link>
+  );
+};
+
 const Navbar = () => {
 
   const [location] = useLocation();
-
-
-  const SidebarItem = (props) => {
-    return (
-      <Link href={props.item.link}>
-        <li
-          className={
-            props.item.link === location
-              ? "sidebar__list__item__active"
-              : "sidebar__list__item"
-          }
-        >
-          <div className="sidebar__list__item__icon"> {props.icon}</div>
-          <span>{props.item.name}</span>
-        </li>
-      </Link>
-    );
-  };
 
   const sidebarItem = [
     {
@@ -157,9 +156,14 @@ const Navbar = () => {
 
       <div className="sidebar">
         <ul className="sidebar__list">
-          {sidebarItem.map((item, index) => {
+          {sidebarItem.map((item) => {
             return (
-              <SidebarItem icon={item.icon} key={index} item={item}></SidebarItem>
+              <SidebarItem
+                icon={item.icon}
+                key={item.link}
+                item={item}
+                location={location}
+              ></SidebarItem>
             );
           })}
         </ul>
