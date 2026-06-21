@@ -9,8 +9,8 @@ function OptionsSelected(props) {
     });
   };
   return (
-    <div className='w-full  svelte-1l8159u'>
-      <div className='my-2 p-1 flex bg-white rounded svelte-1l8159u'>
+    <div className='w-full '>
+      <div className='my-2 p-1 flex bg-white rounded'>
         <div className='flex flex-auto flex-wrap'>
           {props.selectedCountries.map((name) => (
             <OptionSelected
