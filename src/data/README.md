@@ -1,16 +1,24 @@
 # Dataset estático modular
 
 Reemplazo de la API `api.thecovidvaccines.com` (caída). El front consume estos
-JSON en vez de la red. Está pensado para **alta performance** y **lazy load
-real**: cada país es un archivo aparte y se descarga solo cuando se lo necesita.
+JSON en vez de la red. La organización es **modular**: cada país es un archivo
+aparte y, vía `import()` dinámico, webpack lo emite como un _chunk_ propio que se
+descarga al usarlo.
 
-## Por qué es rápido
+> Nota de alcance: los archivos son chiquitos (~1 KB por país, 12 filas), así que
+> el code splitting es sobre todo organización, no una ganancia de performance
+> medible. Las pantallas de ranking y mapa cargan `last-data.json` (un único
+> archivo con todos los países) y la comparación trae la selección default de una
+> sola vez con `Promise.all`; el "se descarga solo cuando se lo necesita" aplica
+> a la serie por país, no a esas dos pantallas.
+
+## Cómo está organizado
 
 - **Modular, no monolítico.** En lugar de un blob único, hay un JSON por país
   (`countries/<slug>.json`, `sources/<slug>.json`). Con `import()` dinámico en
-  `loader.js`, webpack los emite como _chunks_ separados: la pantalla de un país
-  descarga solo ese país. Eso es lazy load real (code splitting), no diferir el
-  render de un dato ya bajado.
+  `loader.js`, webpack los emite como _chunks_ separados: cada serie por país es
+  un chunk aparte que se baja al pedirlo. Es code splitting real, pero el dataset
+  es lo bastante chico como para que no sea un argumento de performance.
 - **Series en formato columnar.** Cada serie temporal se guarda como
   `{ fields, rows }` en vez de un array de objetos. Las claves
   (`date`, `daily_vaccinations`, …) aparecen **una sola vez** y no en cada
