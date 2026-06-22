@@ -8,7 +8,7 @@ import {
     getSourcesForCountry
 } from "../../../adapters/data-sources";
 
-import SelectCountry from "../SelectCountryComponent/SelectCountry";
+import { SelectCountry } from "../../../shared/SelectCountry";
 
 
 const InformationSources = () => {

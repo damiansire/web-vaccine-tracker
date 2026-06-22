@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-import OptionsSelected from '../components/SelectCountryComponent/OptionsSelected';
+import { OptionsSelected } from '../../../shared/SelectCountry';
 
 import {
   FormControlLabel,
