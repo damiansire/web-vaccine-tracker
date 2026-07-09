@@ -1,8 +1,8 @@
 {
-  "name": "web-covid-vaccine-tracker",
+  "name": "covid-vaccine-tracker-archive",
   "version": "0.1.0",
   "private": true,
-  "description": "Tracker de vacunación COVID-19 construido con React (proyecto archivado/EOL, conservado como pieza de portfolio histórico).",
+  "description": "[Archived] A web-based COVID-19 vaccination tracker built with React. Preserved as a historical portfolio piece.",
   "author": "Damian Sire <damiansire@gmail.com>",
   "license": "MIT",
   "repository": {
