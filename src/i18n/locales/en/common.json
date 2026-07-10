@@ -1,0 +1,39 @@
+{
+  "appName": "Vaccine Tracker",
+  "stamp": "Historical record · campaign closed 2020–2024",
+  "nav": {
+    "worldSituation": "World situation",
+    "ranking": "Ranking",
+    "compare": "Compare",
+    "evolution": "Evolution"
+  },
+  "footer": {
+    "dataPrefix": "Data:",
+    "dataSource": "Our World in Data",
+    "domainClosed": "closed domain, fixed historical dataset (2020–2024)",
+    "noLiveApi": "no live API."
+  },
+  "errorBoundary": {
+    "title": "This section couldn't render",
+    "description": "Could be a piece of data that failed to load, or a temporary glitch. Try again, or head back to the world situation.",
+    "retry": "Retry",
+    "backHome": "Back to overview"
+  },
+  "countrySelect": {
+    "searchPlaceholder": "Search country…",
+    "maxReached": "Maximum {{max}} countries",
+    "remove": "Remove {{country}}"
+  },
+  "metrics": {
+    "peopleFullyVaccinatedPerHundred": "Fully vaccinated",
+    "peopleVaccinatedPerHundred": "At least one dose",
+    "totalVaccinations": "Total doses administered",
+    "totalBoosters": "Boosters administered",
+    "daysToFully50": "Speed: days to 50% fully vaccinated"
+  },
+  "loading": "Loading…",
+  "languageSwitcher": {
+    "es": "Español",
+    "en": "English"
+  }
+}

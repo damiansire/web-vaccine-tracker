@@ -1,0 +1,26 @@
+{
+  "backToRanking": "← Back to ranking",
+  "notFound": "We couldn't find that country in the dataset.",
+  "loadError": "We couldn't load this country's data. It might be a connection issue.",
+  "lastUpdate": "Latest data: {{date}}",
+  "milestone": {
+    "reached": "Reached 50% fully vaccinated on {{date}}",
+    "notReached": "Hasn't reached 50% fully vaccinated yet"
+  },
+  "kpi": {
+    "fullyVaccinated": "Fully vaccinated",
+    "atLeastOneDose": "At least one dose",
+    "totalDoses": "Total doses",
+    "boosters": "Boosters"
+  },
+  "coverageChart": {
+    "title": "Vaccination coverage",
+    "atLeastOneDose": "At least one dose",
+    "fullyVaccinated": "Fully vaccinated"
+  },
+  "dosesChart": {
+    "title": "Doses administered per day",
+    "daily": "Daily doses"
+  },
+  "sources": "Sources"
+}

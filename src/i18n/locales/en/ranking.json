@@ -1,0 +1,8 @@
+{
+  "title": "Country ranking",
+  "description": "{{count}} countries with data available for this metric, latest recorded value.",
+  "columns": {
+    "rank": "#",
+    "country": "Country"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "title": "Comparar países",
+  "description": "Elegí hasta {{max}} países para ver su serie histórica lado a lado.",
+  "emptyState": "Elegí al menos un país para empezar a comparar.",
+  "columns": {
+    "country": "País",
+    "lastValue": "{{metric}} (último dato)"
+  },
+  "alignMode": {
+    "calendar": "Fecha calendario",
+    "days": "Días desde el inicio",
+    "daysAxisLabel": "Días desde el primer dato de cada país"
+  }
+}

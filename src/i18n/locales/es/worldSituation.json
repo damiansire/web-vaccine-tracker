@@ -1,0 +1,19 @@
+{
+  "headline": "Así vacunó al mundo la humanidad contra el COVID-19",
+  "description": "Registro cerrado de la campaña de vacunación global: {{count}} países, desde el primer dato hasta el último. No es un tablero en vivo — es el archivo completo.",
+  "kpi": {
+    "countriesWithData": "Países con datos",
+    "totalDoses": "Dosis aplicadas (global)",
+    "avgCoverage": "Promedio esquema completo",
+    "avgCoverageHint": "promedio simple entre países",
+    "topCountry": "País líder"
+  },
+  "mapSection": {
+    "title": "Esquema completo por país",
+    "description": "Porcentaje de población con esquema de vacunación completo, último dato disponible por país. Click en un país para ver su serie histórica completa."
+  },
+  "rankPreview": {
+    "highest": "Coberturas más altas",
+    "lowest": "Coberturas más bajas"
+  }
+}

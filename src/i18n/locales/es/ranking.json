@@ -1,0 +1,8 @@
+{
+  "title": "Ranking de países",
+  "description": "{{count}} países con dato disponible para esta métrica, último valor registrado.",
+  "columns": {
+    "rank": "#",
+    "country": "País"
+  }
+}

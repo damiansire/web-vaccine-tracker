@@ -1,0 +1,39 @@
+{
+  "appName": "Vaccine Tracker",
+  "stamp": "Registro histórico · campaña cerrada 2020–2024",
+  "nav": {
+    "worldSituation": "Situación mundial",
+    "ranking": "Ranking",
+    "compare": "Comparar",
+    "evolution": "Evolución"
+  },
+  "footer": {
+    "dataPrefix": "Datos:",
+    "dataSource": "Our World in Data",
+    "domainClosed": "dominio cerrado, dataset histórico fijo (2020–2024)",
+    "noLiveApi": "sin API en vivo."
+  },
+  "errorBoundary": {
+    "title": "Esta sección no pudo mostrarse",
+    "description": "Puede ser un dato que no cargó bien o algo temporal de la página. Reintentá, o volvé a la situación mundial.",
+    "retry": "Reintentar",
+    "backHome": "Volver al inicio"
+  },
+  "countrySelect": {
+    "searchPlaceholder": "Buscar país…",
+    "maxReached": "Máximo {{max}} países",
+    "remove": "Quitar {{country}}"
+  },
+  "metrics": {
+    "peopleFullyVaccinatedPerHundred": "Esquema completo",
+    "peopleVaccinatedPerHundred": "Al menos una dosis",
+    "totalVaccinations": "Dosis totales aplicadas",
+    "totalBoosters": "Refuerzos aplicados",
+    "daysToFully50": "Velocidad: días hasta 50% con esquema completo"
+  },
+  "loading": "Cargando…",
+  "languageSwitcher": {
+    "es": "Español",
+    "en": "English"
+  }
+}

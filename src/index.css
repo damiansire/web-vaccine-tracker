@@ -1,18 +1,111 @@
-/* ./src/index.css */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Self-hosted (public/fonts/, ver LICENSE.txt ahí) — sin dependencia de un
+ * CDN de fuentes en runtime, mismo criterio que el dataset (todo lo que el
+ * dominio-cerrado necesita vive en el repo). */
+@font-face {
+  font-family: "Fraunces";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/fraunces-600.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("/fonts/inter-variable.woff2") format("woff2");
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/ibm-plex-mono-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/ibm-plex-mono-500.woff2") format("woff2");
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+@theme inline {
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  /* Roles semánticos que consumen los componentes shadcn/ui */
+  --color-background: var(--ink);
+  --color-foreground: var(--paper);
+  --color-primary: var(--amber);
+  --color-primary-foreground: var(--ink);
+  --color-secondary: var(--surface-2);
+  --color-secondary-foreground: var(--paper);
+  --color-muted: var(--surface);
+  --color-muted-foreground: var(--ink-2);
+  --color-popover: var(--surface);
+  --color-popover-foreground: var(--paper);
+  --color-accent: var(--surface-2);
+  --color-accent-foreground: var(--paper);
+  --color-destructive: var(--status-critical);
+  --color-border: var(--hairline);
+  --color-input: var(--hairline);
+  --color-ring: var(--amber);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+
+  /* Paleta de dominio — validada con la skill dataviz (6/6 checks, dark,
+   * superficie #0E1A24): amber/teal/indigo categórica, rose reservado a
+   * estado. Ver _audits/DECISIONES.md para la corrida del validador. */
+  --color-ink: #0e1a24;
+  --color-surface: #142530;
+  --color-surface-2: #1b2e3a;
+  --color-paper: #ece7d8;
+  --color-ink-2: #9fb0bd;
+  --color-ink-muted: #64798a;
+  --color-hairline: rgb(236 231 216 / 10%);
+
+  --color-amber: #d97706;
+  --color-amber-300: #fcd34d;
+  --color-amber-800: #78350f;
+  --color-teal: #0d9488;
+  --color-indigo: #6366f1;
+  --color-rose: #f43f5e;
+
+  --color-status-good: #0ca30c;
+  --color-status-warning: #fab219;
+  --color-status-serious: #ec835a;
+  --color-status-critical: #d03b3b;
+}
+
+:root {
+  --radius: 0.5rem;
+  color-scheme: dark;
+}
+
+body {
+  font-feature-settings: "tnum" 1;
+}
+
+/* Cifras siempre en mono tabular — regla del dominio (dataset estadístico),
+ * ver CLAUDE.md § UI. */
+.tabular {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Baseline de a11y: quien pidió menos movimiento en el SO no debería recibir
+ * las transiciones de hover/focus de shadcn (Select, Button) igual. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

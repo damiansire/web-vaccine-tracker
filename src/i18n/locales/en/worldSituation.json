@@ -1,0 +1,19 @@
+{
+  "headline": "How humanity vaccinated the world against COVID-19",
+  "description": "Closed record of the global vaccination campaign: {{count}} countries, from the first data point to the last. This isn't a live dashboard — it's the complete archive.",
+  "kpi": {
+    "countriesWithData": "Countries with data",
+    "totalDoses": "Doses administered (global)",
+    "avgCoverage": "Average full coverage",
+    "avgCoverageHint": "simple average across countries",
+    "topCountry": "Leading country"
+  },
+  "mapSection": {
+    "title": "Full vaccination coverage by country",
+    "description": "Share of population with a complete vaccination scheme, latest data available per country. Click a country to see its full historical series."
+  },
+  "rankPreview": {
+    "highest": "Highest coverage",
+    "lowest": "Lowest coverage"
+  }
+}

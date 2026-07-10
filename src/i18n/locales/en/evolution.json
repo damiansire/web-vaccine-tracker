@@ -1,0 +1,13 @@
+{
+  "title": "Animated evolution",
+  "description": "Watch how vaccination progressed day by day across up to {{max}} countries — pick them, hit play, and adjust the speed.",
+  "emptyState": "Pick at least one country to start the animation.",
+  "play": "Play",
+  "pause": "Pause",
+  "speed": "Speed",
+  "scrubberLabel": "Animation date",
+  "columns": {
+    "country": "Country",
+    "valueAsOf": "{{metric}} as of {{date}}"
+  }
+}

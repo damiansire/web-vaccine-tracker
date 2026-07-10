@@ -1,8 +1,9 @@
 {
-  "name": "covid-vaccine-tracker-archive",
-  "version": "0.1.0",
+  "name": "web-vaccine-tracker",
   "private": true,
-  "description": "[Archived] A web-based COVID-19 vaccination tracker built with React. Preserved as a historical portfolio piece.",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Panel histórico de vacunación COVID-19 por país, sobre el dataset completo de Our World in Data (pandemia cerrada, sin API en vivo).",
   "author": "Damian Sire <damiansire@gmail.com>",
   "license": "MIT",
   "repository": {
@@ -16,61 +17,51 @@
     "covid",
     "vaccine",
     "tracker",
-    "react"
+    "react",
+    "dataviz",
+    "historical-data"
   ],
-  "dependencies": {
-    "@craco/craco": "^6.1.2",
-    "@material-ui/core": "^4.11.3",
-    "@material-ui/data-grid": "^4.0.0-alpha.23",
-    "@material-ui/icons": "^4.11.2",
-    "@material-ui/lab": "^4.0.0-alpha.57",
-    "@tailwindcss/forms": "^0.3.2",
-    "@testing-library/jest-dom": "^5.11.9",
-    "@testing-library/react": "^11.2.5",
-    "@testing-library/user-event": "^12.8.3",
-    "apexcharts": "^3.26.0",
-    "autoprefixer": "^9.8.6",
-    "bootstrap": "^4.6.0",
-    "echarts": "^5.1.2",
-    "echarts-for-react": "^3.0.1",
-    "postcss": "^7.0.35",
-    "react": "^17.0.2",
-    "react-apexcharts": "^1.3.7",
-    "react-bootstrap": "^1.5.2",
-    "react-dom": "^17.0.2",
-    "react-ga": "^3.3.0",
-    "react-scripts": "4.0.3",
-    "react-svg-worldmap": "^1.1.0",
-    "styled-components": "^5.3.1",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.2",
-    "web-vitals": "^1.1.1",
-    "wouter": "^2.7.4"
-  },
   "scripts": {
-    "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider craco start",
-    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider craco build",
-    "test": "cross-env NODE_OPTIONS=--openssl-legacy-provider craco test",
-    "eject": "react-scripts eject"
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "build:pages": "tsc -b && vite build --base=/web-vaccine-tracker/ && node scripts/copy-404.mjs",
+    "preview": "vite preview",
+    "lint": "oxlint",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "generate:data": "node scripts/generate-dataset.ts",
+    "verify": "npm run lint && npm run test && npm run build && node scripts/check-bundle-size.mjs"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "dependencies": {
+    "@base-ui/react": "^1.6.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "echarts": "^6.1.0",
+    "i18n-iso-countries": "^7.14.0",
+    "i18next": "^26.3.6",
+    "i18next-resources-to-backend": "^1.2.1",
+    "lucide-react": "^1.24.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-i18next": "^17.0.9",
+    "react-svg-worldmap": "^2.0.2",
+    "tailwind-merge": "^3.6.0",
+    "wouter": "^3.10.0"
   },
   "devDependencies": {
-    "cross-env": "^10.1.0"
+    "@tailwindcss/vite": "^4.3.2",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/node": "^24.13.2",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.3",
+    "jsdom": "^29.1.1",
+    "oxlint": "^1.71.0",
+    "tailwindcss": "^4.3.2",
+    "typescript": "~6.0.2",
+    "vite": "^8.1.1",
+    "vitest": "^4.1.10"
   }
 }
