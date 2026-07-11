@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import "./i18n/config";
 import "./index.css";
 import App from "./App.tsx";
+import { registerServiceWorker } from "./registerServiceWorker";
 
 const rootElement = document.getElementById("root");
 if (!rootElement) {
@@ -14,3 +15,5 @@ createRoot(rootElement).render(
     <App />
   </StrictMode>,
 );
+
+registerServiceWorker();
