@@ -56,3 +56,22 @@ El dataset es histórico y fijo — no cambia en runtime, no hay tablero "en
 vivo". Se genera una vez desde el CSV público de OWID y se versiona junto al
 código; contrato completo, licencia del dato y manejo de países faltantes en
 [`src/data/README.md`](src/data/README.md).
+
+### Pipeline de build (resumen técnico)
+
+`npm run generate:data` corre `scripts/generate-dataset.ts` sobre el CSV real
+de [OWID](https://github.com/owid/covid-19-data/tree/master/public/data/vaccinations)
+y produce el dataset columnar en `src/data/`:
+
+- **Columnas**: se buscan por nombre en el CSV (no por posición), definidas en
+  `src/data/types.ts` → `FIELDS`; agregar una columna nueva es una sola línea ahí.
+- **Métricas derivadas**: `daysToFully50` se calcula a build-time desde la
+  serie completa de cada país (`src/lib/milestones.ts`), no viene del CSV.
+- **Países con datos faltantes**: `loadCountry`/`loadCountrySources`
+  (`src/data/loader.ts`) nunca lanzan — un país sin archivo loguea el error y
+  degrada a `null`/`{ sources: [] }`. `loadCountries` usa `Promise.allSettled`,
+  así que un país roto no tumba el resto (evita el bug de home-en-blanco por
+  `Promise.all` sin `.catch` del repo anterior).
+
+Detalle completo (formato exacto de cada archivo, licencia, campos) en
+[`src/data/README.md`](src/data/README.md).
