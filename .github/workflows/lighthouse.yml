@@ -1,0 +1,44 @@
+name: Lighthouse
+
+# Observabilidad, no gate: corre aparte de ci.yml (que sí es bloqueante vía
+# npm run verify) y nunca falla el build por un score bajo — sube el JSON
+# como artifact versionado para trackear drift de performance en el tiempo.
+# Ver docs/perf/README.md para el método y cómo regenerar el baseline a mano.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Servir el build de producción
+        run: npx --yes serve -s dist -l 4173 &
+
+      - name: Esperar a que el preview responda
+        run: npx --yes wait-on http://localhost:4173
+
+      - name: Lighthouse contra el build real
+        run: |
+          npx --yes lighthouse http://localhost:4173/ \
+            --output=json \
+            --output-path=./lighthouse-report.json \
+            --chrome-flags="--headless --no-sandbox" \
+            --preset=desktop
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-report
+          path: lighthouse-report.json
+          retention-days: 90

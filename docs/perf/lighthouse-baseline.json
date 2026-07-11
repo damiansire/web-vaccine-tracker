@@ -1,0 +1,31 @@
+{
+  "generatedAt": "2026-07-11T05:13:47.109Z",
+  "measuredAgainst": "npm run build && npm run preview (build de producción real, no dev server)",
+  "tooling": "Chrome DevTools Protocol vía MCP chrome-devtools (lighthouse_audit + performance_start_trace) — ver docs/perf/README.md para el método completo y cómo regenerar este snapshot.",
+  "lighthouse": {
+    "version": "13.3.0",
+    "url": "http://localhost:4173/",
+    "categories": {
+      "accessibility": { "score": 0.96 },
+      "best-practices": { "score": 1 },
+      "seo": { "score": 1 },
+      "agentic-browsing": { "score": 0.67 }
+    },
+    "note": "El modo 'navigation' de esta herramienta excluye la categoría performance (LCP/TBT/Speed Index) — esos números salen del trace de Performance por separado (ver 'coreWebVitals' abajo), no de este reporte."
+  },
+  "coreWebVitals": {
+    "route": "/",
+    "cls": 0.0,
+    "note": "CLS observado (lab) desde un Performance trace real de Chrome DevTools sobre la home (WorldSituation). LCP/INP no quedaron expuestos como insight en este trace puntual — pendiente de una corrida con performance_analyze_insight(LCPBreakdown) cuando haya un requerimiento más fino."
+  },
+  "insights": [
+    {
+      "name": "RenderBlocking",
+      "description": "Requests que bloquean el render inicial (candidato a diferir/inlinear)."
+    },
+    {
+      "name": "DOMSize",
+      "description": "Tamaño de DOM a vigilar en la home (WorldSituation renderiza ~200 países)."
+    }
+  ]
+}
