@@ -1,6 +1,6 @@
 # Contribuir
 
-Este repo tiene un alcance chico y deliberado (ver "Qué NO es" en el
+Este repo tiene un alcance chico y deliberado (ver "Alcance" en el
 README): un explorador de solo-lectura del histórico de vacunación COVID
 de OWID, no un tracker en vivo ni un panel analítico multi-fuente. Esa
 elección de alcance es a propósito — bajarla no es en sí un bug.

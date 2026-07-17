@@ -27,6 +27,16 @@ hoy es el **archivo completo**: 217 países, desde el primer dato hasta el
 Bilingüe (español / English) vía prefijo de URL (`/ranking` = español,
 `/en/ranking` = inglés) — ver `src/i18n/`.
 
+## Alcance
+
+**Qué es**: un explorador de solo lectura del histórico de vacunación COVID
+de OWID, con el dataset horneado a build-time.
+
+**Qué no es**: no es un tracker en vivo (no hay fetch en runtime ni API), ni
+un panel analítico multi-fuente (una sola fuente: OWID). Ampliar el alcance
+(otra fuente de datos, ponderación por población, drill-down subnacional) es
+una discusión de issue antes que un PR — ver `CONTRIBUTING.md`.
+
 ## Correr el proyecto
 
 ```sh
