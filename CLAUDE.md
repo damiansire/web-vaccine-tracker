@@ -7,13 +7,13 @@ build-time en `src/data/` (formato columnar `{fields, rows}`, ver ese directorio
 cuando exista). Arquetipo: **app de dataviz**, no librería — no aplican reglas de
 `exports` map / tree-shaking / publicación npm.
 
-## Estándar nivel mundial
+## Barra de calidad
 
-Construido con `/fragua nuevo vite-react-ts` sobre el corpus de
-`~/.claude/tools/_audit-tools/refs/`. Todo código nuevo se escribe CONTRA esto,
-no se audita después.
+Stack: Vite + React + TypeScript. Todo código nuevo se escribe CONTRA esta barra,
+no se audita después. Las prácticas de stack se apoyan en proyectos open source
+públicos, citados con su URL donde aplican.
 
-### Piso Craft (regla de Intención Clara — `refs/architecture/fellow-standard.md`)
+### Piso de craft (regla de intención clara)
 - **a. Nombres de dominio, no de mecanismo** — `daily_vaccinations`, no `data`/`item`.
 - **b. Comentarios explican el PORQUÉ, nunca el QUÉ.**
 - **c. La firma pública se entiende sin leer el cuerpo.**
@@ -32,7 +32,7 @@ no se audita después.
   cuando un país faltante no debe tumbar el batch completo.
 - **j. N/A** (no hay auth/permisos en este repo — dataset público estático).
 
-### Piso Legibilidad en frío (k–m)
+### Piso de legibilidad en frío (k–m)
 - **k. El README lidera con una captura/GIF real** del panel, no solo texto —
   es un artefacto visual, la descripción sola no cuenta como prueba.
 - **l. N/A por ahora** — no hay claim de perf/robustez que probar hasta que exista
@@ -42,18 +42,18 @@ no se audita después.
   históricos y fijos (no un tracker en vivo) — no reusar lenguaje de "en tiempo
   real" heredado de la versión COVID-era.
 
-### Reglas del stack (citadas del corpus)
+### Reglas del stack
 - **tsconfig estricto** (`strict` + `noUncheckedIndexedAccess` +
   `exactOptionalPropertyTypes` + `forceConsistentCasingInFileNames`) — ya en
-  `tsconfig.app.json`. Fuente: `refs/react/from-radix-primitives.md`,
-  `refs/ts-libs/from-sindresorhus-type-fest.md`. `noUncheckedIndexedAccess` es el
+  `tsconfig.app.json`. Referencias: https://github.com/radix-ui/primitives,
+  https://github.com/sindresorhus/type-fest. `noUncheckedIndexedAccess` es el
   que más importa acá: el dataset columnar (`rows[i]`) es exactamente el patrón
   que rompe sin ese flag.
 - **`useControlled`-style para cualquier selector controlado/no-controlado**
   (país seleccionado, filtros) — un solo hook, `isControlled` fijado en el primer
-  render, nunca a mano por componente. Fuente: `refs/react/from-mui-material-ui.md`.
+  render, nunca a mano por componente. Fuente: https://github.com/mui/material-ui.
 - **`forwardRef` en toda primitiva reusable** que envuelva un elemento DOM.
-  Fuente: `refs/react/from-radix-primitives.md`.
+  Fuente: https://github.com/radix-ui/primitives.
 - **CI bloqueante, sin `continue-on-error`**: `npm run verify` (lint + test +
   build, `build` ya incluye `tsc -b`) en cada push/PR a `main`
   (`.github/workflows/ci.yml`), un solo comando — no tres pasos que puedan
